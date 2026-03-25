@@ -79,13 +79,13 @@ function install() {
 function upgrade() {
   console.log("\n  Upgrading show-me-the-money to latest version...\n");
   try {
-    execFileSync("npm", ["install", "-g", "show-me-the-money@latest"], {
+    execFileSync("npm", ["install", "-g", "@orrisai/show-me-the-money@latest"], {
       stdio: "inherit",
     });
     console.log("\n  Upgrade complete!\n");
   } catch {
     console.error(
-      "  Upgrade failed. Try manually: npm install -g show-me-the-money@latest"
+      "  Upgrade failed. Try manually: npm install -g @orrisai/show-me-the-money@latest"
     );
     process.exit(1);
   }

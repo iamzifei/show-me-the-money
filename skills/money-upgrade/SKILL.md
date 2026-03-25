@@ -18,12 +18,12 @@ cat ~/.claude/skills/money/../../VERSION 2>/dev/null || echo "Unknown"
 
 Or check via CLI:
 ```bash
-npx show-me-the-money version
+npx @orrisai/show-me-the-money version
 ```
 
 ### Step 2: Check Latest Version
 ```bash
-npm view show-me-the-money version
+npm view @orrisai/show-me-the-money version
 ```
 
 ### Step 3: Compare Versions
@@ -42,7 +42,7 @@ echo "Backup saved to $BACKUP_DIR"
 
 ### Step 5: Install Latest Version
 ```bash
-npx show-me-the-money@latest install
+npx @orrisai/show-me-the-money@latest install
 ```
 
 ### Step 6: Verify Installation

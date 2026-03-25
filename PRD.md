@@ -8,10 +8,7 @@
 
 **Solution**: A Claude Code skill suite that acts as a virtual business operating system. It discovers opportunities, creates strategies, builds products, generates content, runs marketing campaigns, manages outreach, optimizes for search, runs paid ads, tracks finances, and orchestrates all of these autonomously 24/7.
 
-**Inspiration**:
-- [dbskill](https://github.com/dontbesilent2025/dbskill) — Business diagnostics and decision frameworks
-- [gstack](https://github.com/garrytan/gstack) — Engineering workflow automation via Claude Code skills
-- [Polsia](https://github.com/PolsiaAI/Polsia) — 24/7 autonomous multi-agent business operations
+**Inspiration**: Business diagnostics frameworks, engineering workflow automation via Claude Code skills, and autonomous multi-agent business operations systems.
 
 ## 2. Target User
 
@@ -65,10 +62,10 @@ The system is built as a collection of Claude Code skills, each handling a speci
 ### Distribution Model
 
 ```
-npm publish → npx show-me-the-money install → ~/.claude/skills/money-*/
+npm publish → npx @orrisai/show-me-the-money install → ~/.claude/skills/money-*/
 ```
 
-Users install via `npx`, which copies SKILL.md files to their Claude Code skills directory. Upgrades are handled by re-running `npx show-me-the-money@latest install` or using the built-in `/money-upgrade` skill.
+Users install via `npx`, which copies SKILL.md files to their Claude Code skills directory. Upgrades are handled by re-running `npx @orrisai/show-me-the-money@latest install` or using the built-in `/money-upgrade` skill.
 
 ## 4. Skill Specifications
 
@@ -267,7 +264,7 @@ User: /money-ads "set up Google Ads for my API product"
 ## 6. Technical Requirements
 
 ### Installation
-- Distributed via npm (`npx show-me-the-money install`)
+- Distributed via npm (`npx @orrisai/show-me-the-money install`)
 - Skills installed to `~/.claude/skills/` for global availability
 - No external dependencies (pure Markdown skills)
 - Version management via `/money-upgrade`
