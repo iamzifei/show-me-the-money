@@ -1,5 +1,7 @@
 # 💰 Show Me The Money
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 **Build and run a 24/7 automated business from scratch — powered by Claude Code.**
 
 Show Me The Money is a Claude Code skill suite that acts as your AI business operating system. It discovers opportunities, creates strategies, builds products, runs marketing, manages sales, and orchestrates everything autonomously.
