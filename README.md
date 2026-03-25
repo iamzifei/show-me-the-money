@@ -7,7 +7,7 @@ Show Me The Money is a Claude Code skill suite that acts as your AI business ope
 ## Quick Start
 
 ```bash
-npx show-me-the-money
+npx @orrisai/show-me-the-money
 ```
 
 Then open Claude Code and type:
@@ -47,7 +47,7 @@ From zero to a running business:
 ### Via npx (Recommended)
 
 ```bash
-npx show-me-the-money
+npx @orrisai/show-me-the-money
 ```
 
 This installs all 12 skills to `~/.claude/skills/` automatically.
@@ -55,7 +55,7 @@ This installs all 12 skills to `~/.claude/skills/` automatically.
 ### Via npm (Global)
 
 ```bash
-npm install -g show-me-the-money
+npm install -g @orrisai/show-me-the-money
 ```
 
 ### Manual
@@ -68,7 +68,7 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 ### Upgrade
 
 ```bash
-npx show-me-the-money@latest
+npx @orrisai/show-me-the-money@latest
 ```
 
 Or from within Claude Code:
@@ -161,16 +161,10 @@ Skills are installed to `~/.claude/skills/` where Claude Code automatically disc
 └── money-upgrade/SKILL.md      ← Version management
 ```
 
-## Inspired By
-
-- [dbskill](https://github.com/dontbesilent2025/dbskill) — Business diagnostics framework
-- [gstack](https://github.com/garrytan/gstack) — Engineering workflow automation by Garry Tan
-- [Polsia](https://github.com/PolsiaAI/Polsia) — 24/7 autonomous business agent system
-
 ## Uninstall
 
 ```bash
-npx show-me-the-money uninstall
+npx @orrisai/show-me-the-money uninstall
 ```
 
 ## Contributing
