@@ -1,0 +1,41 @@
+{
+  "name": "show-me-the-money",
+  "version": "1.0.0",
+  "description": "Claude Code skill suite that builds and runs a 24/7 automated business from scratch — from idea discovery to revenue generation.",
+  "keywords": [
+    "claude-code",
+    "skills",
+    "agent",
+    "business-automation",
+    "24/7",
+    "startup",
+    "revenue",
+    "seo",
+    "ads",
+    "outreach",
+    "content",
+    "social-media"
+  ],
+  "author": "iamzifei",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamzifei/show-me-the-money.git"
+  },
+  "homepage": "https://github.com/iamzifei/show-me-the-money",
+  "bugs": {
+    "url": "https://github.com/iamzifei/show-me-the-money/issues"
+  },
+  "bin": {
+    "show-me-the-money": "./bin/cli.js"
+  },
+  "files": [
+    "skills/",
+    "bin/",
+    "install.js",
+    "VERSION"
+  ],
+  "scripts": {
+    "postinstall": "node install.js"
+  }
+}
