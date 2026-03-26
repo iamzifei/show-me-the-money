@@ -18,7 +18,18 @@ If the user's message contains a `[Language: ...]` tag, use that language for al
 
 Default to English if the user doesn't specify. All subsequent output must be in the chosen language.
 
-## Upgrade Process
+## Quick Update (Recommended)
+
+The fastest way to update is the built-in CLI command. It checks for a new version,
+downloads it, and re-installs all skills in one step:
+
+```bash
+npx @orrisai/show-me-the-money update
+```
+
+If you prefer more control, follow the manual steps below.
+
+## Manual Upgrade Process
 
 ### Step 1: Check Current Version
 Read the VERSION file from the installed skill directory:

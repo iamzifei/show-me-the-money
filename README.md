@@ -67,11 +67,13 @@ git clone https://github.com/iamzifei/show-me-the-money.git ~/.claude/skills/sho
 cd ~/.claude/skills/show-me-the-money && node install.js
 ```
 
-### Upgrade
+### Update
 
 ```bash
-npx @orrisai/show-me-the-money@latest
+npx @orrisai/show-me-the-money update
 ```
+
+This checks for the latest version, downloads it, and re-installs all skills automatically.
 
 Or from within Claude Code:
 

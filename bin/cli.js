@@ -4,10 +4,10 @@
  * CLI entry point for show-me-the-money.
  *
  * Supports:
- *   npx show-me-the-money install   — install skills to ~/.claude/skills/
- *   npx show-me-the-money upgrade   — re-install latest from GitHub
- *   npx show-me-the-money version   — print current version
- *   npx show-me-the-money uninstall — remove skills from ~/.claude/skills/
+ *   npx @orrisai/show-me-the-money install   — install skills to ~/.claude/skills/
+ *   npx @orrisai/show-me-the-money update    — pull latest version and re-install skills
+ *   npx @orrisai/show-me-the-money version   — print current version
+ *   npx @orrisai/show-me-the-money uninstall — remove skills from ~/.claude/skills/
  */
 
 const fs = require("fs");
@@ -33,8 +33,9 @@ switch (command) {
   case "install":
     install();
     break;
+  case "update":
   case "upgrade":
-    upgrade();
+    update();
     break;
   case "version":
   case "--version":
@@ -76,16 +77,53 @@ function install() {
   );
 }
 
-function upgrade() {
-  console.log("\n  Upgrading show-me-the-money to latest version...\n");
+/**
+ * Check for the latest version on npm, download it, and re-install all skills.
+ *
+ * Flow:
+ *   1. Query npm registry for the latest published version
+ *   2. Compare with the currently installed version
+ *   3. If already up-to-date, exit early
+ *   4. Otherwise run `npx @orrisai/show-me-the-money@latest install` which
+ *      downloads the new package and copies skills into ~/.claude/skills/
+ */
+function update() {
+  console.log(`\n  show-me-the-money v${VERSION} — Checking for updates...\n`);
+
+  // Step 1: Fetch the latest version from npm using execFileSync (no shell)
+  let latest;
   try {
-    execFileSync("npm", ["install", "-g", "@orrisai/show-me-the-money@latest"], {
+    latest = execFileSync("npm", ["view", "@orrisai/show-me-the-money", "version"], {
+      encoding: "utf8",
+      stdio: ["pipe", "pipe", "pipe"],
+    }).trim();
+  } catch {
+    console.error("  Could not reach npm registry. Check your network and try again.");
+    process.exit(1);
+  }
+
+  // Step 2: Compare versions
+  if (latest === VERSION) {
+    console.log(`  Already on the latest version (v${VERSION}). No update needed.\n`);
+    return;
+  }
+
+  console.log(`  Current version: v${VERSION}`);
+  console.log(`  Latest version:  v${latest}`);
+  console.log(`\n  Downloading and installing...\n`);
+
+  // Step 3: Download the latest package and run its install command.
+  //         npx with @latest always fetches the newest published version,
+  //         then the "install" sub-command copies skills into ~/.claude/skills/.
+  try {
+    execFileSync("npx", ["--yes", "@orrisai/show-me-the-money@latest", "install"], {
       stdio: "inherit",
     });
-    console.log("\n  Upgrade complete!\n");
+    console.log(`\n  Update complete! v${VERSION} → v${latest}`);
+    console.log("  Open Claude Code and type /money to use the new version.\n");
   } catch {
     console.error(
-      "  Upgrade failed. Try manually: npm install -g @orrisai/show-me-the-money@latest"
+      "  Update failed. Try manually:\n    npx @orrisai/show-me-the-money@latest\n"
     );
     process.exit(1);
   }
@@ -108,13 +146,13 @@ function printHelp() {
   show-me-the-money v${VERSION}
 
   Usage:
-    npx show-me-the-money [command]
+    npx @orrisai/show-me-the-money [command]
 
   Commands:
     install     Install skills to ~/.claude/skills/ (default)
-    upgrade     Upgrade to the latest version
+    update      Check for updates, pull latest version, and re-install skills
     uninstall   Remove all skills from ~/.claude/skills/
-    version     Print version
+    version     Print current version
     help        Show this help message
 
   After installing, open Claude Code and type /money to get started.

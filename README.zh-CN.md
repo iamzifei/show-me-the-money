@@ -67,11 +67,13 @@ git clone https://github.com/iamzifei/show-me-the-money.git ~/.claude/skills/sho
 cd ~/.claude/skills/show-me-the-money && node install.js
 ```
 
-### 升级
+### 更新
 
 ```bash
-npx @orrisai/show-me-the-money@latest
+npx @orrisai/show-me-the-money update
 ```
+
+自动检查最新版本、下载并重新安装所有技能。
 
 或在 Claude Code 中输入:
 
