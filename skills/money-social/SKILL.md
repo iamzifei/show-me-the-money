@@ -143,6 +143,19 @@ Track weekly:
 - Feed social leads to `/money-outreach`
 - Schedule automated posting via `/money-ops`
 
+## Hook Writing for Social Posts
+
+Every post needs a strong opening. Apply the hook formula: **topic + hook + credibility** in the first line.
+
+Priority-ranked hook techniques for social:
+1. **Results with reversal** — "I grew to $10K MRR by REMOVING our best feature"
+2. **Data shock** — "I analyzed 500 SaaS landing pages. 73% make the same mistake."
+3. **Contrast** — "6 months ago I had 0 followers. Today: [number]. Here's what changed."
+4. **Memorable statements** — "The best marketing strategy is a great product. The second best is..."
+5. **Authority + viewpoint** — "After building 3 profitable SaaS products, here's what I'd do differently"
+
+**Key principle**: Create mystery rather than deliver answers. Your opening should make people NEED to read the rest.
+
 ## Principles
 
 - **Consistency beats virality** — Show up every day
@@ -150,3 +163,4 @@ Track weekly:
 - **Platform-native** — What works on X doesn't work on LinkedIn
 - **Authentic voice** — People follow people, not brands
 - **Metrics-driven** — Double down on what gets engagement, cut what doesn't
+- **Concrete deliverables** — End with "Tomorrow's first social action: [specific task]"

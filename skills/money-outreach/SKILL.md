@@ -117,6 +117,18 @@ After 100 emails sent:
 - Coordinate with `/money-social` for warm outreach via social channels
 - Use `/money-ops` for scheduling automated follow-ups
 
+## Email Hook Techniques
+
+Apply these engagement principles to subject lines and opening lines:
+
+| Technique | Example | When to Use |
+|-----------|---------|-------------|
+| Results with reversal | "We cut our CAC by 80% — by spending MORE on ads" | When you have surprising data |
+| Data shock | "47% of [industry] companies still do [bad thing] manually" | When data is compelling |
+| Contrast | "Your competitor launched [X] last week. Here's what they missed." | Competitive intelligence angle |
+| Direct value | "I built [specific thing] for companies like [theirs]" | When product is a clear fit |
+| Curiosity gap | "Quick question about your [specific page/feature]" | Low-commitment opener |
+
 ## Principles
 
 - **Personalization is non-negotiable** — Generic mass emails don't work
@@ -124,3 +136,4 @@ After 100 emails sent:
 - **Follow up** — Most deals close on the 2nd or 3rd touch
 - **Respect boundaries** — If they say no, stop. If they don't reply after 3, stop.
 - **Track everything** — You can't optimize what you don't measure
+- **Concrete deliverables** — End with "Tomorrow's first outreach action: [specific task]"

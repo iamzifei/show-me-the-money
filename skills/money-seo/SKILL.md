@@ -154,6 +154,18 @@ Track monthly:
 - Coordinate with `/money-ads` for keyword strategy alignment
 - Schedule regular audits via `/money-ops`
 
+## GEO Content Diagnosis
+
+Before publishing any SEO/GEO content, run this quality check:
+
+| Dimension | Check | Pass Criteria |
+|-----------|-------|---------------|
+| **Citeability** | Would an AI model cite this as a source? Is the information specific, factual, and well-structured? | Contains unique data, clear definitions, or authoritative explanations |
+| **Schema completeness** | Is structured data present and valid? | JSON-LD validates with no errors |
+| **Answer directness** | Does the content directly answer the target query? | Answer appears in first 2 paragraphs |
+| **E-E-A-T signals** | Experience, Expertise, Authority, Trust — are all represented? | Author credentials, real data, external citations |
+| **Cognitive gap** | What makes this content different from the top 5 results? | Unique angle, original data, or deeper analysis |
+
 ## Principles
 
 - **GEO is the new SEO** — Optimize for AI search alongside traditional search
@@ -161,3 +173,4 @@ Track monthly:
 - **Technical foundation first** — Fix crawl issues before creating content
 - **Compound growth** — SEO takes 3-6 months to show results, but compounds
 - **Measure everything** — Track rankings, traffic, and conversions weekly
+- **Concrete deliverables** — End with "Tomorrow's first SEO action: [specific task]"

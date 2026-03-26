@@ -160,6 +160,16 @@ When the user types `/money-ops` for the first time:
 5. **Test run** — Execute each operation once to verify it works
 6. **Activate** — Start the autonomous schedule
 
+## Provisioned Infrastructure
+
+We provision all operational infrastructure so the user just approves:
+- **Scheduled agents** via Claude Code `/schedule` — configured automatically
+- **Email service** (SendGrid) for automated outreach — provisioned
+- **Monitoring** — health checks, uptime, alert thresholds — configured
+- **Logging** — all operations produce structured logs
+
+The user only needs to set their timezone and approve the schedule. Everything else is handled.
+
 ## Principles
 
 - **Reliable over clever** — Simple cron jobs beat complex orchestration
@@ -167,3 +177,5 @@ When the user types `/money-ops` for the first time:
 - **Observable** — Every operation must produce a log entry
 - **Gradual autonomy** — Start with human-in-the-loop, automate as trust builds
 - **Cost-aware** — Track API costs and token usage per operation
+- **Provision everything** — User approves, we execute. Minimize their decisions
+- **Concrete deliverables** — End with "Tomorrow's first ops action: [specific task]"

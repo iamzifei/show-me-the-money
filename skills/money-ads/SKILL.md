@@ -153,6 +153,28 @@ When available, leverage specialized ad management skills:
 - Revenue attribution from `/money-finance`
 - Automated monitoring from `/money-ops`
 
+## Ad Creative: Hook Techniques
+
+Apply engagement principles from content marketing to ad copy:
+
+| Technique | Headline Example | Best For |
+|-----------|-----------------|----------|
+| Results with reversal | "We cut onboarding time 80% — by adding MORE steps" | Case study angles |
+| Data shock | "9 out of 10 [role]s waste $X/mo on [old way]" | Problem-aware audiences |
+| Contrast | "Stop doing [old way]. Start [new way]." | Competitor conquest |
+| Direct benefit | "[Outcome] in [timeframe]. No [common objection]." | High-intent keywords |
+| Social proof | "Join [N]+ [role]s who switched to [product]" | Retargeting |
+
+## Provisioned Infrastructure
+
+When setting up ad campaigns, we provision everything the user needs:
+- **MCC sub-account** for Google Ads (user doesn't need their own account)
+- **Pixel setup** for Meta Ads tracking
+- **Conversion tracking** configured end-to-end
+- **Landing page** optimized for the campaign (via `/money-product`)
+
+The user only sets the budget and approves the strategy. We handle the rest.
+
 ## Principles
 
 - **ROI or die** — Every dollar spent must be tracked to revenue
@@ -160,3 +182,4 @@ When available, leverage specialized ad management skills:
 - **Message match** — Ad copy must match the landing page
 - **Negative keywords are gold** — Excluding bad traffic is as important as finding good traffic
 - **Automate monitoring** — Set up alerts for budget overruns and performance drops
+- **Concrete deliverables** — End with "Tomorrow's first ads action: [specific task]"

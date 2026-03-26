@@ -2,9 +2,13 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-**Build and run a 24/7 automated business from scratch — powered by Claude Code.**
+**AI agent skills that build and run your business autonomously — from idea to revenue, 24/7.**
 
-Show Me The Money is a Claude Code skill suite that acts as your AI business operating system. It discovers opportunities, creates strategies, builds products, runs marketing, manages sales, and orchestrates everything autonomously.
+> One command. 12 agent skills. Zero to profitable business.
+
+Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, and operating everything autonomously.
+
+Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that support the skill system.
 
 ## Quick Start
 
@@ -18,31 +22,57 @@ Then open Claude Code and type:
 /money
 ```
 
+That's it. The AI will onboard you, build your profile, and guide you through every step.
+
 ## What It Does
 
 ```
-💡 Idea Discovery ──► 📋 Strategy ──► 🔨 Build Product ──► 📈 Grow
-                                                              │
-                                    ┌─────────────────────────┤
-                                    │         │         │     │
-                                    ▼         ▼         ▼     ▼
-                                Content    Social    SEO    Ads
-                                    │         │         │     │
-                                    └─────────┴────┬────┴─────┘
-                                                   ▼
-                                              🤖 24/7 Ops
-                                                   │
-                                                   ▼
-                                              💵 Revenue
+📧 Onboarding          Build your profile from public data
+       │
+       ▼
+💡 Discover             Scan markets, validate demand, find your wedge
+       │
+       ▼
+📊 Strategy             Market research, SWOT, 4P, business model, GTM plan
+       │
+       ▼
+🔨 Build                Ship MVP with landing page, payments, and SEO
+       │
+       ▼
+📈 Grow                 Content, social, outreach, SEO, ads — all automated
+       │
+       ▼
+🤖 Operate              24/7 autonomous ops, monitoring, financial reports
+       │
+       ▼
+💵 Revenue
 ```
 
-From zero to a running business:
+### The Full Pipeline
 
-1. **No idea?** → `/money-discover` scans markets, trends, and gaps to find profitable opportunities
-2. **Have an idea?** → `/money-strategy` creates your business model, pricing, and go-to-market plan
-3. **Have a plan?** → `/money-product` builds and deploys your MVP with payment integration
-4. **Have a product?** → Growth skills handle content, social, SEO, ads, and outreach
-5. **Want automation?** → `/money-ops` runs everything 24/7 without you
+1. **Onboarding** — Share your email and socials. The AI auto-researches your background and builds a personalized profile
+2. **Discover** (`/money-discover`) — Scans market gaps, validates demand with 6 forcing questions, runs a 5-filter evaluation on every idea
+3. **Strategy** (`/money-strategy`) — Generates a full market research report: SWOT, 4P analysis, competitive landscape, business model validation, go-to-market plan
+4. **Product** (`/money-product`) — Builds and deploys your MVP with landing page, auth, payments, SEO/GEO optimization, logo, and OG images
+5. **Content** (`/money-content`) — Creates blog posts, email sequences, social content, video scripts — all diagnosed with a 5-dimensional quality check
+6. **Outreach** (`/money-outreach`) — Cold email sequences, partnership outreach, lead generation with personalization
+7. **Social** (`/money-social`) — Social media management across X, LinkedIn, Reddit, Product Hunt with hook-writing frameworks
+8. **SEO** (`/money-seo`) — Traditional SEO + GEO (AI search optimization for ChatGPT, Perplexity, Gemini)
+9. **Ads** (`/money-ads`) — Google Ads, Meta Ads — campaign setup, optimization, ROAS tracking
+10. **Ops** (`/money-ops`) — 24/7 autonomous operations — scheduling, monitoring, health checks
+11. **Finance** (`/money-finance`) — Revenue tracking, unit economics, financial reports
+
+## Why This Exists
+
+Most AI business tools give you generic advice. Show Me The Money gives you **executable workflows** — every skill produces concrete actions, not just analysis. Every phase ends with "Tomorrow's first action: [specific task]."
+
+**Key differentiators:**
+- **Personalized** — Auto-researches your background and tailors all recommendations to YOU
+- **Validated frameworks** — Integrates battle-tested methodologies: 6-question demand validation, 5-filter opportunity scoring, business model audit, 5-dimensional content diagnosis
+- **Full-stack** — Covers the entire business lifecycle, not just one piece
+- **Revenue-first** — Every recommendation connects to making money. No fluff
+- **Autonomous** — Set up once, runs 24/7 with `/money-ops`
+- **Open source** — MIT license. Customize, extend, contribute
 
 ## Installation
 
@@ -75,44 +105,39 @@ npx @orrisai/show-me-the-money update
 
 This checks for the latest version, downloads it, and re-installs all skills automatically.
 
-Or from within Claude Code:
-
-```
-/money-upgrade
-```
-
-## Skills
+## Skills Reference
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| **Router** | `/money` | Main entry point — routes you to the right skill or runs the full pipeline |
-| **Discover** | `/money-discover` | Find profitable business ideas from market gaps and trends |
-| **Strategy** | `/money-strategy` | Business model, pricing, competitive analysis, go-to-market plan |
-| **Product** | `/money-product` | Build and deploy MVP with payments (Next.js, Supabase, Stripe, Vercel) |
-| **Content** | `/money-content` | Content pipeline — blog posts, emails, social media, copywriting |
-| **Outreach** | `/money-outreach` | Cold email sequences, lead generation, partnership outreach |
-| **Social** | `/money-social` | Social media management across X, LinkedIn, Reddit, Product Hunt |
-| **SEO** | `/money-seo` | Traditional SEO + GEO (AI search optimization for ChatGPT, Perplexity) |
-| **Ads** | `/money-ads` | Google Ads, Meta Ads — campaign setup, optimization, ROAS tracking |
-| **Ops** | `/money-ops` | 24/7 autonomous operations — scheduling, monitoring, health checks |
-| **Finance** | `/money-finance` | Revenue tracking, unit economics, financial reports, pricing optimization |
-| **Upgrade** | `/money-upgrade` | Update to the latest version with backup and rollback |
+| **Router** | `/money` | Onboards you, builds your profile, routes to the right skill |
+| **Discover** | `/money-discover` | Find and validate profitable business ideas |
+| **Strategy** | `/money-strategy` | Market research report with SWOT, 4P, BMC, and GTM plan |
+| **Product** | `/money-product` | Build and deploy MVP (Next.js, Supabase, Stripe, Vercel) |
+| **Content** | `/money-content` | Content pipeline with 5-dimensional quality diagnosis |
+| **Outreach** | `/money-outreach` | Cold email sequences and partnership outreach |
+| **Social** | `/money-social` | Social media management with hook-writing frameworks |
+| **SEO** | `/money-seo` | SEO + GEO optimization for search engines and AI |
+| **Ads** | `/money-ads` | Google Ads, Meta Ads — setup, optimization, ROAS |
+| **Ops** | `/money-ops` | 24/7 autonomous operations and monitoring |
+| **Finance** | `/money-finance` | Revenue tracking and financial reports |
+| **Upgrade** | `/money-upgrade` | Update to the latest version |
 
 ## Usage Examples
 
 ### Start from scratch
 ```
 /money
-→ Select "Starting from zero"
+→ Share your email and X handle
+→ AI researches your background
 → Follow the guided pipeline
 ```
 
-### Get business ideas
+### Validate a business idea
 ```
 /money-discover "I'm a developer who can build web apps"
 ```
 
-### Create a strategy for an existing idea
+### Get a full market research report
 ```
 /money-strategy "API product that provides AI image generation"
 ```
@@ -122,40 +147,37 @@ Or from within Claude Code:
 /money-product "SaaS tool for email analytics, $29/mo"
 ```
 
-### Set up marketing automation
+### Launch your content engine
+```
+/money-content "create a launch content plan for my product at example.com"
+```
+
+### Automate everything
 ```
 /money-ops "automate content, social, and SEO for my product at example.com"
 ```
 
-### Run ads
-```
-/money-ads "Google Ads campaign for my AI writing tool, $20/day budget"
-```
+## Compatibility
 
-### Get financial reports
-```
-/money-finance "weekly revenue report from Stripe"
-```
+Show Me The Money works with any AI coding agent that supports the `~/.claude/skills/` skill system:
+
+- **Claude Code** (primary)
+- **Codex CLI**
+- **Gemini CLI**
+- **Cursor** (via skills)
+- **Other compatible agents**
 
 ## How It Works
 
-Show Me The Money is built on the [Claude Code skill system](https://docs.anthropic.com/en/docs/claude-code/skills). Each skill is a `SKILL.md` file containing:
-
-- **Frontmatter** — Name, description, and configuration
-- **Instructions** — Step-by-step workflows Claude follows
-- **Frameworks** — Business templates, checklists, and decision trees
-
-Skills are installed to `~/.claude/skills/` where Claude Code automatically discovers them. When you type `/money`, Claude loads the skill instructions and follows them to execute your request.
-
-### Architecture
+Built on the [Claude Code skill system](https://docs.anthropic.com/en/docs/claude-code/skills). Each skill is a `SKILL.md` file containing step-by-step workflows, business frameworks, and decision trees that the AI follows autonomously.
 
 ```
 ~/.claude/skills/
-├── money/SKILL.md              ← Main router
-├── money-discover/SKILL.md     ← Business idea discovery
-├── money-strategy/SKILL.md     ← Strategy & planning
-├── money-product/SKILL.md      ← Product building
-├── money-content/SKILL.md      ← Content pipeline
+├── money/SKILL.md              ← Router + onboarding
+├── money-discover/SKILL.md     ← Idea discovery + validation
+├── money-strategy/SKILL.md     ← Market research + strategy
+├── money-product/SKILL.md      ← Product building + deployment
+├── money-content/SKILL.md      ← Content creation pipeline
 ├── money-outreach/SKILL.md     ← Sales & outreach
 ├── money-social/SKILL.md       ← Social media
 ├── money-seo/SKILL.md          ← SEO & GEO
@@ -178,6 +200,8 @@ npx @orrisai/show-me-the-money uninstall
 3. Edit SKILL.md files in `skills/`
 4. Test by copying to `~/.claude/skills/` and running in Claude Code
 5. Submit a PR
+
+All contributions welcome — new skills, framework improvements, language support, and bug fixes.
 
 ## License
 

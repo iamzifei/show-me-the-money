@@ -187,3 +187,4 @@ Based on current growth rate and churn:
 - **Forecast conservatively** — Plan for 70% of optimistic projections
 - **Cash flow is king** — Monthly billing over annual for early-stage (unless cash-strapped)
 - **Automate reporting** — Financial data should be available on demand, not compiled manually
+- **Concrete deliverables** — End with "Tomorrow's first finance action: [specific task]"
