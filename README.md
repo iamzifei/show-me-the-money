@@ -4,7 +4,7 @@
 
 **AI agent skills that build and run your business autonomously — from idea to revenue, 24/7.**
 
-> One command. 12 agent skills. Zero to profitable business.
+> One command. 14 agent skills. Zero to profitable business.
 
 Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, and operating everything autonomously.
 
@@ -51,16 +51,18 @@ That's it. The AI will onboard you, build your profile, and guide you through ev
 ### The Full Pipeline
 
 1. **Onboarding** — Share your email and socials. The AI auto-researches your background and builds a personalized profile
-2. **Discover** (`/money-discover`) — Scans market gaps, validates demand with 6 forcing questions, runs a 5-filter evaluation on every idea
-3. **Strategy** (`/money-strategy`) — Generates a full market research report: SWOT, 4P analysis, competitive landscape, business model validation, go-to-market plan
-4. **Product** (`/money-product`) — Builds and deploys your MVP with landing page, auth, payments, SEO/GEO optimization, logo, and OG images
-5. **Content** (`/money-content`) — Creates blog posts, email sequences, social content, video scripts — all diagnosed with a 5-dimensional quality check
-6. **Outreach** (`/money-outreach`) — Cold email sequences, partnership outreach, lead generation with personalization
-7. **Social** (`/money-social`) — Social media management across X, LinkedIn, Reddit, Product Hunt with hook-writing frameworks
-8. **SEO** (`/money-seo`) — Traditional SEO + GEO (AI search optimization for ChatGPT, Perplexity, Gemini)
-9. **Ads** (`/money-ads`) — Google Ads, Meta Ads — campaign setup, optimization, ROAS tracking
-10. **Ops** (`/money-ops`) — 24/7 autonomous operations — scheduling, monitoring, health checks
-11. **Finance** (`/money-finance`) — Revenue tracking, unit economics, financial reports
+2. **Discover** (`/money-discover`) — Scans market gaps, validates demand with 6 forcing questions, runs a 5-filter evaluation with competitive intelligence protocol
+3. **Strategy** (`/money-strategy`) — Generates a full market research report: premise deconstruction, SWOT, 4P analysis, competitive landscape, business model stress test, go-to-market plan
+4. **Product** (`/money-product`) — Builds and deploys your MVP with landing page, auth, payments, SEO/GEO optimization, QA testing, and post-deploy canary monitoring
+5. **Quality** (`/money-quality`) — Pre-launch quality gates: code review, QA testing, security audit, performance checks, accessibility
+6. **Content** (`/money-content`) — Creates blog posts, email sequences, social content, video scripts — with authenticity audit, headline impact matrix, and content substance scoring
+7. **Outreach** (`/money-outreach`) — Cold email sequences, partnership outreach, lead generation with personalization
+8. **Social** (`/money-social`) — Social media management across X, LinkedIn, Reddit, Product Hunt with hook-writing frameworks
+9. **SEO** (`/money-seo`) — Traditional SEO + GEO (AI search optimization for ChatGPT, Perplexity, Gemini)
+10. **Ads** (`/money-ads`) — Google Ads, Meta Ads — campaign setup, optimization, ROAS tracking
+11. **Ops** (`/money-ops`) — 24/7 autonomous operations with business health scoring, canary monitoring, and safety guardrails
+12. **Finance** (`/money-finance`) — Revenue tracking, unit economics, financial reports
+13. **Diagnose** (`/money-diagnose`) — Deep business diagnosis when things aren't working: problem deconstruction, assumption audit, execution coaching
 
 ## Why This Exists
 
@@ -68,7 +70,7 @@ Most AI business tools give you generic advice. Show Me The Money gives you **ex
 
 **Key differentiators:**
 - **Personalized** — Auto-researches your background and tailors all recommendations to YOU
-- **Validated frameworks** — Integrates battle-tested methodologies: 6-question demand validation, 5-filter opportunity scoring, business model audit, 5-dimensional content diagnosis
+- **Validated frameworks** — Integrates battle-tested methodologies: premise deconstruction protocol, 6-question demand validation, 5-filter opportunity scoring, business model stress test, 5-dimensional content diagnosis, 12-signal authenticity audit, headline impact matrix
 - **Full-stack** — Covers the entire business lifecycle, not just one piece
 - **Revenue-first** — Every recommendation connects to making money. No fluff
 - **Autonomous** — Set up once, runs 24/7 with `/money-ops`
@@ -82,7 +84,7 @@ Most AI business tools give you generic advice. Show Me The Money gives you **ex
 npx @orrisai/show-me-the-money
 ```
 
-This installs all 12 skills to `~/.claude/skills/` automatically.
+This installs all 14 skills to `~/.claude/skills/` automatically.
 
 ### Via npm (Global)
 
@@ -110,15 +112,17 @@ This checks for the latest version, downloads it, and re-installs all skills aut
 | Skill | Command | What It Does |
 |-------|---------|-------------|
 | **Router** | `/money` | Onboards you, builds your profile, routes to the right skill |
-| **Discover** | `/money-discover` | Find and validate profitable business ideas |
-| **Strategy** | `/money-strategy` | Market research report with SWOT, 4P, BMC, and GTM plan |
-| **Product** | `/money-product` | Build and deploy MVP (Next.js, Supabase, Stripe, Vercel) |
-| **Content** | `/money-content` | Content pipeline with 5-dimensional quality diagnosis |
+| **Discover** | `/money-discover` | Find and validate profitable business ideas with competitive intelligence |
+| **Strategy** | `/money-strategy` | Premise deconstruction + market research + business model stress test |
+| **Diagnose** | `/money-diagnose` | Deep diagnosis when business is stuck — root cause, not symptoms |
+| **Product** | `/money-product` | Build, deploy, QA test, and monitor MVP |
+| **Quality** | `/money-quality` | Code review, security audit, performance check, pre-launch gates |
+| **Content** | `/money-content` | Content pipeline with authenticity audit and headline impact matrix |
 | **Outreach** | `/money-outreach` | Cold email sequences and partnership outreach |
 | **Social** | `/money-social` | Social media management with hook-writing frameworks |
 | **SEO** | `/money-seo` | SEO + GEO optimization for search engines and AI |
 | **Ads** | `/money-ads` | Google Ads, Meta Ads — setup, optimization, ROAS |
-| **Ops** | `/money-ops` | 24/7 autonomous operations and monitoring |
+| **Ops** | `/money-ops` | 24/7 autonomous operations with health scoring and safety guardrails |
 | **Finance** | `/money-finance` | Revenue tracking and financial reports |
 | **Upgrade** | `/money-upgrade` | Update to the latest version |
 
@@ -173,16 +177,18 @@ Built on the [Claude Code skill system](https://docs.anthropic.com/en/docs/claud
 
 ```
 ~/.claude/skills/
-├── money/SKILL.md              ← Router + onboarding
-├── money-discover/SKILL.md     ← Idea discovery + validation
-├── money-strategy/SKILL.md     ← Market research + strategy
-├── money-product/SKILL.md      ← Product building + deployment
-├── money-content/SKILL.md      ← Content creation pipeline
+├── money/SKILL.md              ← Router + onboarding + signal-based routing
+├── money-discover/SKILL.md     ← Idea discovery + competitive intelligence
+├── money-strategy/SKILL.md     ← Premise deconstruction + market research
+├── money-diagnose/SKILL.md     ← Business diagnosis + execution coaching
+├── money-product/SKILL.md      ← Product building + QA + canary monitoring
+├── money-quality/SKILL.md      ← Code review + security + performance gates
+├── money-content/SKILL.md      ← Content pipeline + authenticity audit
 ├── money-outreach/SKILL.md     ← Sales & outreach
 ├── money-social/SKILL.md       ← Social media
 ├── money-seo/SKILL.md          ← SEO & GEO
 ├── money-ads/SKILL.md          ← Paid advertising
-├── money-ops/SKILL.md          ← 24/7 operations
+├── money-ops/SKILL.md          ← 24/7 operations + health scoring
 ├── money-finance/SKILL.md      ← Financial tracking
 └── money-upgrade/SKILL.md      ← Version management
 ```

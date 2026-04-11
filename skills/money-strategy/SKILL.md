@@ -1,6 +1,6 @@
 ---
 name: money-strategy
-description: "Create comprehensive business strategy, business model canvas, pricing, go-to-market plan, and competitive positioning. Generates a full market research report with SWOT and 4P analysis. Use when the user has an idea and needs a strategic plan, competitive analysis, pricing strategy, GTM plan, or says 'business plan', 'strategy', 'pricing', 'go-to-market', or 'competitive analysis'."
+description: "Create comprehensive business strategy with premise deconstruction, business model stress test, pricing, go-to-market plan, and competitive positioning. Runs a 4-layer premise audit before strategy, then generates a full market research report with SWOT, 4P, 10-point business model validation, and constraint analysis. Use when the user has an idea and needs a strategic plan, competitive analysis, pricing strategy, GTM plan, or says 'business plan', 'strategy', 'pricing', 'go-to-market', or 'competitive analysis'."
 ---
 
 # Money Strategy — Business Strategy & Market Research
@@ -109,9 +109,11 @@ Personalize based on the user profile:
 
 Fill every cell with SPECIFIC content, not generic placeholders.
 
-### Section 8: Business Model Validation
+### Section 8: Business Model Stress Test
 
-Run 7 validations on the proposed model:
+Run the full validation suite on the proposed model. This is a 10-point stress test — every business must pass before committing resources.
+
+#### Part A: Revenue Machine Validation (7 checks)
 
 | Validation | Question | Status |
 |-----------|----------|--------|
@@ -122,6 +124,28 @@ Run 7 validations on the proposed model:
 | 5. Traffic-to-money | Is the path from visitor to paying customer ≤3 steps? | ✅/⚠️/❌ |
 | 6. Scalability | Can this grow without linear increase in effort? | ✅/⚠️/❌ |
 | 7. Automation readiness | Can core operations run autonomously? | ✅/⚠️/❌ |
+
+#### Part B: Unit Economics Stress Test (3 checks)
+
+| Validation | Question | Status |
+|-----------|----------|--------|
+| 8. LTV > 3×CAC | Will lifetime value exceed 3× customer acquisition cost? Estimate: LTV = ARPU × avg months retained. CAC = total acquisition spend / new customers | ✅/⚠️/❌ |
+| 9. Payback period | Can you recover CAC within 3 months? If CAC > 3×monthly ARPU, acquisition is too expensive or churn is too high | ✅/⚠️/❌ |
+| 10. Gross margin ≥ 70% | For SaaS: revenue minus infrastructure/API costs should leave ≥70%. For services: ≥40%. Below threshold means you're selling dollars for cents | ✅/⚠️/❌ |
+
+#### Part C: Constraint Analysis (Theory of Constraints)
+
+Identify the **single biggest constraint** limiting this business. Only one constraint matters at a time — optimizing anything else is waste.
+
+| Growth Stage | Typical Constraint | How to Test |
+|-------------|-------------------|-------------|
+| Pre-launch | Demand uncertainty | Can you get 10 people to pre-pay? |
+| 0-10 customers | Product-market fit | Are customers referring others? |
+| 10-100 customers | Acquisition channel | Is one channel consistently profitable? |
+| 100-1000 customers | Retention | Is monthly churn <5%? |
+| 1000+ customers | Operations | Can you serve 10x without 10x effort? |
+
+**Output**: Name the current constraint and the ONE action to address it. Ignore everything else until this constraint is resolved.
 
 ### Section 9: Go-To-Market Plan
 
@@ -168,6 +192,78 @@ Generate a concrete TODO list:
 ```
 
 Every TODO must be a specific, executable action — not "do market research" but "search Reddit r/[subreddit] for complaints about [competitor]."
+
+---
+
+## Pre-Strategy: Premise Deconstruction Protocol
+
+Before building the strategy, deconstruct the user's idea through 4 layers. Many business problems evaporate under scrutiny — better to discover this BEFORE spending weeks building. Run each layer in order; stop and discuss if a layer reveals a fatal issue.
+
+### Layer 1: Definition Clarity (Socratic Audit)
+
+Check whether the user's key terms are precisely defined. Vague language hides vague thinking.
+
+**Method**: Identify the 2-3 most important terms in the user's pitch. For each, ask: "When you say [term], what specific, measurable outcome do you mean?"
+
+Common traps:
+| Vague term | What it usually masks | Better framing |
+|-----------|----------------------|----------------|
+| "High-quality" | No defined standard | "Passes [specific test] at [threshold]" |
+| "Scalable" | No growth model | "Can serve 10x users with <2x cost increase" |
+| "AI-powered" | Feature, not benefit | "Reduces [task] from [X hours] to [Y minutes]" |
+| "Market fit" | No demand evidence | "[N] people currently pay $[X] for inferior alternative" |
+| "Disruptive" | No incumbent analysis | "Replaces [specific workflow] that currently costs [amount]" |
+
+If key terms can't be defined precisely, the idea needs narrowing, not strategizing.
+
+### Layer 2: Assumption Audit (Inversion Method)
+
+List every assumption the business idea relies on. For each, apply Kahneman's pre-mortem: "Imagine this assumption is wrong. What happens?"
+
+**Must-check assumptions**:
+1. **Demand assumption** — "People want this" → Evidence? Or are you projecting your own preference?
+2. **Willingness-to-pay assumption** — "People will pay $X" → Are they paying for alternatives NOW?
+3. **Channel assumption** — "We'll acquire users via [channel]" → What's your evidence this channel works for this product type?
+4. **Capability assumption** — "We can build this" → Have you built anything similar? What's the hardest technical challenge?
+5. **Timing assumption** — "Now is the right time" → What changed that makes this viable today vs. 2 years ago?
+
+For each assumption, classify:
+- ✅ **Validated** — evidence exists (users paying, search volume, competitor revenue)
+- ⚠️ **Plausible** — logical but unproven (needs testing within 30 days)
+- ❌ **Unvalidated** — no evidence, pure belief (strategy must address this risk)
+
+### Layer 3: Causal Logic Check
+
+Trace the causal chain from effort to revenue. Many business ideas confuse correlation with causation or skip critical links.
+
+**The Revenue Causal Chain**:
+```
+[Action you take] → [First-order effect] → [User behavior change] → [Revenue event]
+```
+
+For each link, ask:
+- Is this link **necessary** (must happen) or **hopeful** (might happen)?
+- Is there a **simpler path** to the same revenue event?
+- Where is the **weakest link** in this chain?
+
+**Common logic errors**:
+- "More content → more traffic → more revenue" (ignores conversion rate)
+- "Better product → users will switch" (ignores switching costs)
+- "Cheaper price → more customers" (ignores value perception)
+- "Viral features → growth" (ignores whether core product retains users)
+
+### Layer 4: Decision Readiness
+
+Before proceeding, assess: do we have enough information to make a strategy, or do we need to run experiments first?
+
+| Signal | Decision Ready | Need Experiments |
+|--------|---------------|-----------------|
+| Target customer | Can name 3 specific people | "Anyone who needs X" |
+| Pricing | Know what competitors charge | No pricing reference |
+| Channel | Have used this channel before | "Probably SEO" |
+| Demand | See people paying for alternatives | "I think people want this" |
+
+If 3+ dimensions need experiments: **Don't build a full strategy.** Instead, output a 2-week experiment plan to gather missing data, THEN return for strategy.
 
 ---
 

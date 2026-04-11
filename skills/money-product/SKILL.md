@@ -1,6 +1,6 @@
 ---
 name: money-product
-description: "Build the actual product — from landing page to deployed MVP with payment integration. Handles code generation, deployment, database setup, authentication, and Stripe/payment integration. Use when the user needs to build something, deploy a product, set up payments, create a landing page, or says 'build this', 'deploy', 'create MVP', 'set up payments', or 'ship it'."
+description: "Build the actual product — from landing page to deployed MVP with payment integration, QA testing, and post-deploy canary monitoring. Handles code generation, deployment, database setup, authentication, Stripe/payment integration, systematic QA protocol, and production health scoring. Use when the user needs to build something, deploy a product, set up payments, create a landing page, or says 'build this', 'deploy', 'create MVP', 'set up payments', or 'ship it'."
 ---
 
 # Money Product — Product Building & Launch
@@ -165,6 +165,92 @@ After deployment, verify:
 - [ ] OG image renders correctly when shared on social media
 - [ ] Mobile experience is smooth
 - [ ] Schema markup validates (schema.org validator)
+
+## Phase 6: Quality Assurance
+
+After the launch checklist passes, run systematic QA testing. Don't ship what you haven't tested in a real browser.
+
+### QA Testing Protocol
+
+**Tier selection** — Choose based on product maturity:
+
+| Tier | When to Use | Scope | Time |
+|------|-------------|-------|------|
+| Quick | Pre-commit, small changes | Happy path + critical errors | 15 min |
+| Standard | Pre-launch, feature complete | Happy path + edge cases + mobile | 45 min |
+| Exhaustive | Before charging real money | All flows + error states + load + a11y | 2+ hours |
+
+### Testing Workflow
+
+For each test flow:
+1. **Navigate** — Open the page in a real browser
+2. **Test** — Execute the user flow
+3. **Verify** — Check expected outcome
+4. **Document** — Record pass/fail with evidence (screenshot if failing)
+5. **Fix** — If broken, fix immediately with an atomic commit per fix
+6. **Re-verify** — Confirm the fix works without breaking other flows
+
+### Critical Test Flows (must pass before launch)
+
+| Flow | Steps | Expected Result |
+|------|-------|----------------|
+| New user signup | Visit → Sign up → Verify email → Land on dashboard | User sees core product |
+| Core feature | Login → Use primary feature → See result | Feature works as expected |
+| Payment | Choose plan → Enter card → Complete payment → Access paid features | Stripe records payment, user is upgraded |
+| Mobile experience | All above flows on mobile viewport (375px) | No broken layouts, all CTAs tappable |
+| Error handling | Invalid inputs, network failures, expired sessions | Graceful error messages, no crashes |
+| SEO basics | Check rendered HTML for meta tags, heading hierarchy, structured data | All SEO elements present in page source |
+
+### Bug Fix Discipline
+
+When a bug is found during QA:
+1. **Reproduce** — Confirm the bug, note exact steps
+2. **Diagnose** — Find the root cause before writing code
+3. **Fix** — Minimum change to resolve the issue
+4. **Commit** — One atomic commit per fix with descriptive message
+5. **Re-test** — Verify fix works AND no regressions in related flows
+
+Never batch multiple bug fixes into one commit. Each fix should be independently revertable.
+
+## Phase 7: Post-Deploy Monitoring (Canary Mode)
+
+After deploying to production, run continuous verification for the first 24 hours. Things break in production that don't break in development.
+
+### Canary Checks (run every 2 hours for first 24h)
+
+| Check | How | Alert If |
+|-------|-----|----------|
+| **Uptime** | HTTP GET to landing page, check 200 status | Non-200 response |
+| **Core flow** | Automated: visit → sign up → use feature | Any step fails |
+| **Payment** | Check Stripe dashboard for failed charges | Failure rate > 5% |
+| **Console errors** | Check browser console for JS errors | New errors not present pre-deploy |
+| **Performance** | Check page load time | LCP > 4s (2x pre-deploy baseline) |
+| **Error logs** | Check application logs/monitoring | New error types appearing |
+
+### Rollback Protocol
+
+If any canary check shows critical failure:
+1. **Revert** — Deploy previous known-good version immediately
+2. **Investigate** — What changed? Diff the deploy
+3. **Fix** — Address root cause in a separate branch
+4. **Re-deploy** — Deploy fix with canary checks again
+
+### Health Score Dashboard
+
+After first 24h, generate a product health summary:
+
+```
+Product Health Score: [X/10]
+
+✅ Uptime: 100% (24h)
+✅ Core flow: All passing
+✅ Payment: 0 failures
+⚠️ Performance: LCP 2.8s (target <2.5s)
+✅ Errors: 0 new errors
+✅ Mobile: All flows passing
+```
+
+Track this score over time. Every deploy should maintain or improve the score.
 
 ## Integration Points
 

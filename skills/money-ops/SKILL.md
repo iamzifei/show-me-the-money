@@ -1,6 +1,6 @@
 ---
 name: money-ops
-description: "24/7 autonomous business operations orchestrator. Schedules and runs all business functions automatically — content publishing, social media posting, outreach sequences, ad monitoring, financial reporting, and health checks. Use when the user wants to automate operations, schedule tasks, set up autonomous workflows, or says 'automate this', '24/7', 'run automatically', 'schedule', 'cron', 'autonomous', or 'set and forget'."
+description: "24/7 autonomous business operations orchestrator with business health scoring, canary monitoring, and safety guardrails. Schedules and runs all business functions automatically — content publishing, social media posting, outreach sequences, ad monitoring, financial reporting, health checks, and post-deploy verification. Use when the user wants to automate operations, schedule tasks, set up autonomous workflows, or says 'automate this', '24/7', 'run automatically', 'schedule', 'cron', 'autonomous', or 'set and forget'."
 ---
 
 # Money Ops — 24/7 Autonomous Operations
@@ -123,6 +123,35 @@ Use the `/loop` skill for in-session monitoring:
 
 ## Health Monitoring
 
+### Business Health Score (0-10 Dashboard)
+
+Track business health across 6 dimensions. Generate this score weekly and track trends over time.
+
+| Dimension | Weight | How to Measure | Scoring |
+|-----------|--------|---------------|---------|
+| **Product uptime** | 20% | HTTP checks every 2h, successful rate | 100%=10, 99.5%=8, 99%=6, <99%=2 |
+| **Revenue velocity** | 25% | MRR growth rate month-over-month | >10%=10, 5-10%=7, 0-5%=5, negative=2 |
+| **Acquisition health** | 20% | CAC trend + new signups/week trend | Both improving=10, stable=6, declining=3 |
+| **Retention health** | 20% | Monthly churn rate | <3%=10, 3-5%=8, 5-10%=5, >10%=2 |
+| **Ops reliability** | 15% | % of scheduled operations that completed successfully | >95%=10, 90-95%=7, 80-90%=4, <80%=1 |
+
+**Composite Score** = weighted average across all dimensions.
+
+```
+Weekly Business Health: [X.X/10]
+
+Product:     ████████░░ 8/10  (99.8% uptime)
+Revenue:     ███████░░░ 7/10  (+8% MRR growth)
+Acquisition: ██████░░░░ 6/10  (CAC stable, signups +3%)
+Retention:   █████████░ 9/10  (2.1% monthly churn)
+Ops:         ████████░░ 8/10  (96% task completion)
+
+Trend: ↑ improving (was 7.2 last week)
+Bottleneck: Acquisition — CAC not improving. Consider new channel test.
+```
+
+**Weekly action**: Identify the lowest-scoring dimension. That's your constraint. Focus the week on improving THAT dimension only.
+
 ### Automated Health Checks
 Every 6 hours, check:
 - [ ] Website is up and responsive
@@ -131,6 +160,20 @@ Every 6 hours, check:
 - [ ] Ad campaigns are running (not paused or disapproved)
 - [ ] Social accounts are connected
 - [ ] No critical errors in application logs
+
+### Canary Mode (Post-Deploy)
+
+After any production deployment, activate canary monitoring for 24 hours:
+
+1. **Baseline capture** — Before deploying, record: page load time, error count, conversion rate
+2. **Deploy** — Ship the change
+3. **Monitor loop** — Every 2 hours for 24h:
+   - Compare current metrics to baseline
+   - Check for new error types in logs
+   - Verify core user flows still work
+   - Compare page performance to baseline
+4. **Verdict** — After 24h with no regression: canary passes. Mark deploy as stable.
+5. **Auto-rollback trigger** — If any metric degrades >50% from baseline for 2 consecutive checks: alert user, recommend rollback
 
 ### Alert Thresholds
 | Metric | Warning | Critical |
@@ -141,13 +184,29 @@ Every 6 hours, check:
 | Revenue (daily) | <50% of average | <25% of average |
 | Error rate | >1% | >5% |
 
+### Safety Guardrails
+
+Operations that run autonomously can be dangerous. Apply these safety rules:
+
+**Spending limits**: No automated operation may spend more than the user's approved daily budget. If an ad campaign or outreach batch would exceed limits, pause and alert.
+
+**Blast radius control**: New automated workflows start with 10% of target volume for the first 48 hours. Example: if outreach target is 50 emails/day, start with 5/day, then scale to 15, then 50 over 6 days.
+
+**Destructive action confirmation**: The following actions ALWAYS require user confirmation, even in fully automated mode:
+- Deleting any data, campaigns, or content
+- Spending >$100 in a single operation
+- Sending email to >100 recipients
+- Changing pricing or payment settings
+- Modifying production database
+- Pausing revenue-generating campaigns
+
 ### Incident Response
 When a critical alert fires:
 1. **Pause** — Stop the affected operation immediately
-2. **Diagnose** — Check logs and recent changes
+2. **Diagnose** — Check logs and recent changes. Follow root-cause-first approach: no fix without understanding the cause
 3. **Fix** — Apply the minimum fix to restore service
-4. **Notify** — Alert the user with a summary
-5. **Review** — Root cause analysis and prevention
+4. **Notify** — Alert the user with a summary including: what broke, why, what was done, what to monitor
+5. **Review** — Root cause analysis and prevention. Document in a post-mortem: timeline, impact, root cause, fix, prevention
 
 ## Setup Wizard
 

@@ -60,11 +60,13 @@ Present the options:
 > - 🔨 **I have a plan** — need to build it
 > - 📈 **I have a product** — need growth and customers
 > - 🤖 **I have a business** — need automation and scale
+> - 🩺 **Something isn't working** — need diagnosis
+> - ✅ **Pre-launch check** — need quality review before shipping
 > - 🔄 **Full pipeline** — do everything end-to-end
 
 ## Step 3: Route
 
-Based on the answer, route immediately:
+### Explicit routing (user selected a situation):
 
 ```
 User Situation
@@ -74,8 +76,28 @@ User Situation
     ├─ I have a plan ──────────────────► /money-product
     ├─ I have a product ───────────────► /money-seo + /money-content + /money-social
     ├─ I have a business ──────────────► /money-ops + /money-finance + /money-ads
+    ├─ Something isn't working ────────► /money-diagnose
+    ├─ Pre-launch check ───────────────► /money-quality
     └─ Full pipeline ──────────────────► Run all skills in sequence
 ```
+
+### Signal-based routing (user describes a problem without choosing):
+
+If the user doesn't pick from the menu but describes their situation in free text, detect intent signals and route automatically:
+
+| Signal in User's Message | Route To | Why |
+|-------------------------|----------|-----|
+| "Not working", "stuck", "why isn't", "what's wrong", "struggling" | `/money-diagnose` | Needs diagnosis, not more tools |
+| "Review", "ready to ship", "check quality", "test this", "is it ready" | `/money-quality` | Needs quality gates |
+| "What should I build", "find ideas", "opportunities" | `/money-discover` | Needs idea discovery |
+| "Business plan", "strategy", "pricing", "go-to-market" | `/money-strategy` | Needs strategic planning |
+| "Build", "deploy", "ship", "code", "MVP" | `/money-product` | Needs to build |
+| "Traffic", "SEO", "content", "blog", "marketing" | `/money-content` + `/money-seo` | Needs growth |
+| "Automate", "schedule", "24/7", "hands-off" | `/money-ops` | Needs automation |
+| "Revenue", "money", "profit", "expenses", "pricing" | `/money-finance` | Needs financial clarity |
+| "I know what to do but..." / "can't get started" / "keep procrastinating" | `/money-diagnose` (execution coaching mode) | Execution blocker, not business problem |
+
+**Rule**: If intent is ambiguous, ask ONE clarifying question — don't present the full menu again. Example: "It sounds like you might need [A] or [B]. Which is closer?"
 
 ## Available Skills
 
@@ -83,7 +105,9 @@ User Situation
 |-------|---------|-------------|
 | Discover | `/money-discover` | Finding business ideas, market gaps, opportunities |
 | Strategy | `/money-strategy` | Business model, pricing, GTM, competitive analysis, market research |
+| Diagnose | `/money-diagnose` | Deep diagnosis when business is stuck — finds root cause, not symptoms |
 | Product | `/money-product` | Building and deploying the actual product |
+| Quality | `/money-quality` | Code review, QA testing, security audit, pre-launch check |
 | Content | `/money-content` | Content creation — articles, emails, social posts, video scripts |
 | Outreach | `/money-outreach` | Cold email, partnerships, lead generation |
 | Social | `/money-social` | Social media management, community building |
@@ -98,15 +122,17 @@ User Situation
 When the user selects "Full pipeline" or says things like "build me a business from scratch":
 
 1. **Discover** → Validate demand, find the narrowest profitable wedge
-2. **Strategy** → Market research report, business model, pricing, GTM plan
+2. **Strategy** → Market research report, business model, pricing, GTM plan (includes premise deconstruction)
 3. **Product** → Build and deploy MVP with landing page and payments
-4. **Content** → Launch content pipeline (blog, email sequences, social)
-5. **SEO/GEO** → Organic discovery for both search engines and AI
-6. **Social** → Social media presence and content calendar
-7. **Outreach** → Cold outreach and partnership sequences
-8. **Ads** → Paid campaigns for fast traffic
-9. **Ops** → Configure 24/7 autonomous operation schedules
-10. **Finance** → Revenue tracking and financial dashboards
+4. **Quality** → Pre-launch quality gates (QA, security, performance, a11y)
+5. **Content** → Launch content pipeline (blog, email sequences, social) with authenticity audit
+6. **SEO/GEO** → Organic discovery for both search engines and AI
+7. **Social** → Social media presence and content calendar
+8. **Outreach** → Cold outreach and partnership sequences
+9. **Ads** → Paid campaigns for fast traffic
+10. **Ops** → Configure 24/7 autonomous operation schedules (with health scoring + canary monitoring)
+11. **Finance** → Revenue tracking and financial dashboards
+12. **Diagnose** → Available anytime when something isn't working as expected
 
 At each phase, present the output and let the user confirm before moving to the next phase.
 

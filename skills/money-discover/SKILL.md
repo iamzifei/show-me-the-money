@@ -1,6 +1,6 @@
 ---
 name: money-discover
-description: "Discover profitable business ideas from scratch. Analyzes market gaps, trending niches, user skills, and competitive landscapes to find high-potential opportunities. Use when the user has no idea what to build, wants to explore opportunities, needs market research, or says 'find me a business idea', 'what should I build', 'market research', or 'find opportunities'."
+description: "Discover profitable business ideas from scratch. Analyzes market gaps, trending niches, user skills, and competitive landscapes with a competitive intelligence protocol including 4-filter benchmark stress test and Blue Ocean differentiation grid. Use when the user has no idea what to build, wants to explore opportunities, needs market research, competitive benchmarking, or says 'find me a business idea', 'what should I build', 'market research', 'find opportunities', or 'competitive analysis'."
 ---
 
 # Money Discover — Business Idea Discovery Engine
@@ -123,19 +123,67 @@ This reveals UX assumptions and real-world friction.
 
 Avoid ideas that ride temporary hype. Look for compounding value — network effects, data moats, switching costs.
 
-## Phase 5: Deep Dive & Competitive Benchmark
+## Phase 5: Deep Dive & Competitive Intelligence
 
-After validation:
+After validation, run a rigorous competitive analysis. The goal is NOT to "understand the market" — it's to find ONE benchmark worth studying in detail and map the exact path to replicate their success.
 
-1. **Map the competitive landscape** — Top 5 competitors, their pricing, what users complain about
-2. **Benchmark analysis** — For each competitor, evaluate:
-   - Revenue model and pricing bands
-   - Acquisition channel (how they get customers)
-   - Delivery mechanism (how they deliver value)
-   - Weak spots (where users are frustrated)
-3. **Define the wedge** — The specific angle that makes this different
-4. **Draft a one-page strategy brief**:
-   - Problem → Solution → Audience → Channels → Revenue model → First 30 days
+### Step 1: Identify Benchmark Candidates (Top 5)
+
+For each competitor, gather:
+- Name, URL, estimated revenue/funding
+- Pricing model and specific price points
+- What users praise (from real reviews)
+- What users complain about (from real reviews)
+
+### Step 2: Benchmark Stress Test
+
+Apply these 4 filters sequentially. A benchmark must pass ALL 4 to be worth studying:
+
+| Filter | Question | Pass Criteria |
+|--------|----------|---------------|
+| **1. Profitable?** | Is this benchmark actually making money — not just growing? | Revenue evidence: pricing × estimated users > operating costs. Look for team size, office, spending patterns as signals |
+| **2. Understandable?** | Can you trace their complete revenue flow: acquire → convert → deliver → retain? | You can explain their business model in 4 sentences covering all 4 stages |
+| **3. Executable?** | Do you have (or can reasonably acquire) the skills and resources to replicate this? | No irreplaceable assets required (exclusive partnerships, government licenses, celebrity connections) |
+| **4. Revenue-focused?** | Does studying this benchmark directly lead to revenue, not just "learning"? | Clear action items emerge, not just "interesting insights" |
+
+### Step 3: Granular Competitive Analysis
+
+For benchmarks that pass all 4 filters, map these dimensions precisely:
+
+| Dimension | Their Approach | Your Approach | Gap |
+|-----------|---------------|---------------|-----|
+| Product price & tiers | | | |
+| Product packaging & positioning | | | |
+| Primary acquisition channel | | | |
+| Content format & frequency | | | |
+| Content style & tone | | | |
+| Conversion mechanism (free→paid) | | | |
+| Delivery method | | | |
+| Retention / repeat purchase tactics | | | |
+| Tech stack (visible) | | | |
+
+**Key principle**: Precision matters. If they post 3x/week on X with 2-paragraph insights, note "3x/week, 2-paragraph insights" — not "active on social media." The detail granularity determines execution quality.
+
+### Step 4: Differentiation Strategy (Blue Ocean Grid)
+
+Use the Eliminate-Reduce-Raise-Create framework to define your unique position:
+
+| Action | Factor | Rationale |
+|--------|--------|-----------|
+| **Eliminate** | What industry factor can you drop entirely? | Reduce cost or complexity |
+| **Reduce** | What can you offer less of than competitors? | Focus resources on what matters |
+| **Raise** | What should you offer more of than competitors? | Your core value advantage |
+| **Create** | What new factor can you introduce that nobody offers? | Your differentiation wedge |
+
+### Step 5: One-Page Strategy Brief
+
+Synthesize into:
+- **Problem** → one sentence, specific pain
+- **Solution** → one sentence, specific mechanism
+- **Audience** → one persona, named and described
+- **Channels** → top 2, with expected CAC
+- **Revenue model** → specific pricing
+- **First 30 days** → 4-week action plan with weekly milestones
 
 Then recommend: "Ready to create the full strategy and market research? Type `/money-strategy` to continue."
 
