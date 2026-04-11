@@ -321,4 +321,4 @@ User: /money-ads "set up Google Ads for my API product"
 
 ## 10. License
 
-MIT — Free for personal and commercial use.
+CC BY-NC 4.0 — Free for personal use. Commercial use requires separate authorization.

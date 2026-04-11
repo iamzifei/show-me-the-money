@@ -74,7 +74,7 @@ Most AI business tools give you generic advice. Show Me The Money gives you **ex
 - **Full-stack** — Covers the entire business lifecycle, not just one piece
 - **Revenue-first** — Every recommendation connects to making money. No fluff
 - **Autonomous** — Set up once, runs 24/7 with `/money-ops`
-- **Open source** — MIT license. Customize, extend, contribute
+- **Open source** — CC BY-NC 4.0 license. Free for personal use. Customize, extend, contribute
 
 ## Installation
 
@@ -211,4 +211,8 @@ All contributions welcome — new skills, framework improvements, language suppo
 
 ## License
 
-MIT
+CC BY-NC 4.0 (Creative Commons Attribution-NonCommercial 4.0)
+
+- Personal / learning / research: use freely
+- Public derivative works: attribute source
+- Commercial use: requires separate authorization
