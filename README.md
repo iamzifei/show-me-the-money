@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.2.0`** · [What's new →](#-whats-new-in-v220)
+**Current version: `v2.3.0`** · [What's new →](#-whats-new-in-v230)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,47 @@ If you're a solo founder, an indie hacker, or a technical founder who wants to s
 Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, operating everything autonomously, **and remembering what you decided across every session**.
 
 Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that support the skill system.
+
+---
+
+## ✨ What's New in v2.3.0
+
+**The founder knowledge base ships with the suite.** Every money-* skill now auto-loads atomic principles distilled from years of solo-SaaS operating notes — battle-tested judgement embedded directly in your AI agent's working context.
+
+### What changed
+
+```
+skills/money/knowledge/atoms/
+  atoms.jsonl                              ← full corpus
+  atoms_solopreneur_psychology.jsonl       ← character, action threshold, focus
+  atoms_market_observation.jsonl           ← shifts, channels, trajectories
+  atoms_agent_infra.jsonl                  ← AI agents, skill design, automation
+  atoms_growth_tactics.jsonl               ← outreach, ads ROI, pricing, conversion
+  atoms_content_meta.jsonl                 ← strategy, AI-content traps, positioning
+```
+
+Each atom is one declarative principle: a market observation, an anti-mainstream take, a hard-won tactic. Distilled from a multi-year archive of working notes — not opinion blog posts.
+
+### Why this matters
+
+Skills used to re-derive the same conclusions every conversation. Now `/money-discover` starts already knowing which market shapes are traps for solo founders. `/money-content` starts already knowing which AI-content patterns kill positioning. `/money-diagnose` cites specific atoms when the user's failure mode matches a known one — and you can trace any recommendation back to its source.
+
+When an atom directly informs a recommendation, the skill cites it by ID:
+
+> "Picking a $29/mo consumer wedge here would hit trap **A-bce2** — agent infra is shifting consumer apps toward UI-less API plays within 12 months."
+
+Click through the source link and you see the original observation, dated, with the original context.
+
+### Two layers of memory now
+
+- **Atoms** (this release) — global, founder-maintained, ship with the package, read-only at runtime. Encode general principles.
+- **Learnings** (v2.2) — project-local, auto-captured per-slug, mutable. Encode this-project-specific patterns.
+
+Together: every skill run starts with both general operating wisdom **and** what we learned about this specific business.
+
+### Maintainer-only: incremental distillation
+
+The pipeline that produces atoms (`scripts/x-distill.mjs`, gitignored) is incremental — only new content gets distilled on subsequent runs, so the corpus grows organically without re-processing the archive.
 
 ---
 

@@ -275,6 +275,50 @@ Read `~/.smtm/projects/<slug>/skills/` (created by `/money-skillify`). If any cu
 
 Do this once per session, not on every invocation. Track via `~/.smtm/.session-skills-shown-<slug>` touch file (created on show, cleared by `/money-restore` or after 24h).
 
+### Step 5: Auto-load global atoms (founder knowledge base)
+
+Atoms are reusable principles distilled from the maintainer's working notes — battle-tested judgement that should inform every skill run. They live at:
+
+```
+~/.claude/skills/money/knowledge/atoms/
+  atoms.jsonl                              # full corpus
+  atoms_solopreneur_psychology.jsonl
+  atoms_market_observation.jsonl
+  atoms_agent_infra.jsonl
+  atoms_growth_tactics.jsonl
+  atoms_content_meta.jsonl
+```
+
+Per-skill atom slice (load only what's relevant — keep working context lean):
+
+| Skill | Atom categories to load |
+|---|---|
+| `/money-discover` | `market_observation`, `growth_tactics` |
+| `/money-strategy` | `market_observation`, `growth_tactics`, `content_meta` |
+| `/money-content`, `/money-social`, `/money-seo` | `content_meta`, `growth_tactics` |
+| `/money-outreach`, `/money-ads` | `growth_tactics`, `content_meta` |
+| `/money-product`, `/money-quality`, `/money-ops` | `agent_infra` |
+| `/money-finance` | `growth_tactics` (pricing subset only) |
+| `/money-diagnose`, `/money-panel`, `/money-review-*` | ALL (especially `solopreneur_psychology`) |
+| `/money-retro` | ALL |
+| `/money-save`, `/money-restore`, `/money-report`, `/money-learn`, `/money-skillify` | none — state managers don't consume atoms |
+
+Filter to `confidence ∈ {validated, emerging}` by default — skip `hypothesis` unless the user explicitly asks for speculative input.
+
+If matching atoms exist, surface them once at the top of the skill's output:
+
+> 🧠 Loaded N relevant atoms from the founder knowledge base:
+> - A-{id} ({confidence}, {category}): {pattern}
+> - ...
+>
+> These principles will inform the analysis below — citations by `A-{id}` link back to source.
+
+Cite an atom whenever a recommendation is directly informed by it, e.g. *"Picking a $29/mo consumer wedge here would hit the same trap A-bce2 names — agent infra is shifting consumer apps toward UI-less API plays within 12 months."*
+
+If 0 matching atoms (e.g. fresh install, atoms not yet bundled): silently skip. Never fabricate atom IDs.
+
+**Difference from learnings**: atoms are global (founder-maintained, ship with the package, read-only). Learnings (Step 3) are project-local (auto-captured per-slug, mutable). Atoms encode general principles; learnings encode this-project-specific patterns.
+
 ---
 
 ## Auto-Update Check (Once Per Session, /money Router Only)

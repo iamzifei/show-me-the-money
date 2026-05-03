@@ -11,4 +11,5 @@ data/
 scripts/x-export.mjs
 scripts/x-analyze.mjs
 scripts/x-deepdive.mjs
+scripts/x-distill.mjs
 scripts/stripe-revenue.mjs
