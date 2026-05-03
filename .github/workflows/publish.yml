@@ -107,9 +107,11 @@ jobs:
           fi
 
           # Echo first few lines so the workflow log shows what's being published.
-          printf '\n--- Release notes preview (first 20 lines) ---\n'
+          # Use `printf -- ...` so leading dashes in the format string aren't
+          # parsed as options by bash's builtin printf.
+          printf -- '\n--- Release notes preview (first 20 lines) ---\n'
           head -n 20 "$NOTES_FILE"
-          printf '----------------------------------------------\n'
+          printf -- '----------------------------------------------\n'
 
           printf 'notes_file=%s\n' "$NOTES_FILE" >> "$GITHUB_OUTPUT"
 
