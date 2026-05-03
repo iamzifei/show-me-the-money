@@ -1,0 +1,126 @@
+name: Publish to npm
+
+# Triggers when a version tag (v*.*.*) is pushed.
+# Verifies package.json + VERSION + tag all match, then publishes to npm
+# and creates a GitHub Release with the README's What's New section as body.
+#
+# One-time setup:
+#   1. Generate an npm automation token at:
+#      https://www.npmjs.com/settings/<your-username>/tokens
+#      → "Generate New Token" → "Automation" type
+#   2. Add it as a GitHub secret:
+#      Repo Settings → Secrets and variables → Actions → New repository secret
+#      Name: NPM_TOKEN
+#      Value: <the token from step 1>
+#
+# Future releases:
+#   1. Bump version in package.json + VERSION + .claude-plugin/marketplace.json
+#   2. Commit
+#   3. git tag -a v2.3.0 -m "release notes"
+#   4. git push origin master --tags
+#   This workflow auto-publishes to npm and creates the GitHub Release.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write   # needed to create the GitHub Release
+  id-token: write   # needed for npm provenance (transparent supply-chain attestation)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    # Pin trusted inputs as env vars at the job level. We never interpolate
+    # ${{ ... }} expressions directly inside run: scripts — instead we read
+    # from these env vars in shell, which is safe even if an attacker could
+    # somehow control the input string (defense-in-depth, since tag names
+    # are already constrained by git ref rules).
+    env:
+      TAG_REF: ${{ github.ref_name }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Verify version consistency
+        # Fails loudly if the tag, package.json, VERSION, and marketplace.json
+        # disagree on the version. Catches the most common release mistake.
+        run: |
+          set -euo pipefail
+          TAG_VERSION="${TAG_REF#v}"
+          PKG_VERSION="$(node -p 'require("./package.json").version')"
+          FILE_VERSION="$(tr -d '[:space:]' < VERSION)"
+          MKT_VERSION="$(node -p 'require("./.claude-plugin/marketplace.json").metadata.version')"
+
+          printf 'Tag:           %s\n' "$TAG_VERSION"
+          printf 'package.json:  %s\n' "$PKG_VERSION"
+          printf 'VERSION file:  %s\n' "$FILE_VERSION"
+          printf 'marketplace:   %s\n' "$MKT_VERSION"
+
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ] || \
+             [ "$TAG_VERSION" != "$FILE_VERSION" ] || \
+             [ "$TAG_VERSION" != "$MKT_VERSION" ]; then
+            echo "::error::Version mismatch — tag must match package.json, VERSION, and marketplace.json"
+            exit 1
+          fi
+          printf '✅ All versions agree on %s\n' "$TAG_VERSION"
+
+          # Export TAG_VERSION for later steps via $GITHUB_ENV.
+          printf 'TAG_VERSION=%s\n' "$TAG_VERSION" >> "$GITHUB_ENV"
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract release notes from README
+        id: notes
+        # Pull the matching "## ✨ What's New in v{version}" section out of README
+        # and write it to a file. The action-gh-release step then reads that file.
+        # We never let the tag string flow into a shell command — only into
+        # awk via env-var indirection, which is safe.
+        run: |
+          set -euo pipefail
+          NOTES_FILE="$(mktemp)"
+          # Use awk with -v to inject the version safely (awk variable, not shell substitution).
+          if grep -q "^## ✨ What's New in v${TAG_VERSION}" README.md; then
+            awk -v ver="$TAG_VERSION" '
+              $0 ~ ("^## ✨ What.s New in v" ver) { flag = 1; next }
+              /^## / { flag = 0 }
+              flag { print }
+            ' README.md > "$NOTES_FILE"
+            printf 'Found release notes for v%s in README\n' "$TAG_VERSION"
+          else
+            printf 'No README section for v%s — using tag annotation\n' "$TAG_VERSION"
+            git tag -l --format='%(contents)' "$TAG_REF" > "$NOTES_FILE"
+          fi
+
+          # Echo first few lines so the workflow log shows what's being published.
+          printf '\n--- Release notes preview (first 20 lines) ---\n'
+          head -n 20 "$NOTES_FILE"
+          printf '----------------------------------------------\n'
+
+          printf 'notes_file=%s\n' "$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body_path: ${{ steps.notes.outputs.notes_file }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
