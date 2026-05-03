@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.3.0`** · [What's new →](#-whats-new-in-v230)
+**Current version: `v2.3.1`** · [What's new →](#-whats-new-in-v231)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,20 @@ If you're a solo founder, an indie hacker, or a technical founder who wants to s
 Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, operating everything autonomously, **and remembering what you decided across every session**.
 
 Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that support the skill system.
+
+---
+
+## ✨ What's New in v2.3.1
+
+**Polish patch following the v2.3.0 atom launch.** Five things landed:
+
+1. **Atom corpus grew 258 → 276** — re-ran the distill with a longer per-tweet timeout and recovered 18 of the 26 tweets that errored on the first pass (mostly long Chinese threads that needed more inference time).
+2. **Per-skill atom-loading callouts** — every non-router skill now has a Standard-startup callout at the top, declaring which atom slice it loads and reminding the agent to cite by `A-{id}` when an atom directly informs a recommendation. Previously the doctrine lived only in `skills/money/SKILL.md` and downstream skills inherited it implicitly; now it's self-documenting per file.
+3. **Workflow step ordering** — `Extract release notes` now runs **before** `Publish to npm` in the auto-publish workflow. Before this fix, a notes-extraction failure left a published-but-unreleased orphan version on npm (which is exactly what happened on the v2.3.0 ship). Notes-failure now leaves a clean rollback path.
+4. **Chinese README at full v2.3 parity** — `README.zh-CN.md` was a v1.x-era page (14 skills, no banner, no founder narrative). Rewritten to match the English version line-for-line, including the v2.1/2.2/2.3 release notes and the founder receipts.
+5. **`printf -- '...'` end-of-options fix** — already shipped in 2.3.0 but worth restating: the auto-publish workflow's `printf '----...'` separator hit bash's option-parsing on its first real run, exiting before npm publish. Now bullet-proof.
+
+No new skills, no new atoms in the corpus from sources other than #1. Library health-check only.
 
 ---
 

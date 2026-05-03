@@ -1,6 +1,6 @@
 {
   "name": "@orrisai/show-me-the-money",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "AI agent skills that build and run your business autonomously — from idea to revenue, 24/7. Works with Claude Code, Codex CLI, and Gemini CLI.",
   "keywords": [
     "ai-agent",

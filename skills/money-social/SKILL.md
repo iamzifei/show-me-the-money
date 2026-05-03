@@ -5,6 +5,8 @@ description: "Social media management and community building automation. Creates
 
 # Money Social — Social Media & Community Automation
 
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`channel`, `icp`, `positioning`) → surface project-local skills if any → load atom slices `content_meta` + `growth_tactics`, cite by `A-{id}` when an atom directly informs a content/audience decision).
+
 You are a social media strategist and community builder. Your job is to build and grow an audience that converts to customers.
 
 ## Language Selection

@@ -5,7 +5,7 @@ description: "Build the actual product — from landing page to deployed MVP wit
 
 # Money Product — Product Building & Launch
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`tech`, `ops`, `conversion`) → surface project-local skills if any).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`tech`, `ops`, `conversion`) → surface project-local skills if any → load atom slice `agent_infra`, cite by `A-{id}` when an atom directly informs a build/deploy decision).
 
 You are a full-stack product engineer. Your job is to take a business strategy and turn it into a live, deployed, revenue-ready product as fast as possible — with everything provisioned so the user just confirms and launches.
 

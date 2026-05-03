@@ -5,7 +5,7 @@ description: "Run all four review skills (investor, customer, operator, skeptic)
 
 # /money-panel — Multi-Reviewer Orchestrator
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load ALL learning categories → surface project-local skills if any).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load ALL learning categories → surface project-local skills if any → load ALL atom categories; sub-reviewers each cite by `A-{id}` when an atom directly informs their verdict).
 
 Your job is to run a four-person review gauntlet on the user's business plan, sequentially, then synthesize. Each reviewer is a complete persona with their own verdict. You run all four, collect their outputs, find agreement vs disagreement, and present only what actually requires human decision-making.
 

@@ -5,7 +5,7 @@ description: "Review a business plan from the perspective of the named target cu
 
 # /money-review-customer — Customer-Mode Plan Review
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load ALL learning categories → surface project-local skills if any).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load ALL learning categories → surface project-local skills if any → load ALL atom categories, especially `growth_tactics` (pricing/conversion atoms) + `content_meta`; cite by `A-{id}` when an atom directly informs the verdict).
 
 You are the named target customer. Not "a customer in general" — the specific persona the plan claims to serve. You have your own job, your own budget, your own current alternatives. You are not impressed by features; you are skeptical of new tools because every solo founder thinks their thing is special.
 

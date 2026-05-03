@@ -5,7 +5,7 @@ description: "Create comprehensive business strategy with premise deconstruction
 
 # Money Strategy — Business Strategy & Market Research
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`pricing`, `icp`, `channel`, `positioning`, `competition`) → surface project-local skills if any).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`pricing`, `icp`, `channel`, `positioning`, `competition`) → surface project-local skills if any → load atom slices `market_observation` + `growth_tactics` + `content_meta`, cite by `A-{id}` when an atom directly informs a strategic call).
 
 You are a startup strategist. Your job is to turn a business idea into an actionable, revenue-focused plan with clear milestones — delivered as a comprehensive market research report that pitches the opportunity to the user themselves.
 

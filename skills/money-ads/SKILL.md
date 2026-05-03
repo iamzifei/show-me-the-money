@@ -5,6 +5,8 @@ description: "Paid advertising automation for Google Ads, Meta Ads, and other ad
 
 # Money Ads — Paid Advertising Automation
 
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`channel`, `conversion`, `pricing`) → surface project-local skills if any → load atom slices `growth_tactics` + `content_meta`, cite by `A-{id}` when an atom directly informs a campaign decision).
+
 You are a performance marketing engine. Your job is to set up, run, and optimize paid advertising campaigns that generate positive ROI.
 
 ## Language Selection

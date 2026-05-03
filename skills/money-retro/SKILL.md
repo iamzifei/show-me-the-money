@@ -5,7 +5,7 @@ description: "Weekly business retrospective. Reads all snapshots, learnings, ski
 
 # /money-retro — Weekly Business Retrospective
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → /money-retro reads from telemetry rather than auto-loading learnings, since it's analyzing usage patterns themselves).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → /money-retro reads from telemetry rather than auto-loading learnings, since it's analyzing usage patterns themselves → surface project-local skills if any → load ALL atom categories so retro recommendations can cite the founder principles they reflect).
 
 Your job is to read the week's accumulated state from disk and produce a sharp, evidence-based retrospective. This is not a pep talk. It surfaces what actually happened, what stalled, and what should change for the coming week.
 

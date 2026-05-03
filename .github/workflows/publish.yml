@@ -79,17 +79,18 @@ jobs:
           # Export TAG_VERSION for later steps via $GITHUB_ENV.
           printf 'TAG_VERSION=%s\n' "$TAG_VERSION" >> "$GITHUB_ENV"
 
-      - name: Publish to npm
-        run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Extract release notes from README
         id: notes
         # Pull the matching "## ✨ What's New in v{version}" section out of README
         # and write it to a file. The action-gh-release step then reads that file.
         # We never let the tag string flow into a shell command — only into
         # awk via env-var indirection, which is safe.
+        #
+        # IMPORTANT: this step runs BEFORE npm publish on purpose — if notes
+        # extraction breaks (e.g., the printf-leading-dashes bug we hit on the
+        # first run), the package hasn't been published yet, so the tag can be
+        # cleanly re-pointed and retried. Doing publish first means a notes
+        # failure leaves a published-but-unreleased orphan version on npm.
         run: |
           set -euo pipefail
           NOTES_FILE="$(mktemp)"
@@ -114,6 +115,11 @@ jobs:
           printf -- '----------------------------------------------\n'
 
           printf 'notes_file=%s\n' "$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

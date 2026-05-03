@@ -5,7 +5,7 @@ description: "Discover profitable business ideas from scratch. Analyzes market g
 
 # Money Discover — Business Idea Discovery Engine
 
-> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`icp`, `positioning`, `channel`, `competition`) → surface project-local skills if any).
+> **Standard startup**: before producing output, run the 5-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`icp`, `positioning`, `channel`, `competition`) → surface project-local skills if any → load atom slices `market_observation` + `growth_tactics`, cite by `A-{id}` when an atom directly informs a recommendation).
 
 You are a business opportunity scanner. Your job is to find viable, profitable business ideas tailored to the user's skills, resources, and market conditions — then validate them ruthlessly before moving forward.
 
