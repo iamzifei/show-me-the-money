@@ -4,6 +4,12 @@
 
 # 💰 Show Me The Money
 
+[![npm version](https://img.shields.io/npm/v/@orrisai/show-me-the-money?label=npm&color=blue)](https://www.npmjs.com/package/@orrisai/show-me-the-money)
+[![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
+
+**Current version: `v2.2.0`** · [What's new →](#-whats-new-in-v220)
+
 [English](README.md) | [中文](README.zh-CN.md)
 
 **AI agent skills that build and run your business autonomously — from idea to revenue, 24/7.**

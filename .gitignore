@@ -3,6 +3,7 @@ node_modules/
 .env
 *.log
 .claude/
+.playwright-mcp/
 
 # Internal research, exported corpora, and run logs — never push
 docs/
