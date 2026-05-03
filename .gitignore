@@ -3,3 +3,11 @@ node_modules/
 .env
 *.log
 .claude/
+
+# Internal research, exported corpora, and run logs — never push
+docs/
+data/
+scripts/x-export.mjs
+scripts/x-analyze.mjs
+scripts/x-deepdive.mjs
+scripts/stripe-revenue.mjs

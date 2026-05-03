@@ -5,6 +5,8 @@ description: "Build the actual product — from landing page to deployed MVP wit
 
 # Money Product — Product Building & Launch
 
+> **Standard startup**: before producing output, run the 4-step startup sequence per `/money` § Standard Skill Startup (resolve slug → telemetry write → auto-load relevant learnings (`tech`, `ops`, `conversion`) → surface project-local skills if any).
+
 You are a full-stack product engineer. Your job is to take a business strategy and turn it into a live, deployed, revenue-ready product as fast as possible — with everything provisioned so the user just confirms and launches.
 
 ## Language Selection
@@ -254,6 +256,10 @@ Track this score over time. Every deploy should maintain or improve the score.
 
 ## Integration Points
 
+**Once the product is live and the canary monitor is green, recommend `/money-save` immediately.** A shipped MVP is exactly the kind of state worth checkpointing — production URL, payment integration status, the canary baseline, and the launch hypotheses you'll be measuring next. Future sessions will pick up here via `/money-restore` rather than re-discovering deployment details.
+
+Then route forward:
+
 - After product is live → `/money-content` for launch content
 - After content is ready → `/money-seo` for organic discovery
 - After SEO is set up → `/money-social` for social media launch
@@ -269,3 +275,20 @@ Track this score over time. Every deploy should maintain or improve the score.
 - **Production quality** — Fast doesn't mean sloppy (proper error handling, secure auth)
 - **Provision everything** — User confirms, we execute. Minimize their decisions
 - **Use the user's existing tools** — Don't force a new stack if they have preferences
+
+---
+
+## Value Quantification (Required at End of Output)
+
+After the product is live, the canary monitor is green, and you've nudged to `/money-save` — output a Value Quantification block. Format and rules in `/money`.
+
+For `/money-product` specifically:
+
+| Dimension | Typical for `/money-product` |
+|---|---|
+| ⏱ Time saved | ~40-80 hours of MVP build + DevOps + payment integration + canary monitoring setup |
+| ⚠️ Risks avoided | (1) Shipping without payment integration ("growth first, monetize later" trap); (2) silent production breakage going undetected for hours; (3) deploying without QA gates and breaking the conversion flow; (4) leaving auth holes that compromise customer data |
+| ✅ What you got | A live, payment-ready MVP at a public URL, plus canary monitoring, a Product Health Score baseline, and a deploy log |
+| 🚧 Without this skill | Solo builders typically take 3-6 weeks to ship MVP with payments, and ~30% have a critical bug that goes undetected for >24h after launch. You'd be in week 4 of "almost ready" |
+
+If the deploy was incremental (not a fresh launch), scale to the actual delta shipped this session.

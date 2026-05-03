@@ -1,0 +1,262 @@
+{
+  "name": "show-me-the-money",
+  "owner": {
+    "name": "iamzifei"
+  },
+  "metadata": {
+    "description": "AI agent skills that build and run your business autonomously — from idea to revenue, 24/7.",
+    "version": "2.2.0"
+  },
+  "plugins": [
+    {
+      "name": "money",
+      "description": "Main entry point — onboards you, builds your profile, and routes to the right skill.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["business", "router", "onboarding", "autonomous", "founder"],
+      "skills": ["./skills/money"]
+    },
+    {
+      "name": "money-discover",
+      "description": "Find and validate profitable business ideas with competitive intelligence.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["ideation", "validation", "market-gap", "wedge", "demand"],
+      "skills": ["./skills/money-discover"]
+    },
+    {
+      "name": "money-strategy",
+      "description": "Premise deconstruction + market research + business model stress test + GTM plan.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["strategy", "market-research", "pricing", "gtm", "business-model"],
+      "skills": ["./skills/money-strategy"]
+    },
+    {
+      "name": "money-diagnose",
+      "description": "Deep diagnosis when business is stuck — root cause, not symptoms. Includes execution coaching.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["diagnosis", "root-cause", "execution-coaching", "blocker"],
+      "skills": ["./skills/money-diagnose"]
+    },
+    {
+      "name": "money-product",
+      "description": "Build, deploy, QA test, and monitor an MVP with landing page, auth, payments, SEO/GEO.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "build",
+      "keywords": ["mvp", "deployment", "landing-page", "payments", "canary"],
+      "skills": ["./skills/money-product"]
+    },
+    {
+      "name": "money-quality",
+      "description": "Code review, security audit, performance check, accessibility — pre-launch quality gates.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "build",
+      "keywords": ["code-review", "security", "qa", "performance", "a11y"],
+      "skills": ["./skills/money-quality"]
+    },
+    {
+      "name": "money-content",
+      "description": "Content pipeline with authenticity audit, headline impact matrix, and substance scoring.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "grow",
+      "keywords": ["content", "blog", "email", "video-script", "authenticity"],
+      "skills": ["./skills/money-content"]
+    },
+    {
+      "name": "money-outreach",
+      "description": "Cold email sequences, partnership outreach, and lead generation with personalization.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "grow",
+      "keywords": ["cold-email", "outreach", "partnerships", "leads"],
+      "skills": ["./skills/money-outreach"]
+    },
+    {
+      "name": "money-social",
+      "description": "Social media management — X, LinkedIn, Reddit, Product Hunt — with hook-writing frameworks.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "grow",
+      "keywords": ["social-media", "twitter", "linkedin", "reddit", "product-hunt"],
+      "skills": ["./skills/money-social"]
+    },
+    {
+      "name": "money-seo",
+      "description": "Traditional SEO + GEO (AI search optimization for ChatGPT, Perplexity, Gemini).",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "grow",
+      "keywords": ["seo", "geo", "ai-search", "organic-traffic"],
+      "skills": ["./skills/money-seo"]
+    },
+    {
+      "name": "money-ads",
+      "description": "Google Ads, Meta Ads — campaign setup, optimization, ROAS tracking.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "grow",
+      "keywords": ["paid-ads", "google-ads", "meta-ads", "roas"],
+      "skills": ["./skills/money-ads"]
+    },
+    {
+      "name": "money-ops",
+      "description": "24/7 autonomous operations with health scoring, canary monitoring, and safety guardrails.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "operate",
+      "keywords": ["autonomous", "24-7", "ops", "monitoring", "scheduler"],
+      "skills": ["./skills/money-ops"]
+    },
+    {
+      "name": "money-finance",
+      "description": "Revenue tracking, unit economics, financial reports — Stripe integration.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "operate",
+      "keywords": ["finance", "revenue", "stripe", "mrr", "unit-economics"],
+      "skills": ["./skills/money-finance"]
+    },
+    {
+      "name": "money-save",
+      "description": "Checkpoint the current business state to disk for cross-session recall — never lose context again.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["state", "snapshot", "checkpoint", "memory", "session"],
+      "skills": ["./skills/money-save"]
+    },
+    {
+      "name": "money-restore",
+      "description": "Resume from a prior saved state — pick up exactly where the last session left off.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["state", "restore", "resume", "memory", "session"],
+      "skills": ["./skills/money-restore"]
+    },
+    {
+      "name": "money-report",
+      "description": "Merge all saved states into a deliverable markdown report — share with co-founders, advisors, or your future self.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["report", "deliverable", "merge", "summary", "share"],
+      "skills": ["./skills/money-report"]
+    },
+    {
+      "name": "money-panel",
+      "description": "Run all four reviewers (investor / customer / operator / skeptic), find agreement, surface only disagreements + taste decisions. One command = full plan-review gauntlet.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["review", "panel", "gauntlet", "stress-test", "verdict"],
+      "skills": ["./skills/money-panel"]
+    },
+    {
+      "name": "money-review-investor",
+      "description": "VC-mode review of a business plan. Verdict modes: SEED VIABLE / LATER ROUND ONLY / BOOTSTRAP-ONLY / UNFUNDABLE. Five questions: founder-market fit, demand evidence, moat theory, TAM math, founder risk.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["review", "investor", "vc", "fundability", "moat"],
+      "skills": ["./skills/money-review-investor"]
+    },
+    {
+      "name": "money-review-customer",
+      "description": "Customer-mode review. First-person verdict from the named ICP on whether they'd pay this price for this solution. Verdict modes: PAY NOW / PAY WITH FRICTION / WRONG POSITIONING / WRONG ICP.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["review", "customer", "icp", "willingness-to-pay", "switching-cost"],
+      "skills": ["./skills/money-review-customer"]
+    },
+    {
+      "name": "money-review-operator",
+      "description": "Solo-founder execution review. Verdict modes: SHIPPABLE NOW / SHIPPABLE WITH DESCOPE / NEEDS HIRE / WRONG STACK. Checks build complexity, ops load, runway, channel feasibility.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["review", "operator", "execution", "solo-founder", "ops-load"],
+      "skills": ["./skills/money-review-operator"]
+    },
+    {
+      "name": "money-review-skeptic",
+      "description": "Devil's advocate review. Seven attack vectors, top-3 risk ranking, and the single avoided question the user has been polite about. Verdict modes: EXISTENTIAL RISK / SOLVABLE RISKS / LOW-RISK / WRONG QUESTION.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "discover-validate",
+      "keywords": ["review", "skeptic", "red-team", "devil-advocate", "failure-modes"],
+      "skills": ["./skills/money-review-skeptic"]
+    },
+    {
+      "name": "money-learn",
+      "description": "Manage atomic project learnings (~/.smtm/projects/{slug}/learnings.jsonl). Auto-loaded into every other money-* skill so the agent gets smarter across sessions instead of cold-starting.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["learnings", "patterns", "memory", "knowledge-base"],
+      "skills": ["./skills/money-learn"]
+    },
+    {
+      "name": "money-retro",
+      "description": "Weekly business retrospective. Reads snapshots, learnings, skill-usage telemetry. Surfaces stalled hypotheses, unused skills, and one recommended focus for the coming week. Portfolio mode aggregates across all projects.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "operate",
+      "keywords": ["retrospective", "review", "weekly", "reflection", "trend"],
+      "skills": ["./skills/money-retro"]
+    },
+    {
+      "name": "money-skillify",
+      "description": "Codify a successful workflow from the current conversation into a permanent project-local skill at ~/.smtm/projects/{slug}/skills/. Future sessions can reference it without re-discovery.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["codify", "skillify", "workflow", "reusable", "automation"],
+      "skills": ["./skills/money-skillify"]
+    },
+    {
+      "name": "money-upgrade",
+      "description": "Update Show Me The Money to the latest version.",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "core",
+      "keywords": ["update", "upgrade", "version"],
+      "skills": ["./skills/money-upgrade"]
+    }
+  ]
+}
