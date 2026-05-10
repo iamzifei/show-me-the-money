@@ -30,6 +30,7 @@ Ranked by revenue impact:
 5. **Documentation** — Reduce churn, improve activation
 6. **Case studies** — Social proof for sales
 7. **Video scripts** — YouTube/TikTok/short-form content
+8. **Release notes** — Convert existing users on every ship (see "Release-notes mode" below)
 
 ## Pipeline: Research → Write → Diagnose → Optimize → Publish
 
@@ -209,10 +210,129 @@ Before finalizing any title/headline, evaluate it against these psychological me
 - [ ] Uses concrete nouns and verbs, not abstract concepts
 - [ ] Creates a question in the reader's mind that can only be answered by reading
 
+### Stage 4.8: Hook & Title Pattern Library
+
+After the hook and headline checks pass, run the candidate against the curated pattern library. The mechanisms matrix tells you WHY a headline works; the pattern library gives you proven SHAPES that have already worked in the wild. Use both — patterns without mechanisms are templates; mechanisms without patterns are theory.
+
+#### Hook patterns (short-form video and social opening)
+
+12 patterns, each indexed by the situation it fits. Match the candidate hook to the closest pattern. If no pattern fits, the hook may need more work — or it may be a new shape worth saving (run `/money-learn add` to log it).
+
+| Pattern | Skeleton | Best for | Example |
+|---|---|---|---|
+| **Result-first reversal** | "I {achieved X}. The way I got there was {opposite of expected}." | Big result + counterintuitive path | "I hit $10K MRR in 6 weeks. I never wrote a single blog post." |
+| **Single-number anchor** | "{Specific number}. {What the number means}." | Data-heavy stories | "$4,327. That's what one customer paid me last week — and I never spoke to them." |
+| **The thing nobody admits** | "Nobody talks about this, but {industry truth}." | Insider takes | "Nobody talks about this, but the top SEO tools all share the same database." |
+| **Yesterday's failure** | "Yesterday I {specific failure}. Here's what I'm changing." | Personal authenticity | "Yesterday I lost a $5K deal because I demoed before qualifying. Here's the new opener." |
+| **N years, one lesson** | "I spent {N} years doing X. Here's the one thing I'd tell my younger self." | Authority + lesson | "I spent 8 years writing code in big tech. The one thing I'd tell my younger self: stop optimizing the wrong loop." |
+| **Setup → flip** | "Everyone says {X}. But {X} is actually {opposite}." | Contrarian takes | "Everyone says raise prices. But for our segment, raising prices killed conversions." |
+| **Watch what happens** | "{Specific action}. {What happened next}." | Story-driven | "I changed one word in our checkout copy. Conversion went from 3.1% to 4.8%." |
+| **The question they're afraid to ask** | "Should you {decision}? Most people are afraid to ask. Here's the honest answer." | Decision content | "Should you quit your day job to ship your side project? Here's the honest math." |
+| **Two roads** | "Two roads. {Road A leads to result Y}. {Road B leads to result Z}. Pick one." | Decision content | "Two roads. Stay in cold outreach and grind. Or wait 9 months for SEO. Pick one." |
+| **The price of {X}** | "The price of {decision/inaction} is {specific cost}." | Loss-aversion | "The price of waiting one more quarter to charge for your beta is roughly $14,000 in lost revenue." |
+| **Reverse credentials** | "I'm not a {expected authority}. But {what I know that they don't}." | Outsider authority | "I'm not a VC. But I've sold three startups for $20M+ each by ignoring everything VCs told me." |
+| **The receipt** | "{Bold claim}. Receipts: {specific evidence}." | Proof-driven | "Cold email still works in 2026. Receipts: 47 booked meetings last quarter, $186K closed." |
+
+#### Title patterns (blog posts, X threads, XHS posts)
+
+15 patterns organized by what the reader is doing the moment they encounter the title:
+
+**For scrollers (need to be stopped):**
+| Pattern | Skeleton | Example |
+|---|---|---|
+| Number + specific noun | "{Specific number} {specific things} that {specific outcome}" | "7 onboarding emails that doubled our trial-to-paid conversion" |
+| Time-bound result | "From {start state} to {end state} in {timeframe}" | "From $0 to $10K MRR in 90 days (with screenshots)" |
+| Anti-advice | "Why I stopped {common practice}" | "Why I stopped using TypeScript on solo projects" |
+| The cost of habit | "What {common thing} is really costing you" | "What your free tier is really costing you" |
+
+**For searchers (already typed a query):**
+| Pattern | Skeleton | Example |
+|---|---|---|
+| Definitional + use | "{Topic}, explained for {specific audience}" | "RAG, explained for backend engineers who already know caching" |
+| Comparison | "{A} vs {B}: which one for {specific use case}" | "Postgres vs DynamoDB: which one for a 2-person SaaS" |
+| Decision framework | "How to choose {thing} (the {N}-question test)" | "How to choose a payment processor (the 5-question test)" |
+| Step-by-step | "{Verb} {outcome} in {N} steps" | "Set up Stripe webhooks for subscriptions in 4 steps" |
+
+**For decision-makers (need a confident take):**
+| Pattern | Skeleton | Example |
+|---|---|---|
+| Strong opinion | "{Industry truth} is wrong. Here's why." | "The 'launch on Product Hunt' playbook is wrong. Here's what I'd do instead." |
+| Receipts post | "I {tried/did X}. Here's what happened (with numbers)." | "I switched from Vercel to Cloudflare. Here's what happened (with numbers)." |
+| Insider take | "What {role} actually look at when {decision}" | "What technical founders actually look at when picking a CRM" |
+| Pattern naming | "The {memorable name} trap" | "The 'one more feature' trap (and how to spot it in week 2)" |
+
+**For platform-specific situations:**
+| Pattern | Skeleton | Best on |
+|---|---|---|
+| 我 + 数字 + 反差 | "我 {做了什么} 之后，{反直觉结果}" | XHS (中文) |
+| 别再 + 行为 | "别再 {主流做法} 了" | XHS, WeChat |
+| 一句话点破 | "{一个反直觉判断}" | X thread opener, XHS |
+
+#### Pattern + Mechanism = Final Title
+
+A strong final title satisfies BOTH:
+- One pattern from the library (proven shape)
+- Two+ mechanisms from the impact matrix at Stage 4.7 (psychological pull)
+
+Output for every candidate title:
+
+| Candidate | Pattern | Mechanisms | Status |
+|---|---|---|---|
+| "Why I stopped using TypeScript on solo projects" | Anti-advice | Cognitive dissonance, Social identity | ✅ Ship |
+| "5 things to consider when choosing TypeScript" | (no clean pattern match) | Information gap (weak) | ❌ Rewrite |
+| "TypeScript on solo projects: a 6-month receipt" | Receipts post | Specificity, Authority contrast | ✅ Ship |
+
 ### Stage 5: Publishing
 - Format content for the target platform
 - Schedule posts using the content calendar
 - Set up tracking (UTM parameters, conversion goals)
+
+## Release-Notes Mode
+
+When a new product version ships, release notes are content with the highest conversion rate in the entire pipeline — every existing user reads them, and well-written ones move ≥1% of free users to paid on every ship. Run this mode when called via `/money-content release-notes` or when `/money-product` ships a version.
+
+### Inputs (auto-fetched)
+
+- **VERSION** — current and previous version from the repo
+- **CHANGELOG.md** — raw commit/PR titles between the two versions
+- **The deploy log** — from `/money-product` (what shipped, what got fixed)
+- **Recent learnings** — `~/.smtm/projects/{slug}/learnings.jsonl`, filtered to `conversion` and `retention`
+
+### The three-tier output
+
+Generate three release-note variants from the same input, because different distribution channels need different lengths.
+
+#### Tier 1 — The one-line ship tweet (X, in-app banner)
+- ≤180 chars including emoji
+- Lead with the one user benefit (not the feature)
+- Include the version: "v2.4.0"
+
+> Example: "v2.4.0 → Stripe webhooks now auto-retry on 5xx. No more silently-lost payments at 2am. 🛡"
+
+#### Tier 2 — The product email (existing customers)
+- Subject line: written using a pattern from the library (typically "Time-bound result" or "Anti-advice")
+- 80-150 words
+- Opening sentence: the user benefit, in user language
+- Middle: 2-3 bullets of what changed (mapped to user pain, not feature)
+- Closing: ONE call-to-action — upgrade path, docs link, or a question that prompts reply
+
+#### Tier 3 — The full notes (CHANGELOG.md entry + blog post)
+- 300-500 words
+- Sections: "What's new" (benefit-first), "What we fixed" (one line per fix), "What we learned" (the story of why this ship matters)
+- For SaaS: ALWAYS include the upgrade prompt for free users in the "What's new" section, framed as access not pressure
+
+### The "should we name this version?" check
+
+Major versions deserve names (gives the marketing surface area). Minor patches don't. Use this filter:
+
+| If the ship includes... | Then... |
+|---|---|
+| A new core feature (not just an improvement) | Name it. The name becomes the marketing handle for 2-4 weeks. |
+| Breaking changes to API or UI | Name it AND publish a migration note. |
+| 3+ small but related fixes that improve a single user journey | Optional name. Worth a short post regardless. |
+| Pure infra / refactor / dependency bump | Don't name. Single line in CHANGELOG. Don't email. |
+
+Names should be one or two words, lowercase if technical (`fastpath`), titlecase if product-facing (`Quiet Mode`). Avoid trendy adjectives — they age fast.
 
 ## Content-to-Format Matching
 

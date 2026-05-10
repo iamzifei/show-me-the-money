@@ -192,7 +192,11 @@ The pre-launch comprehensive audit. Includes everything from Standard, plus:
 - Missing indexes on frequently queried columns?
 - Any query taking >100ms?
 
-### 7. Security Audit (OWASP Top 10)
+### 7. Security Audit (OWASP Top 10 + STRIDE threat model)
+
+Run BOTH passes — OWASP catches the well-known classes of bug; STRIDE catches the architectural assumptions that turn one bug into a breach.
+
+#### OWASP Top 10 (vulnerability classes)
 
 | Check | How | Status |
 |-------|-----|--------|
@@ -204,6 +208,26 @@ The pre-launch comprehensive audit. Includes everything from Standard, plus:
 | XSS | Test: inject `<script>alert(1)</script>` in every user input field | ✅/❌ |
 | CSRF | Check: tokens on state-changing requests, SameSite cookies | ✅/❌ |
 | Dependencies | Run `npm audit` / `pip audit` / `govulncheck` — check for known CVEs | ✅/❌ |
+
+#### STRIDE threat model (architectural exposure)
+
+For each component that handles auth, payments, or user data, ask the six STRIDE questions. Each "yes" is a finding to address; each "we accept this risk" is a decision the user has to actively make.
+
+| Threat | Question | Common in solo SaaS |
+|---|---|---|
+| **S**poofing identity | Can someone claim to be another user? | Magic links sent without rate limits; OAuth without state validation; webhook endpoints without signature verification |
+| **T**ampering with data | Can someone modify data they shouldn't? | Trusting client-sent prices in Stripe Checkout; allowing user to PATCH their own subscription tier; mutable database fields without audit logs |
+| **R**epudiation | Can a user deny doing something with no record? | No audit log of plan changes, refunds, or account deletions; no record of which admin took which action |
+| **I**nformation disclosure | Can someone read data they shouldn't? | Predictable IDs in URLs; verbose error messages leaking schema; environment-variable leaks in client bundles |
+| **D**enial of service | Can someone make the service unavailable? | No rate limit on signup or password reset; unbounded LLM-call costs from one bad actor; unbounded image-upload size |
+| **E**levation of privilege | Can a regular user become an admin? | Admin-flag in client-readable cookie; admin endpoints sharing the auth middleware of public ones; webhook handlers running with elevated permissions |
+
+For each "yes":
+1. Note the threat type, the component, and the specific path
+2. Classify severity (P0: live exposure / P1: works with one chained mistake / P2: requires multiple chained mistakes)
+3. Add to the Ship Check report under "Security findings" with the explicit threat type tag (e.g., `[STRIDE-T]` for tampering)
+
+If 3+ STRIDE threats are open at P0/P1, the product is NOT ready to charge real money — regardless of how the OWASP table looks. STRIDE catches the things OWASP misses.
 
 ### 8. Accessibility Audit (WCAG 2.1 AA)
 
@@ -249,6 +273,74 @@ Remaining items (non-blocking):
 ```
 
 ---
+
+## Tech Triage Mode (when something is broken)
+
+`/money-diagnose` handles business-level "I'm stuck" — slow growth, wrong ICP, channel doesn't convert. **Tech Triage Mode** handles the technical version: a failing test, a slow query, an unexplained 500, a flaky CI run, a feature that "works on my machine".
+
+Trigger via `/money-quality triage` or by describing the symptom directly ("the signup flow returns 500 in production but not staging").
+
+### The triage loop
+
+Do NOT start guessing. Do NOT start grepping the codebase. Do NOT propose fixes. Follow the loop in order — each step is cheap, and the first three usually reveal the answer.
+
+#### Step 1 — Restate the symptom precisely
+
+Force a one-paragraph statement of:
+- What command/URL/action triggers the bug
+- What the user expected to happen
+- What actually happens (exact error message, stack trace, screenshot)
+- What's known to be different between "works" and "doesn't work" (env, browser, account, data)
+
+If any of those four is missing, ask for it before proceeding. ~30% of triage sessions end at this step because the symptom turned out to be different from what was first reported.
+
+#### Step 2 — Find the boundary
+
+The bug exists between something that works and something that doesn't. Find the boundary:
+
+| Boundary axis | Diagnostic |
+|---|---|
+| Time | When was the last known-good run? `git log` between known-good and now is the suspect set |
+| Environment | Works in dev, fails in prod → env vars, build config, runtime version |
+| Data | Works for user A, fails for user B → data-shape difference, edge case on B's row |
+| Code path | Works on URL X, fails on URL Y → route handler difference, middleware difference |
+| Concurrency | Works in isolation, fails under load → race condition, connection pool, rate limit |
+
+Pick the one most likely. Spend ≤10 minutes on each before switching.
+
+#### Step 3 — Reproduce locally
+
+A bug you can't reproduce, you can't fix — you can only hope. Reproduce with the smallest possible inputs:
+
+- Strip everything not in the minimal repro
+- Run it in a clean state (no cache, fresh DB, fresh process)
+- If you can't reproduce in 30 minutes: it's likely environmental — go back to Step 2 with environment as the axis
+
+Once reproducing: capture the exact command and inputs that trigger the failure. This becomes the regression test, regardless of root cause.
+
+#### Step 4 — Hypothesize, then test (not the other way)
+
+Most "obvious" fixes are wrong because the hypothesis was never explicit. Force the format:
+
+> "I think the bug is caused by **{specific cause}**. If I'm right, then **{specific change}** will fix it AND **{prediction about another signal}** will also be true."
+
+If the prediction doesn't pan out, the hypothesis was wrong — don't just patch the symptom. Restart Step 4 with a new hypothesis.
+
+#### Step 5 — Fix, regression-test, document
+
+- Smallest fix that resolves the verified root cause
+- Add the regression test from Step 3
+- Note the bug in the project's `learnings.jsonl` via `/money-learn add` — category `tech`, with the specific cause and the smallest reproducer. Future-you will hit a similar bug and want this trail.
+
+### What to refuse in triage mode
+
+- "Try restarting it" — fine in panic; not in triage
+- "Maybe it's a Heisenbug" — Heisenbugs are race conditions you haven't proven
+- "Let's add error handling" without knowing what error — that hides the bug, doesn't fix it
+- "Just wrap it in try/catch" — same
+- Big refactors prompted by a small bug — fix the bug, log the refactor as a separate task
+
+The triage loop ends with three artifacts: the root cause stated in one sentence, the minimal regression test, and the `/money-learn` row. Without all three, the bug isn't really fixed — it's just suppressed.
 
 ## Continuous Quality (Integration with /money-ops)
 

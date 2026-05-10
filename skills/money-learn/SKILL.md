@@ -43,6 +43,10 @@ These are atomic patterns. Each gets one row in `learnings.jsonl`. They're auto-
 | `/money-learn list <project>` | List learnings for another project |
 | `/money-learn prune` | Interactive: review old/contradicted learnings, mark as superseded or remove |
 | `/money-learn export` | Output all learnings as a markdown table |
+| `/money-learn promote <L-id>` | Promote a project-local learning to the portfolio layer (see below) |
+| `/money-learn portfolio` | Show portfolio-wide learnings shared across every project |
+| `/money-learn portfolio search <query>` | Search portfolio-wide learnings |
+| `/money-learn portfolio demote <L-id>` | Move a portfolio learning back to a single project (if it turned out to be context-specific) |
 
 **Natural-language equivalents**:
 - "Remember this", "Log this learning", "This is a pattern worth keeping"
@@ -124,6 +128,61 @@ For each learning older than 90 days OR marked `hypothesis`:
 This is how the library stays signal-dense.
 
 ---
+
+## Portfolio learnings (cross-project sharing)
+
+A solo operator running multiple products discovers patterns that apply across all of them — not just to one. Examples:
+
+- "$39 converts better than $29" probably only applies to one product's ICP. **Project-local.**
+- "Cold email subject lines that name a specific revenue number outperform benefit-based subjects 4:1" applies to every cold-outreach campaign. **Portfolio-wide.**
+- "Stripe webhook idempotency keys MUST be checked even when the underlying API call is idempotent" applies to every Stripe integration. **Portfolio-wide.**
+
+The portfolio layer captures the second kind. Stored at `~/.smtm/portfolio/learnings.jsonl` (the same schema as project-local), it auto-loads into EVERY money-* skill in EVERY project, before the project-local learnings are loaded.
+
+### Promotion criteria
+
+A project-local learning should be promoted to the portfolio when ALL of:
+
+1. **Validated** confidence — emerging or hypothesis don't qualify
+2. **Replicated** — observed in at least 2 different projects (or the founder believes it would apply to any future project of the same shape)
+3. **Domain-general** — describes a tactic, channel, tool behavior, or operator pattern; NOT a specific ICP, price point, or product-specific finding
+
+Run `/money-learn promote <L-id>` to move a project learning to the portfolio. The skill confirms by re-reading the learning aloud, asks if it really generalizes, and writes to the portfolio file. The original project learning stays in place with a `promoted_to_portfolio: true` flag — so a future audit can trace where it originated.
+
+### Load order
+
+When a money-* skill starts up, learnings are merged in this order (later sources override earlier ones for the same pattern):
+
+1. Atom corpus (read-only, ships with the package)
+2. Portfolio learnings (`~/.smtm/portfolio/learnings.jsonl`)
+3. Project learnings (`~/.smtm/projects/{slug}/learnings.jsonl`)
+
+A project-specific finding always trumps a portfolio finding for that project — but the portfolio pattern is loaded for context. The agent surfaces both, marking the source:
+
+> 📚 Loaded 6 relevant patterns (4 portfolio, 2 project-local). Notably:
+> - L-port-3a8f (portfolio, validated, channel): "Subject lines with specific revenue numbers outperform benefit-based 4:1 across cold-email campaigns"
+> - L-a7k2 (project, validated, pricing): "$39 converts 30% better than $29 in our ICP"
+
+### Demotion
+
+If a learning turns out to be context-specific after all (e.g., the portfolio learning fails to replicate in a new project), demote it:
+
+```
+/money-learn portfolio demote L-port-3a8f --back-to <project-slug>
+```
+
+This moves the row back to a project-local file and removes it from portfolio auto-loading. The provenance is preserved — the row keeps a `was_portfolio: true` flag.
+
+### When NOT to promote
+
+Resist promoting learnings that feel general but aren't:
+
+- Pricing observations: almost always ICP-specific
+- "Channel X works" — works for what offer? Resist generalization
+- Tool preferences: founder's taste, not portfolio truth
+- One-off wins: a single replication does not equal portfolio-grade
+
+Rule of thumb: if you're about to start a new product, would the learning legitimately apply on day 1? If yes → promote. If you'd want to re-validate first → leave project-local.
 
 ## Auto-loading into other skills
 

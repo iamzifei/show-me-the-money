@@ -29,6 +29,8 @@ Output: ONE final verdict with the disagreements explicitly named, plus a punch 
 | `/money-panel <path-to-plan.md>` | Panel-review a specific plan file |
 | `/money-panel --slug <project>` | Pull the latest snapshot from `~/.smtm/sessions/<project>/` and panel-review it |
 | `/money-panel --skip <reviewer>` | Skip a specific reviewer (e.g., `--skip skeptic`). Use sparingly — the whole point is the four-angle gauntlet |
+| `/money-panel --add <persona>` | Add a custom reviewer persona to the gauntlet (see "Custom personas" below) |
+| `/money-panel --only <persona>[,<persona>...]` | Run only the named reviewers. Useful when re-running after a fix to a specific dimension |
 
 **Natural-language equivalents**:
 - "Panel review", "Run all reviews", "Review gauntlet", "Stress test this plan"
@@ -193,6 +195,47 @@ Based on the verdict:
 - **Three actions, not ten** — A panel that ends with 15 todos doesn't get acted on. Three high-leverage actions does.
 
 ---
+
+## Custom personas (`--add` flag)
+
+The four built-in reviewers cover business viability. Some plans need additional lenses — an enterprise procurement buyer, a hardware-supply expert, a privacy lawyer, a community manager, an open-source maintainer. Use `--add` to insert a domain expert into the gauntlet without changing the four core reviewers.
+
+### Syntax
+
+```
+/money-panel --add "<role>: <one-sentence brief>"
+```
+
+Example:
+
+```
+/money-panel --add "Enterprise IT buyer: I need SOC2, SSO, and DPA before signing"
+/money-panel --add "Open-source maintainer: I'm wary of vendoring this dependency"
+```
+
+### How a custom persona is run
+
+For each `--add` persona, run a mini-review with this structure:
+
+1. **Role context**: Restate the persona as a one-paragraph self-introduction. Include incentives — what they're rewarded for, what they're punished for, what their day actually looks like.
+2. **Three questions**: Generate three questions ONLY that persona would ask of this plan. Not generic — questions that only make sense from that role.
+3. **Verdict in their language**: Output a verdict using the persona's own framing (an enterprise buyer doesn't say "shippable", they say "would I expense this through procurement").
+4. **The one thing the user is missing**: One sentence — the single thing the plan doesn't address that this persona considers a blocker.
+
+The custom persona's verdict joins the matrix but doesn't count toward the 12-point score. It surfaces as a separate "additional perspectives" section. Use it for stress-testing, not gating.
+
+### Common custom personas worth adding
+
+| Plan type | Custom personas worth adding |
+|---|---|
+| Enterprise SaaS | "Enterprise IT buyer", "Compliance officer", "Procurement lead" |
+| Consumer app | "Casual user with no patience", "Privacy-conscious user", "Power user who customizes everything" |
+| Developer tool | "Senior engineer evaluating dependencies", "Open-source maintainer", "Platform-team lead at a 50-person company" |
+| Marketplace | "Two-sided market expert", "Liquidity-first investor" |
+| Hardware / supply chain | "Operations / fulfillment lead", "Manufacturing partner" |
+| Regulated industry | "Domain-specific lawyer (healthcare / finance / education)" |
+
+For each plan type, the default `--add` set is roughly two extra personas. More than two adds noise; one rarely catches enough.
 
 ## After the panel
 

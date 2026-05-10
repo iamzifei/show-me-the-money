@@ -218,6 +218,30 @@ Common traps:
 
 If key terms can't be defined precisely, the idea needs narrowing, not strategizing.
 
+#### Term-by-Term Audit Loop
+
+For every load-bearing word in the pitch, run this loop until each term has a measurable substitute. Stop when no more vague terms remain or after 5 rounds (whichever comes first).
+
+1. **Spot it** — Underline the word. Examples: "easy", "smart", "intelligent", "best-in-class", "premium", "community-driven", "viral".
+2. **Probe it** — Ask the user: "If a stranger had to verify this is true without trusting your word, what would they measure?"
+3. **Convert it** — Replace the word with the measurable substitute the user offered. If the user can't offer one, the term is decoration — strike it from the pitch.
+4. **Re-read** — Read the whole sentence with the substitute in place. If the sentence now sounds embarrassingly small, that's the real proposition. Decide whether to ship the small thing or change the proposition.
+
+The output of this loop is a one-paragraph pitch in which every claim is either measurable, time-bounded, or named to a specific person. Vague words have been either swapped or deleted. This rewritten pitch becomes the input to Layers 2-4.
+
+#### Fuzzy-to-Measurable Conversion
+
+Before exiting Layer 1, every goal the user mentioned must be converted to a measurable outcome in the format `<verb> <metric> <threshold> <by date>`:
+
+| Original (fuzzy) | Converted (measurable) |
+|---|---|
+| "Get more customers" | "Acquire 50 paying users at ≥$29/mo by 2026-08-01" |
+| "Build a community" | "Get 200 verified-email subscribers reading 2+ posts/mo by month 3" |
+| "Become the best in the space" | "Rank in top 3 Google results for 'X' by month 6, with ≥5% CTR" |
+| "Ship a great product" | "Ship feature X passing the QA tier 'Ship Check' with ≥9/10 score by date Y" |
+
+If the user resists conversion ("I just want to make it big"), that resistance IS the signal — the strategy is not yet ready. Output: "Goal is not yet measurable. Run `/money-discover` Phase 4.5 (Narrowest-Bet Pressure Test) to extract a falsifiable one-week bet, then return for strategy."
+
 ### Layer 2: Assumption Audit (Inversion Method)
 
 List every assumption the business idea relies on. For each, apply Kahneman's pre-mortem: "Imagine this assumption is wrong. What happens?"

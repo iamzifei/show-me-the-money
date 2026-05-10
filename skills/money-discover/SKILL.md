@@ -125,6 +125,27 @@ This reveals UX assumptions and real-world friction.
 
 Avoid ideas that ride temporary hype. Look for compounding value — network effects, data moats, switching costs.
 
+## Phase 4.5: Narrowest-Bet Pressure Test
+
+Q4 surfaced the smallest version someone would pay for. Before moving to strategy, prove that version is **demonstrable tomorrow**, not "in 2-3 weeks of prep". Most stuck founders skip this and end up at week 4 of "almost ready to show someone".
+
+Force the founder to answer all four below. If any answer slides past tomorrow, the wedge is still too wide — narrow until it fits.
+
+| Pressure point | Forcing question | Pass if |
+|---|---|---|
+| **Demo-able tomorrow** | What's the smallest artifact you could put in front of a real prospect within 24 hours? | A wireframe + Stripe payment link, a 60-second Loom of a no-code prototype, or a manual-fulfillment offer page |
+| **One thing it does** | If you had to remove every feature except one, which one stays? | A single sentence answer. If the answer has "and" in it, it's two features |
+| **One named buyer** | Which specific human — by name, role, or company type — would you DM tonight to test this? | First name + how you'd reach them within 24h |
+| **One-week kill-switch** | If you can't get a single paying signal in 7 days, what does that prove? | A specific falsifiable read, not "I'll know it when I see it" |
+
+If all four pass: the wedge is demonstrable. Move on. If any one fails: keep cutting — the wedge is still hiding behind preparation work.
+
+Output a one-line **narrowest-bet statement** in the format:
+
+> "By **{tomorrow's date}**, I will put **{one demo artifact}** in front of **{one named buyer}** to test whether they'll pay **{specific price}** for **{the one thing it does}**. If no signal by **{date + 7 days}**, the wedge is wrong."
+
+This sentence is the strategy team's anchor for everything that follows. Every later decision either supports or contradicts this bet.
+
 ## Phase 5: Deep Dive & Competitive Intelligence
 
 After validation, run a rigorous competitive analysis. The goal is NOT to "understand the market" — it's to find ONE benchmark worth studying in detail and map the exact path to replicate their success.

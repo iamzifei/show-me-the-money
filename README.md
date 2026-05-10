@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.3.1`** · [What's new →](#-whats-new-in-v231)
+**Current version: `v2.4.0`** · [What's new →](#-whats-new-in-v240)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,76 @@ If you're a solo founder, an indie hacker, or a technical founder who wants to s
 Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, operating everything autonomously, **and remembering what you decided across every session**.
 
 Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that support the skill system.
+
+---
+
+## ✨ What's New in v2.4.0
+
+**The "ship without nuking production" release.** Six things landed, all folded into existing skills — no new commands to remember, no skill-count explosion.
+
+### 1. Operating modes + edit perimeter + panic stop (in `/money-ops`)
+
+Autonomy without guardrails is how solo founders break production at 2am. The ops layer now declares an **operating mode** — `open` / `staging` / `production` — and every destructive command (rm -rf, force push, DROP TABLE, kubectl delete, bulk Stripe operations) requires a confirmation in the higher modes. Add an **edit perimeter** to lock a debugging session to one subtree, and call `/money-ops stop` to halt every scheduled agent and outreach loop instantly.
+
+```
+mode: production
+→ rm -rf production_users requires typing "yes-delete-production_users"
+→ npm publish requires explicit version confirmation
+→ Outreach batches > 10 recipients require explicit batch approval
+```
+
+### 2. Narrowest-bet pressure test (in `/money-discover`)
+
+The 6 forcing questions surface the smallest version someone would pay for. v2.4 adds a **Phase 4.5 pressure test** that forces the wedge to be **demonstrable tomorrow** — not "in 2-3 weeks of prep". Output is a one-line falsifiable bet: "By {date}, I will put {artifact} in front of {named buyer} to test {specific price} for {one thing it does}. If no signal by {date+7}, the wedge is wrong."
+
+This is the #1 reason solo founders end up at week 4 of "almost ready to show someone".
+
+### 3. Term-by-term audit + fuzzy-to-measurable (in `/money-strategy`)
+
+Layer 1 of the premise audit now runs a loop: spot every load-bearing fuzzy word in the pitch, probe it ("how would a stranger measure this?"), and convert it to a measurable substitute. Every goal becomes `<verb> <metric> <threshold> <by date>` before strategy starts.
+
+If the user can't convert their goals to measurable form, the strategy refuses to proceed and routes back to `/money-discover` Phase 4.5 first. No more strategizing on top of vague terms.
+
+### 4. Hook + title pattern library + Release-notes mode (in `/money-content`)
+
+Stage 4.8 adds a **pattern library** — 12 hook patterns and 15 title patterns indexed by reader state (scrolling / searching / decision-making) plus platform-specific patterns for XHS and WeChat. A title must satisfy BOTH a library pattern AND 2+ mechanisms from the existing impact matrix before shipping.
+
+Plus a new **Release-notes mode**: when `/money-product` ships a version, this mode generates three-tier release notes (one-line ship tweet, product email, full CHANGELOG entry + blog post). Release-note emails have the highest conversion rate of any content type — skipping them leaves free→paid upgrades on the table.
+
+### 5. Design system contract + ship lifecycle (in `/money-product`)
+
+A new **Phase 0** writes `DESIGN.md` to the project root before any UI code — aesthetic stance, type/color/spacing tokens, motion rules, AND the rejection list (what the system explicitly does NOT do). Solves the "portfolio of 4 products that all look unrelated" problem.
+
+A new **Phase 5.5 ship lifecycle** turns deployment into a 5-step protocol: VERSION bump (semver) → CHANGELOG entry → pre-deploy verification → deploy + tag → release-notes delivery. Skipping a step is what causes "production incidents" — every step has a refuse-if-missing gate.
+
+### 6. STRIDE threat model + Tech-triage mode (in `/money-quality`)
+
+The security audit now runs BOTH OWASP Top 10 AND a STRIDE pass (spoofing / tampering / repudiation / information disclosure / DoS / elevation-of-privilege) — catches the architectural assumptions that OWASP misses. 3+ STRIDE threats at P0/P1 means NOT ready to charge real money, regardless of OWASP score.
+
+New **Tech-triage mode** for when something is technically broken — failing test, slow query, mystery 500. A 5-step loop (restate → boundary → reproduce → hypothesize-then-test → fix + regression test + `/money-learn` row). Refuses to start guessing or grep before the symptom is restated precisely.
+
+### 7. Custom reviewer personas + architecture lens (in `/money-panel` + `/money-review-operator`)
+
+`/money-panel --add "Enterprise IT buyer: needs SOC2 before signing"` inserts a domain-expert reviewer into the gauntlet. Useful when the four built-in lenses (investor / customer / operator / skeptic) don't capture the specific reviewer your plan needs to survive — enterprise procurement, privacy lawyer, open-source maintainer, regulated-industry compliance.
+
+`/money-review-operator` gets a Q5: **Architecture & data-flow stress test** — five failure modes a solo operator can't escape from (hidden ops cost, data shape lock-in, single point of failure, cost-curve mismatch, debug accessibility). 2+ red flags here flips the verdict to NEEDS HIRE regardless of the other questions.
+
+### 8. Portfolio learnings — cross-project knowledge (in `/money-learn`)
+
+Learnings used to be project-local. v2.4 adds a **portfolio layer** at `~/.smtm/portfolio/learnings.jsonl` that auto-loads into EVERY money-* skill in EVERY project. Run `/money-learn promote <L-id>` to lift a validated, replicated, domain-general pattern from one project to the portfolio. Demote if it turns out to be context-specific.
+
+A solo operator running 6 products discovers patterns that apply to all of them ("Stripe webhook idempotency keys must be checked even when the API call is idempotent"). Those don't belong locked to one product — they belong in the operator's portfolio brain.
+
+### 9. Auto-update command (in `/money-upgrade`)
+
+`/money-upgrade` is now a true auto-updater. One command:
+- Checks npm for the latest version
+- Shows the delta + headline changes
+- Downloads + replaces installed skills
+- Reads the CHANGELOG and surfaces what's new
+- Prompts to restart Claude Code
+
+No more "version compare by hand" or "did I run install or update". One command, idempotent.
 
 ---
 
@@ -300,35 +370,35 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 | **Save** | `/money-save` | Checkpoint the current business state to `~/.smtm/sessions/{project}/` |
 | **Restore** | `/money-restore` | Resume from a prior saved state — pick up exactly where the last session left off |
 | **Report** | `/money-report` | Merge all saved states into a deliverable markdown report |
-| **Learn** | `/money-learn` | Manage atomic project learnings (auto-loaded into every other skill) |
+| **Learn** | `/money-learn` | Manage atomic project learnings + portfolio learnings shared across every project |
 | **Skillify** | `/money-skillify` | Codify a successful workflow into a project-local reusable skill |
-| **Upgrade** | `/money-upgrade` | Update to the latest version |
+| **Upgrade** | `/money-upgrade` | Auto-update: checks npm, downloads, replaces, reads CHANGELOG, prompts to restart |
 
 ### Discover · Strategy · Diagnose · Review
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| **Discover** | `/money-discover` | Find and validate profitable business ideas with competitive intelligence |
-| **Strategy** | `/money-strategy` | Premise deconstruction + market research + business model stress test |
+| **Discover** | `/money-discover` | Find and validate profitable business ideas; ends with a tomorrow-shippable narrowest-bet statement |
+| **Strategy** | `/money-strategy` | Term-by-term clarity audit + fuzzy-to-measurable goals + market research + business model stress test |
 | **Diagnose** | `/money-diagnose` | Deep diagnosis when business is stuck — root cause, not symptoms (with Iron Law phase gate) |
-| **Panel** | `/money-panel` | Run all four reviewers, find agreement, surface only taste decisions |
+| **Panel** | `/money-panel` | Run all four reviewers (+ optional `--add` custom personas), find agreement, surface only taste decisions |
 | **Investor Review** | `/money-review-investor` | VC-mode review with funding viability verdict |
 | **Customer Review** | `/money-review-customer` | Named-ICP customer review with willingness-to-pay verdict |
-| **Operator Review** | `/money-review-operator` | Solo-founder execution feasibility review |
+| **Operator Review** | `/money-review-operator` | Solo-founder execution feasibility + architecture & data-flow stress test |
 | **Skeptic Review** | `/money-review-skeptic` | Devil's advocate red-team review |
 
 ### Build · Quality
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| **Product** | `/money-product` | Build, deploy, QA test, and monitor MVP |
-| **Quality** | `/money-quality` | Code review, security audit, performance check, pre-launch gates |
+| **Product** | `/money-product` | DESIGN.md design contract, build, ship lifecycle (VERSION + CHANGELOG + release notes), deploy, QA, canary |
+| **Quality** | `/money-quality` | Code review, OWASP + STRIDE security, performance, pre-launch gates, tech-triage debugging mode |
 
 ### Grow
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| **Content** | `/money-content` | Content pipeline with authenticity audit and headline impact matrix |
+| **Content** | `/money-content` | Content pipeline with authenticity audit, headline impact matrix, hook + title pattern library, release-notes mode |
 | **Outreach** | `/money-outreach` | Cold email sequences and partnership outreach |
 | **Social** | `/money-social` | Social media management with hook-writing frameworks |
 | **SEO** | `/money-seo` | SEO + GEO optimization for search engines and AI |
@@ -338,7 +408,7 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| **Ops** | `/money-ops` | 24/7 autonomous operations with health scoring and safety guardrails |
+| **Ops** | `/money-ops` | 24/7 autonomous operations, health scoring, operating modes (open/staging/production), edit perimeter, panic stop |
 | **Finance** | `/money-finance` | Revenue tracking and financial reports |
 | **Retro** | `/money-retro` | Weekly retrospective: decided / shipped / stalled / unused-skills / focus |
 

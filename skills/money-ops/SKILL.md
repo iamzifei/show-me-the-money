@@ -210,16 +210,75 @@ When a critical alert fires:
 4. **Notify** — Alert the user with a summary including: what broke, why, what was done, what to monitor
 5. **Review** — Root cause analysis and prevention. Document in a post-mortem: timeline, impact, root cause, fix, prevention
 
+## Operating Mode Switches
+
+Autonomy without guardrails is how solo founders nuke production at 2am. Before doing destructive work, declare the **operating mode** the session is running in. Every skill that touches money, customer data, or live systems reads this setting and adjusts behavior.
+
+### The three modes
+
+| Mode | When to use | What changes |
+|---|---|---|
+| **`open`** | Local dev, prototypes, throwaway repos | No prompts. Anything goes. Default for greenfield work. |
+| **`staging`** | Pre-production work, customer-zero environments, anything where a screwup costs ≤1 hour to recover | Destructive commands require one confirmation. Edit perimeter optional. |
+| **`production`** | Live customer-facing systems, anything touching payments, real customer email blasts | Destructive commands require typed confirmation. Edit perimeter strictly enforced. Multi-customer outreach capped at 10 recipients without explicit batch approval. |
+
+Set the mode at the top of the session: `mode: production` in the user's first message, in a CLAUDE.md, or via `/money-ops set-mode production`. The mode persists for the conversation.
+
+### Destructive command gate
+
+In `staging` or `production` mode, the following commands MUST surface a one-line "about to run X — confirm?" before execution:
+
+- `rm -rf` of anything outside `/tmp` or `node_modules`
+- `git push --force`, `git reset --hard`, `git checkout -- .`, `git branch -D`
+- `DROP`, `TRUNCATE`, `DELETE` SQL without a narrow `WHERE`
+- `kubectl delete`, `terraform destroy`, `wrangler delete`
+- `vercel rm`, `supabase db reset`, `stripe products archive` (bulk)
+- Cron / `/schedule` deletions in bulk
+- Any `npm publish`, `gh release create`, or `git tag` that targets a published version
+
+The confirmation prompt restates the exact target and the blast radius. "About to delete the `prod_subscribers` table (47,318 rows). Confirm with 'yes-delete-prod_subscribers' to proceed."
+
+In `production` mode the confirmation MUST be the exact target string typed back — not a generic "yes". This is the single biggest reduction in fat-finger incidents per session.
+
+### Edit perimeter
+
+For complex debugging sessions where a side-fix in an unrelated file would create noise, the user may set an **edit perimeter** — a directory the session is allowed to modify. Edits outside the perimeter are refused with a one-line "outside perimeter: `<path>`. Set a wider perimeter or remove the constraint."
+
+| Command | Effect |
+|---|---|
+| `/money-ops perimeter <path>` | Lock edits to that subtree |
+| `/money-ops perimeter` (no arg) | Show current perimeter |
+| `/money-ops perimeter clear` | Remove the perimeter |
+
+The perimeter is session-scoped, not persistent — a new conversation starts with no perimeter.
+
+### Panic stop
+
+If something is going wrong and the user wants every autonomous behavior to halt immediately, the panic command stops all scheduled agents, all `/loop` runs, and all in-flight outreach batches owned by this project:
+
+```
+/money-ops stop
+```
+
+It does NOT roll back anything that already shipped — that's `/money-product` rollback territory. It just stops the next cycle from firing. Use this when:
+- An outreach sequence is hitting the wrong segment
+- A scheduled deployment is being canary-flagged repeatedly
+- Stripe webhooks are erroring in a loop and creating noise
+- The user is just done for the day and wants everything quiet
+
+After a panic stop, `/money-ops resume` brings scheduled agents back online — but only after the user types `resume` explicitly. No accidental restarts.
+
 ## Setup Wizard
 
 When the user types `/money-ops` for the first time:
 
 1. **Audit current state** — What skills have been run? What's already set up?
 2. **Select operations** — Which operations does the user want automated?
-3. **Configure schedule** — Set timezone and preferred hours
-4. **Set up monitoring** — Configure health checks and alert channels
-5. **Test run** — Execute each operation once to verify it works
-6. **Activate** — Start the autonomous schedule
+3. **Pick operating mode** — `open` / `staging` / `production` (see above)
+4. **Configure schedule** — Set timezone and preferred hours
+5. **Set up monitoring** — Configure health checks and alert channels
+6. **Test run** — Execute each operation once to verify it works
+7. **Activate** — Start the autonomous schedule
 
 ## Provisioned Infrastructure
 

@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**当前版本：`v2.3.1`** · [更新内容 →](#-v231-更新内容)
+**当前版本：`v2.4.0`** · [更新内容 →](#-v240-更新内容)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,76 @@
 Show Me The Money 是一套开源的 [Claude Code](https://claude.ai/code) 技能套件，兼容主流 AI 编程智能体。它将你的 AI 助手变成一个全栈商业操作系统 —— 发现机会、验证需求、构建产品、运营营销、管理广告、全天候自主运行，**并且记得你在每一次会话中做出的每一个决定**。
 
 支持 **Claude Code**、**Codex CLI**、**Gemini CLI**，以及其他兼容 skill 系统的智能体。
+
+---
+
+## ✨ v2.4.0 更新内容
+
+**"自动化但不会把生产环境干爆"的一版。** 落地 9 项改进，**全部融进现有技能** —— 没有新命令要记、没有技能数量膨胀。
+
+### 1. 运行模式 + 编辑边界 + 紧急停止（`/money-ops`）
+
+自动化没有护栏，就是凌晨两点把生产环境炸了的快速通道。Ops 层现在声明一个**运行模式** —— `open` / `staging` / `production` —— 在更高级别的模式下，每一个破坏性命令（rm -rf、强制推送、DROP TABLE、kubectl delete、Stripe 批量操作）都需要明确确认。可以设置**编辑边界**把调试会话锁在一个子目录里；调 `/money-ops stop` 立刻停掉所有定时智能体和外展循环。
+
+```
+mode: production
+→ rm -rf production_users 需要输入 "yes-delete-production_users"
+→ npm publish 需要明确确认版本号
+→ 超过 10 个收件人的外展批次需要明确批量审批
+```
+
+### 2. 最窄一注压力测试（`/money-discover`）
+
+6 个强制问题已经找出"最小可付费的版本"。v2.4 加了一个 **Phase 4.5 压力测试**，逼迫这个最窄版本必须**明天就能展示** —— 不是"再准备 2-3 周"。输出是一句可证伪的赌注："到 {日期} 前，我会把 {一个工件} 摆到 {具名买家} 面前，测试他们是否愿意为 {一件事} 付 {具体价格}。如果到 {日期+7天} 还没信号，就是赌错了。"
+
+这是独立创业者卡在"差不多准备好可以给人看了"第 4 周最大的原因。
+
+### 3. 逐词审计 + 模糊转可测量（`/money-strategy`）
+
+前提审计 Layer 1 现在跑一个循环：找出 pitch 里每一个承重的模糊词，追问（"陌生人要怎么测量这句话？"），并把它转换成可测量的替代。每一个目标都要变成 `<动词> <指标> <阈值> <截止时间>` 才能进入正式策略。
+
+如果用户没法把目标转成可测量形式，策略环节会拒绝继续，直接回路到 `/money-discover` 的 Phase 4.5。不能在含糊措辞上面继续做策略。
+
+### 4. Hook + 标题模式库 + 发布说明模式（`/money-content`）
+
+Stage 4.8 新增了一个**模式库** —— 12 种 hook 模式 + 15 种标题模式，按读者状态（滑动中 / 搜索中 / 决策中）索引，外加针对 XHS 和微信的平台专属模式。一个标题必须**同时**命中库里的某个模式 **且** 触发现有冲击力矩阵里 2+ 个心理机制，才能放出。
+
+外加一个新的**发布说明模式**：当 `/money-product` 出版本时，自动生成三层发布说明（一行航班 tweet / 产品邮件 / 完整 CHANGELOG + 博客）。发布说明邮件是所有内容类型中转化率最高的 —— 不写就是白白漏掉免费→付费升级。
+
+### 5. 设计系统契约 + 出版生命周期（`/money-product`）
+
+新的 **Phase 0** 在写任何 UI 代码之前写 `DESIGN.md` —— 美学站位、字体/颜色/间距 token、动效规则，以及**拒绝清单**（这套系统明确**不做**什么）。解决"组合里 4 个产品看起来毫无亲缘关系"的问题。
+
+新的 **Phase 5.5 出版生命周期**把部署变成 5 步协议：版本号 bump（semver）→ CHANGELOG 条目 → 部署前验证 → 部署 + tag → 发布说明分发。跳过一步就是"生产事故"的成因 —— 每一步都有"缺失则拒绝"的门禁。
+
+### 6. STRIDE 威胁模型 + 技术分诊模式（`/money-quality`）
+
+安全审计现在跑 OWASP Top 10 **和** STRIDE（仿冒 / 篡改 / 抵赖 / 信息泄露 / 拒绝服务 / 提权）两遍 —— 抓住 OWASP 漏掉的架构性假设。3+ 个 STRIDE 威胁停在 P0/P1，意味着**不能**开始向真实用户收钱，跟 OWASP 分数无关。
+
+新的**技术分诊模式**面向技术层面坏了的场景 —— 测试挂、查询慢、神秘的 500。5 步循环（重述症状 → 找边界 → 复现 → 先假设再验证 → 修复 + 回归测试 + `/money-learn` 留痕）。在精确重述症状之前拒绝瞎猜、拒绝 grep 源码。
+
+### 7. 自定义评审角色 + 架构审视（`/money-panel` + `/money-review-operator`）
+
+`/money-panel --add "Enterprise IT buyer: 签合同前必须 SOC2"` 把一个领域专家评审塞进 gauntlet。当内置 4 个角度（投资人 / 客户 / 操盘手 / 怀疑论者）不足以覆盖你的方案需要的特定视角时用 —— 企业采购、隐私律师、开源维护者、受监管行业合规。
+
+`/money-review-operator` 加了 Q5：**架构与数据流压力测试** —— 独立操盘手逃不掉的 5 种失败模式（隐藏运营成本、数据形状锁定、单点故障、成本曲线错配、调试可达性）。2+ 项红灯就把判决拉到 NEEDS HIRE，无视其他问题的得分。
+
+### 8. 组合学习 —— 跨项目知识沉淀（`/money-learn`）
+
+Learnings 之前只能项目内本地。v2.4 加了一个**组合层** `~/.smtm/portfolio/learnings.jsonl`，自动加载到**每个项目**的**每个 money-* 技能**里。跑 `/money-learn promote <L-id>` 把一条已验证、已复现、领域通用的项目级 pattern 提到组合层。如果发现它只在原来的项目里成立，可以降级。
+
+跑 6 个产品的独立操盘手会发现一些放之四海皆准的 pattern（"Stripe webhook idempotency key 必须显式检查，即使 API 本身幂等"）。这些不该锁在单一产品里 —— 它们属于操盘手的"组合大脑"。
+
+### 9. 自动更新命令（`/money-upgrade`）
+
+`/money-upgrade` 现在是真正的自动更新器。一条命令：
+- 查询 npm 上的最新版本
+- 显示版本差 + 重点变更
+- 下载 + 替换已安装的技能
+- 读 CHANGELOG 摘要更新内容
+- 提示重启 Claude Code
+
+不再"手动比对版本号"或"我应该跑 install 还是 update"。一条命令，幂等。
 
 ---
 
@@ -301,35 +371,35 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 | **保存** | `/money-save` | 把当前业务状态检查点写入 `~/.smtm/sessions/{project}/` |
 | **恢复** | `/money-restore` | 从先前的检查点续接，无需重新解释 |
 | **报告** | `/money-report` | 把所有保存的状态合并成可交付的 markdown 报告 |
-| **学习** | `/money-learn` | 管理项目级原子学习（自动注入每个其他技能） |
+| **学习** | `/money-learn` | 管理项目级原子学习 + 跨项目共享的组合学习层 |
 | **固化技能** | `/money-skillify` | 把一段成功的工作流固化为项目级可复用技能 |
-| **升级** | `/money-upgrade` | 更新到最新版本 |
+| **升级** | `/money-upgrade` | 自动更新：查 npm、下载、替换、读 CHANGELOG、提示重启 |
 
 ### 发现 · 策略 · 诊断 · 评审
 
 | 技能 | 命令 | 功能 |
 |------|------|------|
-| **发现** | `/money-discover` | 发现并验证盈利商机 + 竞品情报 |
-| **策略** | `/money-strategy` | 前提解构 + 市场研究 + 商业模式压力测试 |
+| **发现** | `/money-discover` | 发现并验证盈利商机 + 竞品情报；末尾给出明天就能展示的"最窄一注"赌注 |
+| **策略** | `/money-strategy` | 逐词清晰度审计 + 模糊转可测量目标 + 市场研究 + 商业模式压力测试 |
 | **诊断** | `/money-diagnose` | 业务卡住时找根因，不是症状（带 Iron Law 阶段门） |
-| **评审委员会** | `/money-panel` | 4 个评审一起跑，只把品味分歧抛给你 |
+| **评审委员会** | `/money-panel` | 4 个评审一起跑（+ 可选 `--add` 自定义角色），只把品味分歧抛给你 |
 | **投资人评审** | `/money-review-investor` | VC 视角的融资可行性评判 |
 | **客户评审** | `/money-review-customer` | 指定 ICP 视角的付费意愿评判 |
-| **操盘手评审** | `/money-review-operator` | 独立创始人执行可行性评判 |
+| **操盘手评审** | `/money-review-operator` | 独立创始人执行可行性 + 架构与数据流压力测试 |
 | **质疑者评审** | `/money-review-skeptic` | 红队式质疑评审 |
 
 ### 构建 · 质量
 
 | 技能 | 命令 | 功能 |
 |------|------|------|
-| **产品** | `/money-product` | 构建、部署、QA、监控 MVP |
-| **质量** | `/money-quality` | 代码审查、安全审计、性能检查、上线前门禁 |
+| **产品** | `/money-product` | DESIGN.md 设计契约、构建、出版生命周期（VERSION + CHANGELOG + 发布说明）、部署、QA、金丝雀 |
+| **质量** | `/money-quality` | 代码审查、OWASP + STRIDE 安全、性能、上线前门禁、技术分诊调试模式 |
 
 ### 增长
 
 | 技能 | 命令 | 功能 |
 |------|------|------|
-| **内容** | `/money-content` | 内容管线 + 真实性审计 + 标题影响力矩阵 |
+| **内容** | `/money-content` | 内容管线 + 真实性审计 + 标题影响力矩阵 + Hook & 标题模式库 + 发布说明模式 |
 | **外展** | `/money-outreach` | 冷邮件序列、合作伙伴拓展 |
 | **社交** | `/money-social` | 社交媒体管理 + Hook 写作框架 |
 | **SEO** | `/money-seo` | SEO + GEO 优化（含 AI 搜索） |
@@ -339,7 +409,7 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 
 | 技能 | 命令 | 功能 |
 |------|------|------|
-| **运营** | `/money-ops` | 全天候运营 + 健康评分 + 安全护栏 |
+| **运营** | `/money-ops` | 全天候运营 + 健康评分 + 运行模式（open/staging/production）+ 编辑边界 + 紧急停止 |
 | **财务** | `/money-finance` | 收入追踪、财务报告 |
 | **复盘** | `/money-retro` | 周复盘：决定 / 出货 / 卡住 / 未用技能 / 焦点 |
 

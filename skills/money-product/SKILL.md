@@ -38,6 +38,53 @@ Accept one of:
 
 The user only needs to confirm choices and provide any API keys or credentials they want to use.
 
+## Phase 0: Design System Contract
+
+Before writing any UI code, write `DESIGN.md` at the project root. This is the source-of-truth for every visual decision and prevents the most common solo-founder failure: a portfolio of 4 products that all look unrelated because each was built from a different starter template at a different time.
+
+If a `DESIGN.md` already exists in the repo, **read it and follow it** — don't re-derive choices the user already locked in. If one doesn't exist, generate one and ask the user to confirm before building.
+
+### `DESIGN.md` skeleton
+
+```markdown
+# Design System — {product name}
+
+## Aesthetic stance
+One sentence on the visual feel (e.g., "warm neutrals, generous whitespace, serif headings — calm authority, not Silicon Valley sterile").
+
+## Type
+- Heading: {font, weight, sizes for h1/h2/h3}
+- Body: {font, weight, line-height, max-width}
+- Mono: {font, when to use}
+
+## Color
+- Surface: {hex} — page background
+- Surface alt: {hex} — cards, raised areas
+- Text: {hex primary} / {hex muted}
+- Accent: {hex} — single accent, used sparingly
+- Success / warning / danger: {hex / hex / hex}
+
+## Spacing
+- Base unit: {N}px
+- Section vertical rhythm: {value}
+- Card padding: {value}
+
+## Motion
+- Default transition: {duration / easing}
+- What animates and what doesn't (rule, not list)
+
+## What this system rejects
+3-5 bullet points of "we don't do X" — gradients, glassmorphism, neon, etc. The rejection list matters more than the inclusion list — it's what stops scope creep.
+```
+
+Three rules for the design system:
+
+1. **One accent color.** Multiple accents read as "no point of view".
+2. **Type hierarchy uses size + weight only**, not color. Colored headings age badly.
+3. **Reject list is mandatory.** If `DESIGN.md` has no "what this system rejects" section, every contributor (including you in 3 months) will drift toward whatever's trendy that week.
+
+After writing `DESIGN.md`, every UI choice in this skill — buttons, cards, hero layouts, pricing tables — must trace back to a line in the file. If something doesn't fit, update `DESIGN.md` first, then build.
+
 ## Phase 1: Architecture Decision
 
 Based on the product type, select the optimal stack:
@@ -167,6 +214,70 @@ After deployment, verify:
 - [ ] OG image renders correctly when shared on social media
 - [ ] Mobile experience is smooth
 - [ ] Schema markup validates (schema.org validator)
+
+## Phase 5.5: Ship Lifecycle
+
+Shipping isn't `vercel deploy`. It's a five-step lifecycle that turns a working build into a version users can be told about. Run every step, in order, every time. Most "production incidents" happen because a step was skipped.
+
+### Step 1 — Version bump
+
+Read `VERSION` (create as `0.1.0` if missing). Bump using semver:
+
+| Change | Bump |
+|---|---|
+| Backwards-compatible patch, internal refactor, fix | patch (`x.y.Z`) |
+| New user-facing feature, additive API | minor (`x.Y.0`) |
+| Breaking change to API, URL, or data model | major (`X.0.0`) |
+
+Write the new version to `VERSION` and commit it as part of the ship — never separately.
+
+### Step 2 — CHANGELOG entry
+
+Append (don't overwrite) a new entry to `CHANGELOG.md` at the top, under the new version header. Pull commit titles since the previous tag and group them:
+
+```markdown
+## v2.4.0 — 2026-05-11
+
+### Added
+- {short user-facing description of additions}
+
+### Fixed
+- {short description of fixes}
+
+### Changed
+- {short description of changes}
+```
+
+If a commit can't be grouped into Added/Fixed/Changed, it probably shouldn't ship in a public release — fold it into the next one.
+
+### Step 3 — Pre-deploy verification
+
+Run, in order, and refuse to proceed if any step fails:
+
+- [ ] `/money-quality` standard check (or ship check if charging real money)
+- [ ] All tests pass locally and in CI
+- [ ] `VERSION` and `CHANGELOG.md` updated, committed
+- [ ] No secrets or `.env` files in the diff
+- [ ] If schema changed: migration written AND tested against a copy of production
+- [ ] If pricing or payment flow changed: tested in Stripe test mode end-to-end
+
+### Step 4 — Deploy
+
+Deploy to production. Tag the commit with the version (`v2.4.0`). Push the tag. Open a PR if one isn't already merged. After deploy:
+
+- Note the deploy timestamp
+- Capture baseline metrics for canary (Phase 7)
+- Trigger `/money-content release-notes` to draft the three-tier user comms (see `money-content` "Release-Notes Mode")
+
+### Step 5 — Release notes delivery
+
+Once `/money-content release-notes` returns the three tiers:
+
+- Tier 1 (one-line) → post to in-app banner, X, status page
+- Tier 2 (email) → send to existing users (use `/money-outreach` with the "release-notes" template, not the cold-outreach template)
+- Tier 3 (full notes) → append to CHANGELOG.md (already done in Step 2) + publish as a blog post via `/money-content`
+
+The release-notes delivery is not optional for ships that include user-facing changes. The conversion rate on release-note emails is the highest of any content type — skipping them is leaving free→paid upgrades on the table.
 
 ## Phase 6: Quality Assurance
 

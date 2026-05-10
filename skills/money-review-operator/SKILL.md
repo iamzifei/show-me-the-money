@@ -82,6 +82,25 @@ If the User Profile doesn't include hours-per-week and cash runway, ask for both
 - 🔴 channels for solo without help: Enterprise sales, conference circuit, large paid-ads spend management, multi-platform content empire, building a sales team
 - **If the plan's primary channel is 🔴 for solo, that's NEEDS HIRE territory.**
 
+### Q5: Architecture & data-flow stress test
+
+A plan that's solo-shippable on paper can still trap the founder in 6 months of maintenance work if the architecture is wrong. Audit the proposed tech against five failure modes a solo operator can't escape from:
+
+| Failure mode | Question | Solo-killer if... |
+|---|---|---|
+| **Hidden ops cost** | What service runs that requires the founder's attention to keep alive? | Anything self-hosted that isn't trivially restartable. Anything requiring scheduled human action (manual backups, manual cert rotation, manual cron-job inspection) |
+| **Data shape lock-in** | What's the data model commitment in week 1? | A schema that assumes a use case which may not be the actual use case after first 10 customers — re-shaping data later is the #1 solo-founder time sink |
+| **Single point of failure** | If one third-party API goes down, does the whole product become unusable? | Yes, AND there's no graceful degradation, AND the founder has no fallback |
+| **Cost-curve mismatch** | At 100x current usage, what does the infra cost? | The cost curve goes superlinear (per-user database charges, per-request LLM costs at default models, per-MB egress) and there's no way to throttle |
+| **Debug accessibility** | When something breaks at 3am, what does the founder need to debug it? | The answer is "ssh into the box and grep logs" — not viable for solo. Needs centralized logs, error tracking, and a status URL the founder can hit from their phone |
+
+For each, classify:
+- 🟢 OK — solo-survivable as-is
+- 🟡 Survivable with one specific change (name the change)
+- 🔴 Not solo-survivable past 100 customers without changing this
+
+If 2+ are 🔴, the operator verdict shifts to 🟠 NEEDS HIRE or 🟡 SHIPPABLE WITH DESCOPE regardless of how the other questions went. Architecture debt at the wrong layer is the failure mode most solo plans don't see until month 4.
+
 ---
 
 ## Output structure
@@ -124,6 +143,17 @@ If the User Profile doesn't include hours-per-week and cash runway, ask for both
 | ... | | |
 
 {Verdict on whether the GTM plan is executable solo.}
+
+### 5. Architecture & data-flow stress test
+| Failure mode | Status | Note |
+|---|---|---|
+| Hidden ops cost | 🟢 / 🟡 / 🔴 | |
+| Data shape lock-in | 🟢 / 🟡 / 🔴 | |
+| Single point of failure | 🟢 / 🟡 / 🔴 | |
+| Cost-curve mismatch | 🟢 / 🟡 / 🔴 | |
+| Debug accessibility | 🟢 / 🟡 / 🔴 | |
+
+{Verdict on whether the architecture is solo-survivable.}
 
 ---
 
