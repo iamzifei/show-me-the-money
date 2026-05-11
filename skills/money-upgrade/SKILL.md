@@ -159,9 +159,7 @@ Proceed with update? [y/n]
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~10-15 minutes vs the manual upgrade path (compare versions, backup, install, verify, read release notes) |
-| ⚠️ **Risks avoided** | (1) Partial install where some skills update and others don't; (2) backing up the wrong directory and losing project-local skills; (3) running an old skill alongside a new one and getting inconsistent behavior |
-| ✅ **What you got** | A clean update from v{current} → v{new}, the relevant CHANGELOG bullets, and the restart prompt |
-| 🚧 **Without this skill** | Most users put off the update for weeks, run old skills against new docs/atoms, and surface mystery bugs that turn out to be "you're on v2.1, that field was renamed in v2.3" |
+- ⏱ **Time saved** — ~10-15 minutes vs the manual upgrade path (compare versions, backup, install, verify, read release notes)
+- ⚠️ **Risks avoided** — (1) Partial install where some skills update and others don't; (2) backing up the wrong directory and losing project-local skills; (3) running an old skill alongside a new one and getting inconsistent behavior
+- ✅ **What you got** — A clean update from v{current} → v{new}, the relevant CHANGELOG bullets, and the restart prompt
+- 🚧 **Without this skill** — Most users put off the update for weeks, run old skills against new docs/atoms, and surface mystery bugs that turn out to be "you're on v2.1, that field was renamed in v2.3"

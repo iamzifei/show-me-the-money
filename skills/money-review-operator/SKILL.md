@@ -193,9 +193,7 @@ If 🔴 WRONG STACK: suggest `/money-discover` to find a wedge the founder can a
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~3-6 months of attempting to execute an unshippable plan and only realizing it after burnout |
-| ⚠️ **Risks avoided** | (1) Time-budget mismatch — building a plan that requires 40 hrs/wk when 12 are available; (2) ongoing-ops compounding into burnout across multiple products; (3) GTM channel that requires team-level execution; (4) running out of cash before first revenue |
-| ✅ **What you got** | A specific verdict with realistic 8-week roadmap, ops-load math, runway-vs-revenue check, and channel feasibility per item |
-| 🚧 **Without this skill** | You'd start the plan optimistically, discover at week 6 that ongoing-ops eats more time than expected, and end up with a half-finished MVP and a content pipeline that's three weeks behind |
+- ⏱ **Time saved** — ~3-6 months of attempting to execute an unshippable plan and only realizing it after burnout
+- ⚠️ **Risks avoided** — (1) Time-budget mismatch — building a plan that requires 40 hrs/wk when 12 are available; (2) ongoing-ops compounding into burnout across multiple products; (3) GTM channel that requires team-level execution; (4) running out of cash before first revenue
+- ✅ **What you got** — A specific verdict with realistic 8-week roadmap, ops-load math, runway-vs-revenue check, and channel feasibility per item
+- 🚧 **Without this skill** — You'd start the plan optimistically, discover at week 6 that ongoing-ops eats more time than expected, and end up with a half-finished MVP and a content pipeline that's three weeks behind

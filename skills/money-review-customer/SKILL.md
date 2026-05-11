@@ -148,9 +148,7 @@ If 🔴 WRONG ICP: suggest `/money-discover` again with the new ICP. Do not proc
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~2-4 months of building for the wrong ICP, or pricing in a way the right ICP rejects |
-| ⚠️ **Risks avoided** | (1) Building features for ICP-X while pricing at ICP-Y's tier; (2) underestimating switching cost from incumbent; (3) confusing "they said it sounds cool" with "they would pay" |
-| ✅ **What you got** | A first-person customer verdict with named friction, named objection, and the cheapest experiment to move the verdict up |
-| 🚧 **Without this skill** | You'd ship the product, watch conversion sit at 0.3%, and spend 3 months A/B testing pricing instead of fixing the ICP-positioning mismatch |
+- ⏱ **Time saved** — ~2-4 months of building for the wrong ICP, or pricing in a way the right ICP rejects
+- ⚠️ **Risks avoided** — (1) Building features for ICP-X while pricing at ICP-Y's tier; (2) underestimating switching cost from incumbent; (3) confusing "they said it sounds cool" with "they would pay"
+- ✅ **What you got** — A first-person customer verdict with named friction, named objection, and the cheapest experiment to move the verdict up
+- 🚧 **Without this skill** — You'd ship the product, watch conversion sit at 0.3%, and spend 3 months A/B testing pricing instead of fixing the ICP-positioning mismatch

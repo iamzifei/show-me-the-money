@@ -172,9 +172,7 @@ If 🟡: suggest `/money-discover` to find the right question and the right wedg
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~6-12 months of executing toward a known but unspoken failure mode |
-| ⚠️ **Risks avoided** | (1) Pleasant illusions from polite advisors; (2) AI-commoditization wrapper trap; (3) single-channel distribution death; (4) emotional avoidance of the real strategic question |
-| ✅ **What you got** | The seven failure modes evaluated, the top 3 ranked by probability × severity, the avoided question, and the realistic month-9 picture if the plan ships as-is |
-| 🚧 **Without this skill** | The plan ships, the user is happy at month 1, increasingly stressed at month 4, and at month 9 wishes someone had asked the avoided question 6 months earlier |
+- ⏱ **Time saved** — ~6-12 months of executing toward a known but unspoken failure mode
+- ⚠️ **Risks avoided** — (1) Pleasant illusions from polite advisors; (2) AI-commoditization wrapper trap; (3) single-channel distribution death; (4) emotional avoidance of the real strategic question
+- ✅ **What you got** — The seven failure modes evaluated, the top 3 ranked by probability × severity, the avoided question, and the realistic month-9 picture if the plan ships as-is
+- 🚧 **Without this skill** — The plan ships, the user is happy at month 1, increasingly stressed at month 4, and at month 9 wishes someone had asked the avoided question 6 months earlier

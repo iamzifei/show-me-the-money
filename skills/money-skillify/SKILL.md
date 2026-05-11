@@ -210,16 +210,12 @@ Cat the file. Print path at top.
 
 After successful codification:
 
-| | |
-|---|---|
-| 📦 **Captured** | One reusable skill at `{path}` |
-| ⏱ **Time saved per future use** | ~30-90 minutes — re-discovering the same sequence vs. running it from a SKILL.md |
-| ⚠️ **Risk avoided** | Re-doing the workflow worse next time — most founders re-build a degraded version of their own prior success because the original wasn't captured |
-| 🔁 **Auto-surfaced** | Every future Claude Code session in this project gets a one-line nudge listing project-local skills available |
+- 📦 **Captured** — One reusable skill at `{path}`
+- ⏱ **Time saved per future use** — ~30-90 minutes — re-discovering the same sequence vs. running it from a SKILL.md
+- ⚠️ **Risk avoided** — Re-doing the workflow worse next time — most founders re-build a degraded version of their own prior success because the original wasn't captured
+- 🔁 **Auto-surfaced** — Every future Claude Code session in this project gets a one-line nudge listing project-local skills available
 
 After `/money-skillify list`:
 
-| | |
-|---|---|
-| 📋 **Surfaced** | {N} project-local skills, each with its trigger |
-| ✅ **What you got** | A complete list of your codified workflows for this project, with file paths and triggers |
+- 📋 **Surfaced** — {N} project-local skills, each with its trigger
+- ✅ **What you got** — A complete list of your codified workflows for this project, with file paths and triggers

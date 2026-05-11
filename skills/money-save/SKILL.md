@@ -195,12 +195,10 @@ After confirming the snapshot was written, append:
 
 ### 📊 What this checkpoint is worth
 
-| | |
-|---|---|
-| 💾 **Captured** | {N confirmed conclusions, M ruled-out directions, K open hypotheses} |
-| ⏱ **Saves you next time** | ~15-30 minutes of re-onboarding and re-explaining context to the AI |
-| ⚠️ **Risk avoided** | Re-deciding something you already decided — the most common solo-founder leak. The AI doesn't remember between sessions unless you save |
-| 🔁 **Resume with** | `/money-restore` from this directory in any future Claude Code session |
+- 💾 **Captured** — {N confirmed conclusions, M ruled-out directions, K open hypotheses}
+- ⏱ **Saves you next time** — ~15-30 minutes of re-onboarding and re-explaining context to the AI
+- ⚠️ **Risk avoided** — Re-deciding something you already decided — the most common solo-founder leak. The AI doesn't remember between sessions unless you save
+- 🔁 **Resume with** — `/money-restore` from this directory in any future Claude Code session
 ```
 
 Use the actual counts from the snapshot. If only 1 conclusion was captured, the value is real but smaller — show it honestly. Never inflate.

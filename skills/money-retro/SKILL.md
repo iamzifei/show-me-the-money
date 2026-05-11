@@ -157,12 +157,10 @@ Format: "**Focus**: {one sentence}. **First action**: {today or tomorrow specifi
 
 ## Snapshot of project state
 
-| | |
-|---|---|
-| Total snapshots in project | {N} |
-| Total learnings | {N} ({validated} validated, {emerging} emerging, {hypothesis} hypothesis) |
-| Project age | {months since first snapshot} |
-| Open hypotheses | {N} |
+- Total snapshots in project — {N}
+- Total learnings — {N} ({validated} validated, {emerging} emerging, {hypothesis} hypothesis)
+- Project age — {months since first snapshot}
+- Open hypotheses — {N}
 ```
 
 ### Step 5 — Save the retro
@@ -212,9 +210,7 @@ Always recommend one of:
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~1-2 hours of digging through old chats, snapshots, and trying to remember what you decided |
-| ⚠️ **Risks avoided** | (1) Stalled hypotheses going untested for months; (2) running the same activity (e.g., `/money-content` 12x) without checking ROI; (3) ignoring a quietly-dying side project while focusing on the noisy one; (4) repeating the same week-over-week without intentional course correction |
-| ✅ **What you got** | Decisions / ruled-out / stalled / learnings / skill activity, plus ONE recommended focus and a portfolio rollup if multi-project |
-| 🚧 **Without this skill** | You'd reach the end of the quarter unable to articulate what changed, and at least one hypothesis would have silently aged out without ever being tested |
+- ⏱ **Time saved** — ~1-2 hours of digging through old chats, snapshots, and trying to remember what you decided
+- ⚠️ **Risks avoided** — (1) Stalled hypotheses going untested for months; (2) running the same activity (e.g., `/money-content` 12x) without checking ROI; (3) ignoring a quietly-dying side project while focusing on the noisy one; (4) repeating the same week-over-week without intentional course correction
+- ✅ **What you got** — Decisions / ruled-out / stalled / learnings / skill activity, plus ONE recommended focus and a portfolio rollup if multi-project
+- 🚧 **Without this skill** — You'd reach the end of the quarter unable to articulate what changed, and at least one hypothesis would have silently aged out without ever being tested

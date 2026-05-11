@@ -413,12 +413,10 @@ Other money-* skills do NOT run this — only `/money` does. This prevents a 17-
 
 ### 📊 What this session was worth
 
-| | |
-|---|---|
-| ⏱ **Time saved** | {Be specific — "~6 hours of solo brainstorming" or "~2 weeks of trial-and-error pricing tests"} |
-| ⚠️ **Risks avoided** | {2-3 specific failure modes, named. Not "you avoided risk" — "you avoided picking a market segment with <$500 ACV that can't sustain solo-founder economics"} |
-| ✅ **What you got** | {1-3 concrete deliverables. File paths, decisions, named artifacts.} |
-| 🚧 **Without this skill** | {The specific failure path you'd be on — "You'd likely spend 2-3 weeks researching before realizing the wedge is too vague to act on" — not "you would have struggled"} |
+- ⏱ **Time saved** — {Be specific — "~6 hours of solo brainstorming" or "~2 weeks of trial-and-error pricing tests"}
+- ⚠️ **Risks avoided** — {2-3 specific failure modes, named. Not "you avoided risk" — "you avoided picking a market segment with <$500 ACV that can't sustain solo-founder economics"}
+- ✅ **What you got** — {1-3 concrete deliverables. File paths, decisions, named artifacts.}
+- 🚧 **Without this skill** — {The specific failure path you'd be on — "You'd likely spend 2-3 weeks researching before realizing the wedge is too vague to act on" — not "you would have struggled"}
 
 💾 **Lock this in**: Run `/money-save` to checkpoint these conclusions. Next session, `/money-restore` picks up here — no re-explanation needed.
 ```
@@ -430,6 +428,7 @@ Other money-* skills do NOT run this — only `/money` does. This prevents a 17-
 3. **Without-this-skill must be specific failure path.** Not "you would have struggled." Instead: name the specific wrong turn the user would likely have taken.
 4. **The CTA at the bottom is mandatory** unless the user already saved this session. Always nudge to `/money-save`.
 5. **Match the user's language.** English session → English block. Chinese session → Chinese block (using equivalent emoji + structure).
+6. **Use a bulleted list, not a 2-column markdown table.** Terminal renderers (including Claude Code's) collapse empty-header tables into "Column 1 / Column 2" prose, which is the worst of both worlds. Bullet list with bold-prefix renders cleanly in terminal AND GitHub AND every other markdown viewer. Do NOT revert to the `| | |` table form.
 
 ### When to skip
 

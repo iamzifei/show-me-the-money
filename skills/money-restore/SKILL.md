@@ -164,12 +164,10 @@ After presenting the prior state and the next-step recommendation, append:
 
 ### 📊 What this restore is worth
 
-| | |
-|---|---|
-| 📦 **Restored** | {N conclusions, M ruled-out directions, K open hypotheses from {date}} |
-| ⏱ **Saved this session** | ~15-30 minutes of re-explaining context to the AI |
-| ⚠️ **Risk avoided** | Re-suggesting a direction you already ruled out (the AI has no memory across sessions without `/money-save` and `/money-restore`) |
-| ⏭ **Suggested next** | {next_skill from frontmatter, or "decide based on the state above"} |
+- 📦 **Restored** — {N conclusions, M ruled-out directions, K open hypotheses from {date}}
+- ⏱ **Saved this session** — ~15-30 minutes of re-explaining context to the AI
+- ⚠️ **Risk avoided** — Re-suggesting a direction you already ruled out (the AI has no memory across sessions without `/money-save` and `/money-restore`)
+- ⏭ **Suggested next** — {next_skill from frontmatter, or "decide based on the state above"}
 ```
 
 If the snapshot is older than 90 days, prepend a warning row:

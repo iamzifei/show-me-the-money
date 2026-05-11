@@ -247,9 +247,7 @@ If 🟠 or 🔴: also recommend `/money-save` — saving the panel result is its
 
 ## Value Quantification (Required at End of Output)
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~2-4 weeks of running the four reviewer skills sequentially with full attention each time, plus saved months of executing toward a flawed plan |
-| ⚠️ **Risks avoided** | (1) Self-justifying a plan into a green-light by selectively reading reviews; (2) reviewer fatigue — by review 3 most founders rubber-stamp; (3) burying the avoided question in a polite summary; (4) over-action — ending with 12 todos that get ignored |
-| ✅ **What you got** | A single 🟢/🟡/🟠/🔴 verdict, four reviewer sub-verdicts, the auto-decided actions, the explicit disagreements requiring your taste, the avoided question surfaced, and 3 concrete actions for this week |
-| 🚧 **Without this skill** | You'd run one or two reviews, accept the kindest verdict, ship, and discover at month 4 that the unrun reviewer would have flagged the structural issue immediately |
+- ⏱ **Time saved** — ~2-4 weeks of running the four reviewer skills sequentially with full attention each time, plus saved months of executing toward a flawed plan
+- ⚠️ **Risks avoided** — (1) Self-justifying a plan into a green-light by selectively reading reviews; (2) reviewer fatigue — by review 3 most founders rubber-stamp; (3) burying the avoided question in a polite summary; (4) over-action — ending with 12 todos that get ignored
+- ✅ **What you got** — A single 🟢/🟡/🟠/🔴 verdict, four reviewer sub-verdicts, the auto-decided actions, the explicit disagreements requiring your taste, the avoided question surfaced, and 3 concrete actions for this week
+- 🚧 **Without this skill** — You'd run one or two reviews, accept the kindest verdict, ship, and discover at month 4 that the unrun reviewer would have flagged the structural issue immediately

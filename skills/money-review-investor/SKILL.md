@@ -158,11 +158,9 @@ If the verdict is 🔴, recommend `/money-diagnose` — there's a structural pro
 
 After the verdict, append:
 
-| | |
-|---|---|
-| ⏱ **Time saved** | ~3-6 months of building toward an unfundable plan and only learning the truth from rejection emails |
-| ⚠️ **Risks avoided** | (1) Pitching a plan with a structural moat-theory hole; (2) confusing "would be a great business" with "would be a fundable business"; (3) anchoring on TAM that doesn't survive a year-5 math check |
-| ✅ **What you got** | A specific verdict, the 5-question scorecard, and the cheapest experiment to move up a tier |
-| 🚧 **Without this skill** | You'd hear "interesting, let me think" from 20 investors over 6 months without knowing whether that means "not yet" or "never" — and you'd burn runway figuring it out |
+- ⏱ **Time saved** — ~3-6 months of building toward an unfundable plan and only learning the truth from rejection emails
+- ⚠️ **Risks avoided** — (1) Pitching a plan with a structural moat-theory hole; (2) confusing "would be a great business" with "would be a fundable business"; (3) anchoring on TAM that doesn't survive a year-5 math check
+- ✅ **What you got** — A specific verdict, the 5-question scorecard, and the cheapest experiment to move up a tier
+- 🚧 **Without this skill** — You'd hear "interesting, let me think" from 20 investors over 6 months without knowing whether that means "not yet" or "never" — and you'd burn runway figuring it out
 
 If the verdict was 🔴, this block becomes especially valuable — surfacing the structural problem now beats discovering it after 12 months of building.

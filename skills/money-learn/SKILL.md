@@ -272,17 +272,13 @@ This will now influence future runs of /money-discover, /money-strategy, /money-
 
 After `/money-learn add` (capturing one learning):
 
-| | |
-|---|---|
-| 📝 **Captured** | 1 {category} learning at {confidence} confidence |
-| ⏱ **Saves you each future skill run** | ~30 seconds of re-explaining a pattern + permanent prevention of skill suggesting something you already ruled out |
-| ⚠️ **Risk avoided** | The agent has no memory across sessions without learnings — it will re-suggest the wrong pricing, wrong channel, wrong ICP unless told otherwise |
-| 🔁 **Auto-loaded by** | All major money-* skills on next invocation (filtered by relevant category) |
+- 📝 **Captured** — 1 {category} learning at {confidence} confidence
+- ⏱ **Saves you each future skill run** — ~30 seconds of re-explaining a pattern + permanent prevention of skill suggesting something you already ruled out
+- ⚠️ **Risk avoided** — The agent has no memory across sessions without learnings — it will re-suggest the wrong pricing, wrong channel, wrong ICP unless told otherwise
+- 🔁 **Auto-loaded by** — All major money-* skills on next invocation (filtered by relevant category)
 
 After `/money-learn` (showing recent) or `/money-learn search` (querying):
 
-| | |
-|---|---|
-| 📚 **Surfaced** | {N} matching learnings from {total} total |
-| ⏱ **Time saved** | ~5-15 minutes of digging through old conversation transcripts |
-| ✅ **What you got** | The exact validated patterns relevant to your current question, with evidence citations |
+- 📚 **Surfaced** — {N} matching learnings from {total} total
+- ⏱ **Time saved** — ~5-15 minutes of digging through old conversation transcripts
+- ✅ **What you got** — The exact validated patterns relevant to your current question, with evidence citations

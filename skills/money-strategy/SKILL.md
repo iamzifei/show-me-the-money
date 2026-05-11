@@ -333,7 +333,7 @@ The set of leaderboards we scan depends on `business_type`. Use the opinionated 
 
 | `business_type` | Default leaderboards |
 |---|---|
-| `saas` | [toolify.ai](https://www.toolify.ai/Best-trending-AI-Tools), [trustmrr.com](https://trustmrr.com/), [producthunt.com](https://www.producthunt.com/), [indiehackers.com top revenue](https://www.indiehackers.com/products), [AppSumo bestsellers](https://appsumo.com/browse/) |
+| `saas` | [toolify.ai](https://www.toolify.ai/Best-trending-AI-Tools), [trustmrr.com](https://trustmrr.com/), [producthunt.com](https://www.producthunt.com/), [indiehackers.com top revenue](https://www.indiehackers.com/products), [AppSumo bestsellers](https://appsumo.com/browse/). **Toolify HTML often 403s headless fetchers — use the JSON API fallback below.** |
 | `app` | App Store Top Apps (US + target market), Google Play Top Grossing, Sensor Tower category leaderboards, [App Annie / data.ai](https://www.data.ai/) |
 | `content-kol` | Xiaohongshu 热榜 (by category), 飞瓜 抖音榜, Substack Leaderboard, YouTube Trending (region+category), X/Twitter Trending |
 | `commerce` | Amazon Best Sellers (category), Etsy Bestsellers, Shopify Top Shops by category, Taobao 热卖榜, TikTok Shop Trending |
@@ -347,6 +347,26 @@ Open each leaderboard. Pull the top 10 entries in the user's specific category. 
 - Position on the leaderboard
 - Visible metric the board sorts by (revenue, downloads, ratings, fans, etc.)
 - One quote-worthy line of what they actually offer (not their marketing copy — what they actually deliver)
+
+### Leaderboard fetch fallbacks (when the public HTML 403s)
+
+Some leaderboards block headless fetchers. Use these direct JSON endpoints instead:
+
+**Toolify monthly ranking** (when `toolify.ai/Best-*` returns 403):
+
+```
+https://www.toolify.ai/self-api/v1/top/month-top?page=1&per_page=300&direction=desc&order_by=growth
+```
+
+Tunable query params:
+- `per_page` — 1 to ~500 results per page (300 is a good default for scanning a category)
+- `order_by` — `growth` (fastest-growing this month), `traffic` (raw visits), `score` (composite), `users` (estimated MAU)
+- `direction` — `desc` (default) or `asc`
+- `page` — pagination cursor
+
+Parse the JSON response; entries include `name`, `url`, `description`, `monthly_visits`, `growth_rate`, `category`, and `tags`. Filter to the user's specific subcategory client-side.
+
+**Pattern for other 403-prone boards** — many leaderboards have an unauthenticated JSON endpoint backing their public page. Check the page's network tab in Chrome DevTools for the actual XHR call; the URL often follows a similar `/self-api/` or `/api/v1/` pattern. Document any newly discovered endpoint as a one-line comment in this skill's leaderboard table so future iterations don't repeat the discovery work.
 
 ### Phase C — Pick 3 benchmarks (Five-Filter, applied to live products)
 

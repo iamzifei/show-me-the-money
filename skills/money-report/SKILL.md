@@ -192,12 +192,10 @@ After confirming the report was written, append:
 
 ### 📊 What this report is worth
 
-| | |
-|---|---|
-| 📄 **Generated** | A merged report from {N} snapshots, spanning {oldest date} to {newest date} |
-| ⏱ **Time to produce manually** | ~3-6 hours of digging through old conversation transcripts and summarizing yourself |
-| 🤝 **Shareable with** | Co-founders, advisors, investors, contractors, or your future self |
-| 🚧 **Without this skill** | The {N} decisions you've made over weeks/months stay scattered across chat transcripts that get auto-deleted by the agent harness — and your trajectory is invisible to anyone but you |
+- 📄 **Generated** — A merged report from {N} snapshots, spanning {oldest date} to {newest date}
+- ⏱ **Time to produce manually** — ~3-6 hours of digging through old conversation transcripts and summarizing yourself
+- 🤝 **Shareable with** — Co-founders, advisors, investors, contractors, or your future self
+- 🚧 **Without this skill** — The {N} decisions you've made over weeks/months stay scattered across chat transcripts that get auto-deleted by the agent harness — and your trajectory is invisible to anyone but you
 ```
 
 If the report is the user's first one for this project, append:
