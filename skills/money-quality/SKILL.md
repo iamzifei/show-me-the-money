@@ -21,6 +21,21 @@ Default to English if the user doesn't specify. All subsequent output must be in
 
 ---
 
+## Business-Type Branching (read first)
+
+Read `~/.smtm/projects/{slug}/profile.json` for `business_type`. "Quality" means different things for different business shapes. The code-and-software flow below is the canonical one for `saas` / `app`. For other types, also run the matching alternative quality flow at the end of this file.
+
+| `business_type` | Quality flow | Skip / adapt |
+|---|---|---|
+| `saas` / `app` | Run all sections below as-is (Quick → Standard → Ship; tech-triage when broken) | — |
+| `content-kol` | Quick → run **Content Quality Mode** (below) instead of Standard/Ship | Skip static analysis, OWASP/STRIDE; replace with authenticity audit + factual review |
+| `commerce` | Run **Product / Listing Quality Mode** (below) | Skip code review; add product photography, listing copy, shipping flow, return-policy review |
+| `retail-local` | Run **Service & Experience Quality Mode** (below) | Skip everything code; review POS flow, customer-facing scripts, hygiene, review-response policy |
+| `service` | Run **Deliverable Quality Mode** (below) | Skip OWASP; review SOPs, intake quality, output quality, case-study integrity |
+| `hybrid` | Run the dominant + check the secondary type's flow as a separate pass | — |
+
+For all types, the Tech-Triage Mode below remains useful whenever ANY technical surface (website, payment, app, integration) breaks.
+
 ## Quality Tiers
 
 Choose the tier based on the situation:
@@ -341,6 +356,68 @@ If the prediction doesn't pan out, the hypothesis was wrong — don't just patch
 - Big refactors prompted by a small bug — fix the bug, log the refactor as a separate task
 
 The triage loop ends with three artifacts: the root cause stated in one sentence, the minimal regression test, and the `/money-learn` row. Without all three, the bug isn't really fixed — it's just suppressed.
+
+## Alternative Quality Modes (non-software business types)
+
+### Content Quality Mode (`content-kol`)
+
+Run before publishing or scheduling any piece. The five gates:
+
+1. **Authenticity** — Run `/money-content` Stage 4.5 (12-signal AI-fingerprint audit). 0-2 signals: ship. 3-5: fix. 6+: rewrite.
+2. **Hook quality** — Run `/money-content` Stage 4 hook quality check. Every hook must pass independence + suspense + speakability + credibility + alignment.
+3. **Factual integrity** — Every specific claim (number, percentage, named person, dated event) must have a source you'd back in public. If the source is "ChatGPT said so", remove or verify.
+4. **Cognitive gap** — Read top 3 results for the same query/keyword. If your piece doesn't carry one specific thing the others don't, kill it or rewrite the angle.
+5. **Aligned monetization** — If the piece sells (course, community, sponsored), the sell must match the lesson. A piece teaching "do A" that funnels to "buy our B" reads as bait.
+
+A piece that fails any one of these is NOT ready. Track the failure mode — repeated fails on the same gate is a pattern to fix at the workflow level via `/money-skillify`.
+
+### Product / Listing Quality Mode (`commerce`)
+
+Run before publishing any new SKU listing or running ads to it.
+
+| Check | Pass criteria |
+|---|---|
+| Photography | At least 3 photos (packshot, lifestyle, detail); first photo conversion-optimized; consistent style across catalog |
+| Title formula | Matches platform spec (Amazon's strict; Etsy's loose; TikTok Shop video-first); contains primary search keyword |
+| Description | Hook (2 lines) + 3-bullet benefits + spec table + size/material/origin + return policy + shipping ETA |
+| Pricing strategy | Entry tier exists; psychological pricing (.99 / .95 / .88 region-specific); price tested in last 60 days |
+| Reviews status | First 10 reviews present (seed if not); recent reviews <60 days; response to every <4-star review |
+| Inventory + fulfillment | Stock buffer for forecast 60 days; SKU pickable in <30 sec; shipping tested end-to-end with timing |
+| Returns policy | Visible, ≤2 clicks from listing; matches platform requirements; restocking fee clear |
+
+Any failed check is a deferral, not a P2.
+
+### Service & Experience Quality Mode (`retail-local`)
+
+Run on a recurring weekly basis, and after every significant operational change (new staff, new menu, layout change).
+
+| Check | Pass criteria |
+|---|---|
+| Hygiene + safety | Last cleaning log <24h; food/cosmetic/equipment safety certs in date; mystery-shopper hygiene score >90% |
+| Customer-facing scripts | Greeting, problem-handling, upsell, closing — each staff member can deliver consistently in front of a manager |
+| First-impression flow | Door / entry / signage / wait area meets brand promise; tested by an outside friend (NOT a regular) every 30 days |
+| Booking / queue flow | Wait time < category benchmark (e.g. <15 min for a haircut walk-in); booking conversion >80% |
+| POS + payment | All listed payment methods working; receipt prints / texts correctly; loyalty mechanism active |
+| Review response | <72h response time on every public review across all platforms; 1-star and 2-star get response same day |
+| Cross-promotion follow-through | Partnerships from `/money-outreach` are being honored (their coupons accepted, your fliers visible) |
+
+The single highest-leverage one is "first-impression flow tested by an outside friend monthly" — every solo operator goes blind to their own storefront within 60 days.
+
+### Deliverable Quality Mode (`service` / `agency` / `consulting`)
+
+Run before sending any client deliverable.
+
+| Check | Pass criteria |
+|---|---|
+| Brief vs. delivery match | Re-read the original brief; every point addressed, deviations explicitly named with rationale |
+| Output format | Matches what the client requested; if format is "deck", it's a real deck not a doc disguised; if "report", it's structured |
+| Sample size / data integrity | If analysis: methodology documented; data source named; caveats listed |
+| Voice | Drafts in the client's voice if delivering content, in your voice if delivering analysis/strategy — do not mix |
+| Replication test | A second person on your team (or a future-you) could understand what was done from the deliverable alone |
+| Case-study extraction | After delivery, capture the case-study material now (specific outcome, anonymized if needed) — this is the #1 missed lead source for solo consultants |
+| Invoice + handoff | Invoice sent same-day as delivery; clear next-step or scope-extension proposal attached |
+
+A deliverable that fails the brief-vs-delivery match check is a defect, not "stylistic difference" — fix before sending.
 
 ## Continuous Quality (Integration with /money-ops)
 

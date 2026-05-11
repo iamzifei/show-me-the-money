@@ -19,16 +19,42 @@ If the user's message contains a `[Language: ...]` tag, use that language for al
 
 Default to English if the user doesn't specify. All subsequent output must be in the chosen language.
 
+## Business-Type Branching (read first)
+
+Read `~/.smtm/projects/{slug}/profile.json` for `business_type`. Ad platform fit is highly type-dependent. Match the platform set to the business; running LinkedIn Ads for a Xiaohongshu KOL is wasted spend.
+
+| `business_type` | Primary platforms | Add when ready | Avoid |
+|---|---|---|---|
+| `saas` | Google Search, Meta (lookalike + retarget) | LinkedIn (enterprise), X/Reddit (dev tools) | TikTok unless your ICP lives there |
+| `app` | Apple Search Ads, Google App campaigns, TikTok For Business | Meta App Install, Reddit if niche | LinkedIn |
+| `content-kol` | The platform you're creating on (boosted posts, Dou+, XHS薯条) | Meta/Google sending traffic to your funnel page | Search-intent ads (wrong vector) |
+| `commerce` | Meta + TikTok Shop ads, Amazon Sponsored, Google Shopping | Pinterest (lifestyle), Snapchat (Gen Z) | LinkedIn |
+| `retail-local` | Google Local Ads (Maps + Search), Yelp Ads, Meta with radius targeting | NextDoor (US), 美团/点评推广通 (China) | Broad LinkedIn / X |
+| `service` | Google Search (high-intent local + national), LinkedIn (for enterprise services) | Meta retarget for nurture | TikTok unless target ICP overlaps |
+| `hybrid` | Pick the dominant; expand once that platform has proven ROAS | | |
+
 ## Platform Selection
 
 | Platform | Best For | Min Budget |
 |----------|----------|------------|
 | Google Search | High-intent keywords, B2B, SaaS | $10/day |
 | Google Display | Retargeting, brand awareness | $5/day |
+| Google Local Ads | Local service / retail, Maps placement | $5/day |
+| Google Shopping | Physical / digital product catalogs | $10/day |
+| Apple Search Ads | iOS app discovery | $5/day |
 | Meta (FB/IG) | B2C, visual products, lookalike audiences | $10/day |
+| Meta Shop / IG Shopping | E-commerce | $10/day |
 | LinkedIn Ads | B2B, enterprise, professional services | $30/day |
 | X/Twitter Ads | Dev tools, tech products | $10/day |
 | Reddit Ads | Niche communities, authenticity-focused | $5/day |
+| TikTok For Business / Shop | Impulse e-commerce, apps, Gen Z B2C | $20/day |
+| Yelp Ads | Local restaurant / service | $5/day |
+| NextDoor Ads | Local US service / retail | $5/day |
+| Pinterest Ads | Visual products, female-leaning ICP | $5/day |
+| 美团 / 大众点评 推广通 | China local restaurant / service | ¥30/day |
+| 巨量引擎 (Douyin Ads) | China app, e-comm, retail | ¥100/day |
+| 千川 (Douyin Shop Ads) | China e-comm, livestream | ¥200/day |
+| Dou+ / XHS 薯条 | China KOL boost — your own content reach | ¥50/post |
 
 Recommend platforms based on:
 1. Target audience location

@@ -71,6 +71,60 @@ Store this as `[User Profile: ...]` context and pass it to all sub-skills.
 
 **Important**: If auto-search fails or finds nothing, just proceed with whatever the user told you directly. Never block on research.
 
+## Step 1.5: Business Type Capture
+
+After onboarding (and before situation routing), capture the project's **business type**. This is per-project — not per-user — because a single operator may run a SaaS, a Xiaohongshu account, and an offline store, each needing different stack, channel, and revenue assumptions.
+
+Read first from `~/.smtm/projects/{slug}/profile.json` if it exists. If the file is missing OR the `business_type` field is unset, ask once:
+
+> What kind of business is this?
+> 1. 🌐 **Web SaaS / API** — subscription web app, API product, developer tool
+> 2. 📲 **App** — iOS / Android / desktop app, paid downloads or in-app purchases
+> 3. ✍️ **Content / KOL** — Xiaohongshu, X/Twitter, YouTube, Substack, podcast — revenue from ads, sponsorship, paid community, courses
+> 4. 🛒 **E-commerce / Marketplace** — physical or digital goods sold via Shopify, Amazon, Taobao, Etsy
+> 5. 🏪 **Physical retail / Local service** — coffee shop, salon, gym, restaurant, in-person service business
+> 6. 🤝 **Service / Agency / Consulting** — done-for-you work billed by hour, project, or retainer
+> 7. 🧩 **Hybrid** — combination (e.g. SaaS + creator newsletter; physical store + DTC online)
+
+Accept short numeric reply (1-7) or natural language. Map to canonical slug:
+
+| Reply | `business_type` value |
+|---|---|
+| 1 | `saas` |
+| 2 | `app` |
+| 3 | `content-kol` |
+| 4 | `commerce` |
+| 5 | `retail-local` |
+| 6 | `service` |
+| 7 | `hybrid` |
+
+Persist immediately to `~/.smtm/projects/{slug}/profile.json` (create directory if absent):
+
+```json
+{
+  "slug": "...",
+  "business_type": "saas",
+  "live_url": "https://...",
+  "post_pmf": false,
+  "created_at": "ISO 8601",
+  "updated_at": "ISO 8601"
+}
+```
+
+Subsequent skills read `business_type` from this file and branch their behavior accordingly. If a skill receives an explicit `--type <value>` flag, that overrides the persisted value for that one invocation.
+
+### Why this matters
+
+Without a declared business type, every downstream skill defaults to SaaS assumptions — Next.js stack, Stripe subscriptions, cold-email outreach, Google SEO. That's the wrong starting point for ~half of real founders. Capturing this once at the top means the rest of the suite stops asking "is this a website?" and starts giving advice that fits the actual business.
+
+### Live-product / post-PMF signal
+
+If the user provided a live URL in onboarding AND the page returns 200 AND it has visible signs of customers/users (testimonials, pricing, "log in", changelog, or non-zero traffic from any analytics signal), set `post_pmf: true`. This flag tells `/money-strategy` to enter **iterate mode** by default instead of fresh-strategy mode.
+
+The user can override either field anytime:
+- `/money set type <value>` — change business type
+- `/money set post-pmf true|false` — toggle iteration mode
+
 ## Step 2: Situation Assessment
 
 Present the options:
@@ -80,6 +134,7 @@ Present the options:
 > - 💡 **I have an idea** — need a plan
 > - 🔨 **I have a plan** — need to build it
 > - 📈 **I have a product** — need growth and customers
+> - 🚀 **I have a working product** — need iteration based on top performers (post-PMF)
 > - 🤖 **I have a business** — need automation and scale
 > - 🩺 **Something isn't working** — need diagnosis
 > - ✅ **Pre-launch check** — need quality review before shipping
@@ -93,9 +148,10 @@ Present the options:
 User Situation
     │
     ├─ Starting from zero ─────────────► /money-discover (then full pipeline)
-    ├─ I have an idea ─────────────────► /money-strategy
+    ├─ I have an idea ─────────────────► /money-strategy (fresh mode)
     ├─ I have a plan ──────────────────► /money-product
     ├─ I have a product ───────────────► /money-seo + /money-content + /money-social
+    ├─ I have a working product ───────► /money-strategy iterate (leaderboard scan + iteration plan)
     ├─ I have a business ──────────────► /money-ops + /money-finance + /money-ads
     ├─ Something isn't working ────────► /money-diagnose
     ├─ Pre-launch check ───────────────► /money-quality
@@ -112,6 +168,7 @@ If the user doesn't pick from the menu but describes their situation in free tex
 | "Review", "ready to ship", "check quality", "test this", "is it ready" | `/money-quality` | Needs quality gates |
 | "What should I build", "find ideas", "opportunities" | `/money-discover` | Needs idea discovery |
 | "Business plan", "strategy", "pricing", "go-to-market" | `/money-strategy` | Needs strategic planning |
+| "Iterate", "improve my product", "what's next for my product", "benchmark against top performers", "competitor analysis for my live product", "迭代", "对标", "看看头部产品在做什么" | `/money-strategy iterate` | Post-PMF iteration — leaderboard scan, top-performer teardown, prioritized diff |
 | "Build", "deploy", "ship", "code", "MVP" | `/money-product` | Needs to build |
 | "Traffic", "SEO", "content", "blog", "marketing" | `/money-content` + `/money-seo` | Needs growth |
 | "Automate", "schedule", "24/7", "hands-off" | `/money-ops` | Needs automation |

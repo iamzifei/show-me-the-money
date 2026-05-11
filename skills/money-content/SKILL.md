@@ -19,6 +19,21 @@ If the user's message contains a `[Language: ...]` tag, use that language for al
 
 Default to English if the user doesn't specify. All subsequent output must be in the chosen language.
 
+## Business-Type Branching (read first)
+
+Read `~/.smtm/projects/{slug}/profile.json` for `business_type`. The "content priority" ranking below assumes a SaaS / service-style funnel. For other types, swap in the alternative priority below.
+
+| `business_type` | Priority 1 | Priority 2 | Priority 3 |
+|---|---|---|---|
+| `saas` / `service` | Landing page copy | Email sequences | SEO blog posts (as listed below) |
+| `app` | App Store description + screenshots copy | Short-form video scripts (TikTok / YouTube Shorts) | Press / launch content |
+| `content-kol` | The platform-native format itself (XHS notes / X threads / YouTube videos / Substack posts) | The lead-magnet that captures off-platform | Sponsor pitch deck + media kit |
+| `commerce` | Product listing copy + photography brief | UGC creator brief + scripts | Email lifecycle (welcome / cart / win-back) |
+| `retail-local` | Google Business Profile content + first 10 reviews seed | Local community / neighborhood posts | Loyalty-program content |
+| `hybrid` | Pick the dominant; layer secondary type's #1 as your #2 | | |
+
+Cascade everything below to whichever priority order applies. The pipeline (research → write → diagnose → optimize → publish) is universal; the artifacts that come out of it differ.
+
 ## Content Types & Priority
 
 Ranked by revenue impact:

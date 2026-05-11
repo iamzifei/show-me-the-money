@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**当前版本：`v2.4.0`** · [更新内容 →](#-v240-更新内容)
+**当前版本：`v2.5.0`** · [更新内容 →](#-v250-更新内容)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,65 @@
 Show Me The Money 是一套开源的 [Claude Code](https://claude.ai/code) 技能套件，兼容主流 AI 编程智能体。它将你的 AI 助手变成一个全栈商业操作系统 —— 发现机会、验证需求、构建产品、运营营销、管理广告、全天候自主运行，**并且记得你在每一次会话中做出的每一个决定**。
 
 支持 **Claude Code**、**Codex CLI**、**Gemini CLI**，以及其他兼容 skill 系统的智能体。
+
+---
+
+## ✨ v2.5.0 更新内容
+
+**"你的生意不一定是 SaaS，而且你可能已经有一个跑得起来的产品"的一版。** 两条主线全部融进现有技能 —— 没有新技能文件，数量仍为 25。
+
+### 主线 1 —— 业务类型感知（整套不再默认所有人都在做 SaaS）
+
+v2.5 之前，每个技能都默认走 Web SaaS 假设：Next.js 技术栈、Stripe 订阅、冷邮件外展、Google 网页 SEO、Meta/Google 广告。这对大约一半的真实创业者是错的。`/money` 的 onboarding 现在按项目记录 `business_type`，写入 `~/.smtm/projects/{slug}/profile.json`，下游技能根据它分支调整行为。
+
+**支持 7 种类型：**
+- `saas` —— Web SaaS / API
+- `app` —— iOS / Android / 桌面应用
+- `content-kol` —— 小红书、X、YouTube、Substack、播客的内容创作者
+- `commerce` —— 电商 / 平台店铺（Shopify、Amazon、Etsy、淘宝、TikTok Shop）
+- `retail-local` —— 实体店 / 本地服务业
+- `service` —— 服务 / 代理 / 咨询
+- `hybrid` —— 组合形式
+
+**设置类型后会分支的内容：**
+
+| 技能 | 分支什么 |
+|---|---|
+| `/money-product` | 给内容 KOL（账号搭建、首 10 篇、变现路径）、电商（平台选择、上架、履约）、本地零售（门店、地图收录、本地 SEO）、服务业（服务页、预约、案例库）提供完整替代构建路径 |
+| `/money-finance` | 收入来源按类型映射（Stripe / App Store / 平台结算 / POS / 开票），核心增长指标因业务而异（MRR vs DAU vs 复购率 vs 每日来客数 vs 时间利用率）|
+| `/money-outreach` | 冷邮件只是众多外展模式之一 —— 为非 SaaS 类型新增：本地 PR、批发、达人招募、赞助方对接 |
+| `/money-seo` | 本地 SEO（Google Maps + Yelp + 大众点评）、应用商店优化、平台原生搜索（小红书 / X / YouTube / Substack / 抖音 / TikTok）、电商搜索（Amazon / Etsy / TikTok Shop / 淘宝）—— 跑对应章节，不再统一套 Web SEO |
+| `/money-ads` | 平台选择按类型分化 —— App 用 Apple Search Ads / Google App，KOL 用 Dou+/薯条，本地用 Yelp / NextDoor / 美团，电商用 Amazon Sponsored / TikTok Shop |
+| `/money-quality` | 替代质量模式 —— 内容质量（真实性 + Hook + 事实完整性）、上架质量（图片 + 标题 + 评价 + 履约）、服务体验质量（卫生 + 话术 + 第一印象流程）、交付物质量（Brief 匹配 + 声音 + 案例库沉淀） |
+| `/money-content` | 内容优先级因业务而异 —— 上架文案 + UGC 脚本（电商）；GBP 内容 + 初始评价种子（本地零售）；平台原生格式本身（内容 KOL） |
+
+### 主线 2 —— `/money-strategy iterate` 后 PMF 迭代模式
+
+大部分策略类工具都假设用户在空白起点。反过来其实越来越常见：**已经有产品在跑、有真实客户、有真实指标**，问题是"下一个我该 ship 什么？"。v2.5 给 `/money-strategy` 加了一个 iterate 模式，锚点是真实测量数据，不是假设。
+
+**自动判定：** 如果 `profile.json` 里 `post_pmf: true` 且有 `live_url`，`/money-strategy` 默认进入 iterate 模式。可用 `/money-strategy fresh` 或 `/money-strategy iterate` 强制覆盖。
+
+**流程：**
+
+1. **基线产品快照** —— 定价、当前 MRR / 替代指标、ICP、最近 5 次 ship
+2. **挑选榜单（按业务类型给的默认列表）：**
+   - `saas` → Toolify、TrustMRR、Product Hunt、Indie Hackers 收入榜、AppSumo
+   - `app` → App Store 总榜、Play 畅销榜、Sensor Tower、data.ai
+   - `content-kol` → 小红书 热榜、飞瓜 抖音榜、Substack Leaderboard、YouTube Trending
+   - `commerce` → Amazon Best Sellers、Etsy Bestsellers、Shopify Top Shops、淘宝热卖、TikTok Shop Trending
+   - `retail-local` → Yelp top-rated、大众点评 必吃榜、Google Maps top
+   - `service` → UpWork top、Thumbtack top pros、Clutch top agencies
+3. **挑出 3 个值得深度拆解的对标**（沿用现有的四重过滤，按迭代场景重新定义其中 1 条）
+4. **对每个对标写一段拆解**：他们真正赢在哪、定价结构、真正的流量来源、藏起来的杠杆、他们没占的位
+5. **差距矩阵** —— 用户产品 vs 3 个对标的 11 个维度对比；差距标记 P0 / P1 / P2
+6. **挑出下 3 个 ship** —— 具体、收敛、可量化，每个 ship 都给出"能 ship 的最小版本"
+7. **读品类趋势** —— 榜单 top 10 告诉你品类在往哪走，以及**不要追**什么
+
+输出是一份"下 3 个 ship + 30/60/90 天复盘日期"的迭代计划，不是 11 章的市场研究报告。
+
+### Onboarding 流程更新
+
+`/money` Step 1.5 现在在 onboarding 阶段就询问业务类型和 live URL。新增"我已经有一个跑得起来的产品"选项，直接路由到 `/money-strategy iterate`。`/money-discover` 检测到 post-PMF 状态后会主动路由到 iterate 而非启动全新的发现 —— 防止多产品 operator 的常见模式："对着已经在跑的产品惯性打开 discovery，但实际问题是迭代"。
 
 ---
 

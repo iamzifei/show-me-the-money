@@ -28,6 +28,25 @@ Accept one of:
 
 If a `[User Profile: ...]` context block is provided, use it to personalize all recommendations.
 
+## Mode Selection: Fresh vs Iterate
+
+Before generating output, decide which mode to run. Read `~/.smtm/projects/{slug}/profile.json`:
+
+| Condition | Mode |
+|---|---|
+| `post_pmf: false` OR file missing OR no `live_url` | **Fresh mode** — runs the full 11-section market research report below |
+| `post_pmf: true` AND `live_url` present | **Iterate mode** — runs the leaderboard-driven iteration plan (see "Iterate Mode" section near the end) |
+| User explicitly typed `/money-strategy iterate` or `迭代` | **Iterate mode** (overrides) |
+| User explicitly typed `/money-strategy fresh` | **Fresh mode** (overrides) |
+
+The two modes share the same underlying frameworks (4P, business-model stress test, premise audit) but anchor to different starting points:
+- Fresh mode anchors to a **hypothesis** ("we will charge $X for Y")
+- Iterate mode anchors to **measured reality** ("we charge $X, see Y conversion, top performers in our category do Z")
+
+Tell the user which mode you're entering and why before starting:
+
+> Running in **iterate mode** — detected a live product at {live_url} with `post_pmf: true`. To run fresh strategy instead, say `/money-strategy fresh`.
+
 ---
 
 ## Market Research Report
@@ -292,6 +311,142 @@ Before proceeding, assess: do we have enough information to make a strategy, or 
 If 3+ dimensions need experiments: **Don't build a full strategy.** Instead, output a 2-week experiment plan to gather missing data, THEN return for strategy.
 
 ---
+
+## Iterate Mode — Post-PMF Strategy
+
+When mode is `iterate`, skip the fresh-strategy report above and run this flow instead. The user already has a working product; they don't need a new pitch — they need an honest read on what top performers in their category are doing that they're not.
+
+### Phase A — Baseline the user's product
+
+Pull what we know about the live product from `~/.smtm/projects/{slug}/profile.json`:
+- Live URL
+- Pricing (scrape if not stored)
+- Current MRR / monthly revenue / monthly active users (from `/money-finance` if available; ask user if not)
+- Last 5 ships from CHANGELOG
+- Stated ICP and positioning
+
+If any piece is missing, ask the user for it directly — don't proceed on guesses. Iteration plans built on wrong baselines aim at the wrong targets.
+
+### Phase B — Pick leaderboards (business-type aware)
+
+The set of leaderboards we scan depends on `business_type`. Use the opinionated defaults below; the user can add or remove any via `--leaderboard` / `--no-leaderboard` flags.
+
+| `business_type` | Default leaderboards |
+|---|---|
+| `saas` | [toolify.ai](https://www.toolify.ai/Best-trending-AI-Tools), [trustmrr.com](https://trustmrr.com/), [producthunt.com](https://www.producthunt.com/), [indiehackers.com top revenue](https://www.indiehackers.com/products), [AppSumo bestsellers](https://appsumo.com/browse/) |
+| `app` | App Store Top Apps (US + target market), Google Play Top Grossing, Sensor Tower category leaderboards, [App Annie / data.ai](https://www.data.ai/) |
+| `content-kol` | Xiaohongshu 热榜 (by category), 飞瓜 抖音榜, Substack Leaderboard, YouTube Trending (region+category), X/Twitter Trending |
+| `commerce` | Amazon Best Sellers (category), Etsy Bestsellers, Shopify Top Shops by category, Taobao 热卖榜, TikTok Shop Trending |
+| `retail-local` | Yelp top-rated (category + city), 大众点评 必吃榜 / 必喝榜, Google Maps top in category (city), local "best of" listings |
+| `service` | UpWork top freelancers in category, Thumbtack top pros, Clutch top agencies, LinkedIn ProFinder leaders |
+| `hybrid` | Pick the dominant type's defaults; ask user to add 1-2 more |
+
+Open each leaderboard. Pull the top 10 entries in the user's specific category. For each entry, capture:
+
+- Name + URL/handle
+- Position on the leaderboard
+- Visible metric the board sorts by (revenue, downloads, ratings, fans, etc.)
+- One quote-worthy line of what they actually offer (not their marketing copy — what they actually deliver)
+
+### Phase C — Pick 3 benchmarks (Five-Filter, applied to live products)
+
+We're not chasing all 10; we're picking the 3 worth studying in depth. Apply the existing benchmark stress test from `/money-discover` Phase 5, with one adjustment: the user already has a product, so filter #3 (Replicability) changes meaning — it now asks "can the user reach feature/positioning parity with this benchmark in 90 days?", not "can the user build it from scratch?".
+
+For each of the 3 selected benchmarks, produce a one-paragraph teardown covering:
+
+1. **The wedge they actually won on** — not their tagline, the underlying mechanism
+2. **The pricing structure** — including any free tier, trial mechanics, upsell paths, enterprise pricing
+3. **The traffic / acquisition channel that's actually driving them** — verify via SimilarWeb, X mentions, YouTube co-mentions, search interest, anything observable
+4. **The thing they don't talk about** — what's clearly working but isn't on the landing page (e.g., heavy community use, B2B side door, hidden free tier, partnership-driven)
+5. **The wedge they don't own** — the gap a competitor could exploit
+
+### Phase D — Diff: the user's product vs the 3 benchmarks
+
+Build the diff matrix:
+
+| Dimension | User's product | Benchmark 1 | Benchmark 2 | Benchmark 3 | Gap (P0/P1/P2) |
+|---|---|---|---|---|---|
+| Core wedge | | | | | |
+| Pricing entry tier | | | | | |
+| Pricing peak tier | | | | | |
+| Free / trial mechanic | | | | | |
+| Primary acquisition channel | | | | | |
+| Content cadence + format | | | | | |
+| Onboarding friction (sign-in steps to first value) | | | | | |
+| Retention mechanic | | | | | |
+| Visible community / social proof | | | | | |
+| Mobile experience | | | | | |
+| AI/agent integration story (if relevant) | | | | | |
+
+For every row where the user is behind a benchmark, classify the gap:
+
+- **P0** — closing this gap is required for parity in the next 30 days
+- **P1** — closing this gap is the lever for the next 60-90 days
+- **P2** — interesting but not load-bearing; defer
+
+### Phase E — Pick the next 3 ships
+
+The whole point of iterate mode is to leave with **three specific ships**, not 15 ideas. Pick the 3 highest-leverage gaps from the diff. For each, write:
+
+```
+## Ship N: {name}
+
+**Closes gap with**: {benchmark name} on {dimension}
+**Why this beats the others**: {one sentence explaining the leverage}
+**Estimated effort**: {S / M / L — small <1 week, medium 1-3 weeks, large 1-2 months}
+**Estimated impact**: {acquisition / conversion / retention / pricing}, expected lift {%}
+**The smallest version that ships**: {actual buildable scope, not the dream version}
+**How we'll measure success**: {specific metric + threshold + by-when}
+```
+
+If the 3 ships span >2 months total effort, force-rank again and cut. The point is ships, not roadmaps.
+
+### Phase F — What the leaderboard says about WHERE TO GO
+
+The leaderboard isn't only about catching up — it's also a signal of where the category is heading. Read the top 10 list for trajectory signals:
+
+| Signal | What it likely means | Action |
+|---|---|---|
+| New entrants in top 10 vs. 6 months ago | Category is reshaping; the winning shape is changing | Study the new entrants harder than the incumbents |
+| Multiple entrants converging on one feature (e.g. "agent mode") | Feature is becoming table stakes | Build it or explain on landing page why you don't |
+| Pricing compression across top 10 (avg price dropping) | Market is commodifying | Move up-market OR add a defensible moat (data, integrations, network) |
+| One outlier with 10× revenue of the median | They've cracked something the others haven't | This is the benchmark to teardown deeply |
+| Top 3 are all >2 years old, no new entrants | Mature category, hard to break in solo | Consider an adjacent wedge instead of head-on competition |
+
+### Iterate-mode output
+
+Don't generate the 11-section market research report. Generate this instead:
+
+```markdown
+# Iteration Plan — {product name} ({iso date})
+
+**Baseline**: {one paragraph: pricing, MRR or proxy metric, ICP, last 3 ships}
+
+**Mode**: Iterate (post-PMF). Source of truth: {N leaderboards scanned}
+
+## The category landscape (top 10)
+{Brief 1-paragraph read of the top 10. Where the category is going.}
+
+## The 3 benchmarks worth studying
+{For each: name, wedge, pricing, channel, blind spot, hidden lever}
+
+## Gap diff
+{Matrix as above}
+
+## Next 3 ships
+{Ship 1 / Ship 2 / Ship 3 in the format above}
+
+## What the leaderboard is telling you
+{One paragraph: the trajectory signal that matters most, and the implication}
+
+## What to NOT chase
+{Specific anti-pattern from the diff — features that look interesting on benchmarks but won't move your metrics}
+
+## Re-check date
+{30 / 60 / 90 days from today — when to re-run iterate mode to see if the diff has changed}
+```
+
+End with the standard `/money-save` nudge — iteration plans benefit from being checkpointed so the next re-check can compare ship-by-ship.
 
 ## Scope Challenge (Before Finalizing)
 

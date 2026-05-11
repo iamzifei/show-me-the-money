@@ -38,6 +38,22 @@ Accept one of:
 
 The user only needs to confirm choices and provide any API keys or credentials they want to use.
 
+## Business-Type Branching (read first)
+
+Read `~/.smtm/projects/{slug}/profile.json` for `business_type`. Everything below assumes one of these values; the build path differs significantly between them.
+
+| `business_type` | What "shipping a product" actually means |
+|---|---|
+| `saas` | Web app + landing page + auth + payments + deploy (the rest of this skill, as-is) |
+| `app` | Native or React Native app + App Store / Play Store assets + in-app purchase / subscription + landing page |
+| `content-kol` | Channel setup + bio/profile optimization + first 10 pieces of content + funnel to email/community/paid offer (NOT a SaaS build) |
+| `commerce` | Storefront (Shopify / WooCommerce / 淘宝 / Etsy) + product listings + payment + shipping + reviews mechanic |
+| `retail-local` | Storefront physical setup + Google Business Profile / 大众点评 / Yelp listing + POS + booking flow if applicable + local-SEO checklist |
+| `service` | Service page describing the offer + booking calendar (Calendly / Cal.com) + intake form + invoicing + case studies |
+| `hybrid` | Pick the dominant type and run that path; then apply the secondary type's checklist as a "Phase X" extension |
+
+If `business_type` is `content-kol`, `retail-local`, or `service`, **skip Phase 1 (Architecture Decision), Phase 4 (Core Product Build), and the SaaS-specific QA flows.** Run the alternative checklists at the end of this skill (search "Alternative Build Paths" below). The DESIGN.md contract (Phase 0) and the Ship Lifecycle (Phase 5.5) STILL apply — every business type benefits from a documented design stance and a disciplined ship process.
+
 ## Phase 0: Design System Contract
 
 Before writing any UI code, write `DESIGN.md` at the project root. This is the source-of-truth for every visual decision and prevents the most common solo-founder failure: a portfolio of 4 products that all look unrelated because each was built from a different starter template at a different time.
@@ -364,6 +380,111 @@ Product Health Score: [X/10]
 ```
 
 Track this score over time. Every deploy should maintain or improve the score.
+
+## Alternative Build Paths (non-SaaS business types)
+
+The phases above assume a web SaaS build. For other business types, swap them with the targeted path below. The DESIGN.md contract (Phase 0) and the Ship Lifecycle (Phase 5.5) still apply.
+
+### Path A — `content-kol` (Xiaohongshu / X / YouTube / Substack / podcast)
+
+**Step 1 — Pick the primary channel** based on the audience the user already has the easiest reach to. One primary; one secondary. Do NOT try to launch on 4 channels at once.
+
+**Step 2 — Profile + handle setup**
+- Handle: same across all selected channels (or close to it) — locks brand
+- Bio: under-the-fold-style hook + one specific outcome + clear CTA to the next-step funnel (email list / Discord / paid offer)
+- Profile image: face if you're building personal brand; logo if building product brand
+- Pinned posts / featured content: top 3 pieces that explain who you serve and what they get
+
+**Step 3 — First 10 pieces**
+- Map to the channel's native format (XHS image-text, X thread, YouTube short, Substack post)
+- Each piece must have ONE clear job: hook a specific reader → deliver one insight → move to a named next step
+- Use `/money-content` patterns library (Stage 4.8) for hook + title shapes
+
+**Step 4 — The funnel**
+- Decide the off-platform destination: email list (Substack, ConvertKit, Beehiiv), Discord/Slack community, or a paid offer
+- The CTA in every piece points to ONE destination, not three
+- Track the conversion rate from each piece to the destination
+
+**Step 5 — Monetization layer**
+- Choose at least one of: ads (creator fund), sponsorship (direct deals), paid community/membership, courses/templates, affiliate, or a downstream product
+- Set the floor: minimum sponsor fee, minimum subs, minimum DAU before pitching
+- Most content creators monetize too late. Set the floor low enough that you can hit it in 90 days
+
+**No payment integration step** unless monetization is courses/membership — in which case use Substack paid, Stripe Payment Link, or Gumroad. Skip the full Stripe Checkout flow from the SaaS path.
+
+### Path B — `commerce` (e-commerce / marketplace seller)
+
+**Step 1 — Platform pick**: Shopify (DTC brand), Amazon (volume + fulfillment), Etsy (handmade / digital), Taobao/天猫 (China consumer), TikTok Shop (impulse-buy native), eBay (resale).
+
+**Step 2 — Product listings**
+- 3 product photos minimum (one lifestyle, one packshot, one detail)
+- Description: hook → use case → specs → social proof
+- Pricing: anchor a higher tier; price the entry tier 10-15% below the closest competitor
+
+**Step 3 — Reviews & social proof seeding**
+- Outreach 20-50 first customers (friends, network, micro-influencers, free product in exchange for honest review)
+- Etsy/Amazon weight reviews heavily for ranking — first 10 reviews are pricing pressure
+
+**Step 4 — Fulfillment**
+- Self-fulfillment is fine until 50 orders/month. Beyond that → Amazon FBA, Shipbob, or local 3PL
+- Set up shipping zones and rates BEFORE first order
+
+**Step 5 — Ad & promotion plan**
+- Hand off to `/money-ads` with the platform context — ad strategy differs heavily between Amazon Sponsored, Meta Shop, and TikTok Shop
+
+### Path C — `retail-local` (physical store / local service)
+
+**Step 1 — Storefront setup**
+- Lease, license, fit-out, insurance (out of scope for this skill — surface checklist)
+- POS pick: Square (easy + cheap), Toast (restaurant), Lightspeed (retail multi-location), 美团商家 (China)
+
+**Step 2 — Listings (THIS is the marketing engine, not a website)**
+- Google Business Profile (set up; respond to every review)
+- Yelp / 大众点评 / Tripadvisor (set up; first 20 reviews)
+- Industry-specific (OpenTable for restaurants, Booksy for salons, MindBody for fitness)
+- Apple Maps + Bing Places (low effort, ignored by ~80% of local businesses)
+
+**Step 3 — Local SEO checklist**
+- Run `/money-seo` local mode (see business-type branching in that skill)
+- Get cited in: local news, "best of [city]" lists, regional blogs
+
+**Step 4 — Booking / ordering flow (if applicable)**
+- Calendly / Cal.com for appointments
+- Square Online or Resy for orders
+- WeChat mini-program for China-market businesses
+
+**Step 5 — Word-of-mouth mechanic**
+- Punch card or app loyalty (Square Loyalty, Toast Loyalty)
+- Referral incentive ("bring a friend, both get 20%")
+- Review-prompted-at-receipt — the single highest-leverage thing for Google Maps ranking
+
+**No deploy step.** No canary. The post-launch monitoring is foot traffic + review sentiment + revenue, not uptime.
+
+### Path D — `service` / `agency` / `consulting`
+
+**Step 1 — Service page (NOT a SaaS landing page)**
+- The page sells one offer with one outcome to one named ICP
+- Structure: hook → painful status quo → the offer → 3 case studies → pricing/booking
+- Avoid feature lists; service is sold on outcome and trust
+
+**Step 2 — Booking + intake**
+- Cal.com / Calendly for discovery calls
+- Intake form (Tally, Typeform) to disqualify before the call
+- The intake form is the productized layer of a service business — it does pre-call ICP filtering and saves hours per week
+
+**Step 3 — Invoicing**
+- Stripe Invoicing or 飞书报价 for one-off projects
+- Stripe Subscription for retainers
+- Send invoices same-day; collect deposits before kickoff
+
+**Step 4 — Case studies (this is the lead engine)**
+- After every successful project, write a one-page case study
+- Format: client situation → what we did → outcome (specific numbers)
+- One case study every 4-6 weeks compounds into the strongest sales asset a solo consultant has
+
+**Step 5 — Productization path**
+- A service business that wants leverage either packages a repeatable offer (fixed price, fixed scope, fixed deliverable) OR converts a process into a SaaS
+- Decide which lane you're in by month 6 — staying generic forever caps growth
 
 ## Integration Points
 

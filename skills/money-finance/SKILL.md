@@ -19,6 +19,22 @@ If the user's message contains a `[Language: ...]` tag, use that language for al
 
 Default to English if the user doesn't specify. All subsequent output must be in the chosen language.
 
+## Business-Type Branching (read first)
+
+Read `~/.smtm/projects/{slug}/profile.json` for `business_type`. The "revenue source", "primary metric set", and "what counts as growth" differ significantly between types. Use the table below to pick the right metric pack.
+
+| `business_type` | Revenue source | Primary growth metric | What to ignore |
+|---|---|---|---|
+| `saas` | Stripe subscriptions | MRR, NRR, churn | One-time spike sales |
+| `app` | App Store / Play Store payouts (3-day lag), in-app subs | Daily Active Users + paid conversion | App Store search rankings as proxy for revenue |
+| `content-kol` | Platform ads (creator fund), direct sponsorship, paid community, courses | Active engaged subscribers × ARPU per month | Follower count alone (vanity) |
+| `commerce` | Shopify / Amazon / Etsy / TikTok Shop payouts | Repeat purchase rate × order frequency | Single-channel GMV if multi-channel |
+| `retail-local` | POS sales (Square / Toast / Lightspeed / 美团) | Daily covers / customers × ticket size, repeat-customer % | Foot traffic without conversion |
+| `service` | Invoicing (one-off + retainer mix) | Utilization × effective hourly rate, retainer % of revenue | Headline project value without margin |
+| `hybrid` | Composite — track each revenue stream separately, then aggregate | Mix-shift over time (% from each stream) | A single blended number that hides what's actually growing |
+
+For each row, the metric on the right is the **load-bearing one**. Other metrics are still tracked, but this is the one to put on the wall.
+
 ## Core Metrics Dashboard
 
 ### Revenue Metrics
@@ -50,11 +66,23 @@ Default to English if the user doesn't specify. All subsequent output must be in
 ## Daily Finance Operations
 
 ### Revenue Tracking
-1. **Stripe integration** — Pull daily revenue data
-   - New subscriptions
-   - Cancellations and churn
+
+Pull daily from the relevant source(s) for the project's `business_type`:
+
+- **`saas` / SaaS-portion of hybrid** — Stripe (subscriptions, churn, failed payments, refunds, disputes)
+- **`app`** — App Store Connect + Google Play Console (3-day reporting lag; smooth weekly)
+- **`content-kol`** — Substack revenue dashboard, YouTube AdSense, Patreon, sponsor invoice tracker (manual or `lark-sheets`)
+- **`commerce`** — Shopify/WooCommerce dashboard, Amazon Seller Central, Etsy Stats, TikTok Shop, Taobao 生意参谋
+- **`retail-local`** — POS daily Z-report (Square / Toast / Lightspeed / 美团商家)
+- **`service`** — Invoicing system (Stripe Invoicing, FreshBooks, QuickBooks, 飞书报价) + retainer rollover tracker
+
+Capture the same daily-revenue fields regardless of source:
+
+1. **Daily revenue source-of-truth** (whichever applies above)
+   - New revenue (subs / orders / sales / invoices billed)
+   - Cancellations / refunds / returns / disputes
    - Failed payments and recovery
-   - Refunds and disputes
+   - Pending payouts and the platform-payout schedule (Amazon, Apple, Google all batch differently)
 2. **Revenue summary** — Daily snapshot:
    ```
    Today's Revenue:  $X,XXX

@@ -19,6 +19,16 @@ If the user's message contains a `[Language: ...]` tag, use that language for al
 
 Default to English if the user doesn't specify. All subsequent output must be in the chosen language.
 
+## Pre-flight: Is this discovery, or is it iteration?
+
+Before Phase 1, check `~/.smtm/projects/{slug}/profile.json`. If `post_pmf: true` AND a `live_url` is present, the user is past the "find a wedge" phase — they have a working product. Discovery is the wrong tool. Surface this directly:
+
+> Detected a live product at {live_url} marked post-PMF. `/money-discover` finds *new* wedges from scratch — but you already have a wedge that's working. For "what should I ship next, based on what top performers in my category are doing", use `/money-strategy iterate` instead. Still want to run discovery? (y / no — runs iterate instead)
+
+Only proceed below if the user explicitly says yes. Otherwise hand off to `/money-strategy iterate`.
+
+This protects against the most common pattern in multi-product operators: opening `/money-discover` out of habit when the actual question is "where do I take this existing product next".
+
 ## Phase 1: User Context
 
 If a `[User Profile: ...]` context block is provided, use it. Otherwise, gather these signals (ask at most 2-3 questions, NOT a survey):

@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.4.0`** · [What's new →](#-whats-new-in-v240)
+**Current version: `v2.5.0`** · [What's new →](#-whats-new-in-v250)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -48,6 +48,65 @@ If you're a solo founder, an indie hacker, or a technical founder who wants to s
 Show Me The Money is an open-source skill suite for [Claude Code](https://claude.ai/code) and compatible AI coding agents. It turns your AI assistant into a full-stack business operating system — discovering opportunities, validating demand, building products, running marketing, managing ads, operating everything autonomously, **and remembering what you decided across every session**.
 
 Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that support the skill system.
+
+---
+
+## ✨ What's New in v2.5.0
+
+**The "your business isn't a SaaS, and you already have a working product" release.** Two themes folded into existing skills — no new skill files, count stays at 25.
+
+### Theme 1 — Business-type awareness (the suite stops assuming everything is a SaaS)
+
+Before v2.5, every skill defaulted to web SaaS assumptions: Next.js stack, Stripe subscriptions, cold-email outreach, Google web SEO, Meta/Google ads. That's wrong for ~half of real founders. `/money` onboarding now captures `business_type` per project, persisted to `~/.smtm/projects/{slug}/profile.json`, and downstream skills branch their behavior.
+
+**Seven supported types:**
+- `saas` — Web SaaS / API
+- `app` — iOS / Android / desktop app
+- `content-kol` — Xiaohongshu, X, YouTube, Substack, podcast creators
+- `commerce` — E-commerce / marketplace seller (Shopify, Amazon, Etsy, Taobao, TikTok Shop)
+- `retail-local` — Physical store / local service business
+- `service` — Service / agency / consulting
+- `hybrid` — Combinations
+
+**What changes when you set the type:**
+
+| Skill | What branches |
+|---|---|
+| `/money-product` | Alternative build paths for content-KOL (channel setup, first 10 pieces, monetization), commerce (platform pick, listings, fulfillment), retail-local (storefront, listings, local SEO), service (service page, booking, case studies) |
+| `/money-finance` | Revenue source maps to type (Stripe / App Store / platform payouts / POS / invoicing); primary growth metric differs (MRR vs DAU vs repeat-purchase rate vs daily covers vs utilization) |
+| `/money-outreach` | Cold email is one mode of many — adds local-PR / wholesale / affiliate-recruiting / sponsor-outreach modes for non-SaaS types |
+| `/money-seo` | Local SEO (Google Maps + Yelp + 大众点评), App Store Optimization, Platform-Native Search (XHS / X / YouTube / Substack / Douyin / TikTok), Marketplace Search (Amazon / Etsy / TikTok Shop / Taobao) — runs the matching section, not generic web SEO |
+| `/money-ads` | Platform picks differ — Apple Search Ads / Google App for apps, Dou+/薯条 for KOL, Yelp/NextDoor/美团 for local, Amazon Sponsored / TikTok Shop Ads for commerce |
+| `/money-quality` | Alternative quality modes — Content Quality (authenticity + hook + factual integrity), Listing Quality (photos + title + reviews + fulfillment), Service & Experience Quality (hygiene + scripts + first-impression flow), Deliverable Quality (brief match + voice + case-study extraction) |
+| `/money-content` | Content priority differs — listing copy + UGC scripts (commerce); GBP content + reviews seed (retail-local); platform-native format itself (content-kol) |
+
+### Theme 2 — Post-PMF iteration via `/money-strategy iterate`
+
+Most strategy skills assume the user has a blank slate. The opposite is increasingly common: a working product, real customers, real metrics — and the question is *"what should I ship next?"*. v2.5 adds an iterate mode to `/money-strategy` that anchors to measured reality instead of a hypothesis.
+
+**Auto-detection:** If `profile.json` has `post_pmf: true` AND a `live_url`, `/money-strategy` enters iterate mode by default. Force either mode with `/money-strategy fresh` or `/money-strategy iterate`.
+
+**The flow:**
+
+1. **Baseline the user's product** — pricing, current MRR/proxy metric, ICP, last 5 ships
+2. **Pick leaderboards (type-aware defaults)**:
+   - `saas` → Toolify, TrustMRR, Product Hunt, Indie Hackers top revenue, AppSumo
+   - `app` → App Store Top, Play Top Grossing, Sensor Tower, data.ai
+   - `content-kol` → XHS 热榜, 飞瓜 抖音榜, Substack Leaderboard, YouTube Trending
+   - `commerce` → Amazon Best Sellers, Etsy Bestsellers, Shopify Top Shops, Taobao 热卖, TikTok Shop Trending
+   - `retail-local` → Yelp top-rated, 大众点评 必吃榜, Google Maps top
+   - `service` → UpWork top, Thumbtack top pros, Clutch top agencies
+3. **Pick 3 benchmarks** worth deep-studying (re-uses the existing 4-filter test but with iteration-flavored definitions)
+4. **For each benchmark, write a teardown** — the wedge they actually won on, pricing, traffic source, hidden lever, the gap they don't own
+5. **Diff matrix** — user's product vs each benchmark across 11 dimensions; gaps classified P0 / P1 / P2
+6. **Pick the next 3 ships** — specific, scoped, measurable, with the smallest version that ships
+7. **Read the category trajectory** — what the leaderboard top 10 says about where the category is heading, and what NOT to chase
+
+The output is an iteration plan with three concrete ships and a 30/60/90-day re-check date, not a 11-section market research report.
+
+### Onboarding flow updates
+
+`/money` Step 1.5 now asks for the business type and live URL during onboarding. New "I have a working product" situation routes directly to `/money-strategy iterate`. `/money-discover` detects post-PMF status and routes to iterate rather than running fresh discovery — protects against the common "opening discovery out of habit when the question is actually iteration" pattern in multi-product operators.
 
 ---
 
