@@ -2,13 +2,13 @@
   <img src="https://pbs.twimg.com/media/HFoAbmGawAAdzJm?format=jpg&name=large" alt="Show Me The Money — autonomous business OS for solo founders" width="100%" />
 </p>
 
-# 💰 Show Me The Money
+# 💰 Show Me The Money · 来财
 
 [![npm version](https://img.shields.io/npm/v/@orrisai/show-me-the-money?label=npm&color=blue)](https://www.npmjs.com/package/@orrisai/show-me-the-money)
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.7.0`** · [What's new →](#-whats-new-in-v270) · [Full changelog →](CHANGELOG.md)
+**Current version: `v2.7.1`** · [What's new →](#-whats-new-in-v271) · [Full changelog →](CHANGELOG.md)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -51,17 +51,20 @@ Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that
 
 ---
 
-## ✨ What's New in v2.7.0
+## ✨ What's New in v2.7.1
 
-**The "hold my hand" release** — a zero-input beginner tutorial built into the router:
+**The "来财" release** — a Chinese name and a transparency pass:
 
-- **Tutorial Mode.** Type `/money onboarding` (or `/money 新手`) and get a ~5-minute guided walkthrough that assumes nothing: a 3-sentence orientation, a demo-persona picker where pressing Enter just works, and a live mini-demo of the discover → strategy → action flow with a "💡 What just happened" explainer after each step.
-- **Demo Business Brief.** Every tutorial run ends with a real ≤40-line deliverable — wedge, named competitors with prices, suggested pricing, riskiest assumption, 7-day plan — so beginners see actual value before being asked for anything.
-- **Explicit ask always wins.** Tutorial triggers are detected before mode detection and beat saved state — a returning user who asks for the tutorial gets the tutorial, not a restore prompt.
-- **Anti-pattern guardrails.** No email harvesting before value, no full skill runs inside the demo, no 25-skill table dumps, no open-ended questions.
+- **The suite now has a Chinese name: 来财 (lái cái).** Two characters, meme-friendly, easy to say and share — and saying "来财" now invokes `/money` directly.
+- **Self-audit against the OECD skill-review principles** (the standard behind @dontbesilent's `/dbs-skill-cleaner`), with every finding fixed:
+  - Every ccapi.ai mention now carries an explicit interest disclosure — it's run by this suite's author, and the skills must say so whenever they offer it.
+  - Removed the author's private Vercel team scope that had leaked into `/money-product` (it would have broken deploys for everyone else).
+  - The "Without this skill" value line is now optional and evidence-bound — skills may never fabricate a counterfactual failure story to inflate perceived value.
+  - New [Privacy & Disclosure](#-privacy--disclosure) section: all data is local-only, and the suite's only network call is an npm version check.
 
 ### Looking for older release notes?
 
+- [v2.7.0](CHANGELOG.md#v270--2026-07-17) — Tutorial Mode: zero-input beginner onboarding (`/money onboarding` / `/money 新手`)
 - [v2.6.0](CHANGELOG.md#v260--2026-07-07) — dual-mode router: post-task navigation, silent language detection, fast-path routing, proactive handoff
 - [v2.5.1](CHANGELOG.md#v251--2026-05-11) — Value Quantification terminal rendering fix + changelog split
 - [v2.5.0](CHANGELOG.md#v250--2026-05-11) — business-type awareness (7 types) + `/money-strategy iterate` for post-PMF iteration
@@ -412,6 +415,14 @@ Built on the [Claude Code skill system](https://docs.anthropic.com/en/docs/claud
 ```
 
 State files live in `~/.smtm/sessions/{project}/` (per-project, append-only) and `~/.smtm/reports/{project}/` (timestamped, never overwritten).
+
+---
+
+## 🔒 Privacy & Disclosure
+
+- **Everything stays local.** All state the suite collects or generates — profiles, learnings, session checkpoints, usage telemetry — lives in plain markdown/JSONL under `~/.smtm/` on your machine. Nothing is ever uploaded. The suite's only network call is a silent npm version check (`npm view`), which fails quietly offline.
+- **Erase anytime.** Delete `~/.smtm/` and every piece of collected data is gone.
+- **Interest disclosure.** When a skill needs an AI API key, it may mention [ccapi.ai](https://ccapi.ai) as a convenience option. ccapi.ai is run by this suite's author. It is never required — your own API keys always work.
 
 ---
 

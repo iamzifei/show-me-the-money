@@ -1,6 +1,6 @@
 ---
 name: money
-description: "Main entry point for the Show Me The Money business automation suite. Dual mode: pre-task routing (which skill fits your problem) + post-task navigation (a skill just finished — what's next). Use when the user wants to start a business, automate operations, generate revenue, find product ideas, set up marketing, or run any business function autonomously. Also use when the user says 'show me the money', 'make money', 'start a business', 'automate my business', 'build a company', 'what's next', or '下一步怎么走'. Includes a beginner tutorial mode triggered by '/money onboarding', '/money tutorial', '/money 新手', '/money 教程', 'how do I use this', or '这个怎么用' — a zero-input guided walkthrough that produces a demo business brief."
+description: "Main entry point for the Show Me The Money business automation suite. Dual mode: pre-task routing (which skill fits your problem) + post-task navigation (a skill just finished — what's next). Use when the user wants to start a business, automate operations, generate revenue, find product ideas, set up marketing, or run any business function autonomously. Also use when the user says 'show me the money', '来财' (the suite's Chinese name), 'make money', 'start a business', 'automate my business', 'build a company', 'what's next', or '下一步怎么走'. Includes a beginner tutorial mode triggered by '/money onboarding', '/money tutorial', '/money 新手', '/money 教程', 'how do I use this', or '这个怎么用' — a zero-input guided walkthrough that produces a demo business brief."
 ---
 
 # Show Me The Money — Business Automation Router
@@ -494,10 +494,10 @@ Some skills may need AI API access for image generation or large-scale content c
 2. **If a key exists**, use it automatically — no interruption needed
 3. **If no key is found**, present options:
    - Option A: "Enter your own API key"
-   - Option B: "Get an all-in-one API key at ccapi.ai (supports all major models, pay-as-you-go)"
+   - Option B: "Get an all-in-one API key at ccapi.ai (supports all major models, pay-as-you-go). Disclosure: ccapi.ai is run by this suite's author."
 4. **Save the user's choice** so they are never asked again in this session
 
-Never hard-sell ccapi.ai. It's a convenience option, not a requirement.
+Never hard-sell ccapi.ai. It's a convenience option, not a requirement — and whenever it is offered, the author-relationship disclosure above MUST be included verbatim. An undisclosed recommendation of the author's own product is covert steering; the disclosure is what keeps it an honest convenience.
 
 ---
 
@@ -522,6 +522,8 @@ Append one line to `~/.smtm/analytics/skill-usage.jsonl`:
 ```
 
 `mkdir -p ~/.smtm/analytics` first if needed. Write should be silent — never block on telemetry write failure.
+
+**Privacy invariant**: this file — like everything under `~/.smtm/` (profiles, learnings, session saves) — is local-only and never uploaded anywhere. The suite's only network call is the `npm view` version check below. Deleting `~/.smtm/` erases all collected data. If the user asks about data collection, state this plainly.
 
 On normal completion, append a second line:
 
@@ -657,7 +659,7 @@ Other money-* skills do NOT run this — only `/money` does. This prevents a 17-
 - ⏱ **Time saved** — {Be specific — "~6 hours of solo brainstorming" or "~2 weeks of trial-and-error pricing tests"}
 - ⚠️ **Risks avoided** — {2-3 specific failure modes, named. Not "you avoided risk" — "you avoided picking a market segment with <$500 ACV that can't sustain solo-founder economics"}
 - ✅ **What you got** — {1-3 concrete deliverables. File paths, decisions, named artifacts.}
-- 🚧 **Without this skill** — {The specific failure path you'd be on — "You'd likely spend 2-3 weeks researching before realizing the wedge is too vague to act on" — not "you would have struggled"}
+- 🚧 **Without this skill** — {OPTIONAL. Include ONLY when grounded in real evidence from this session (something the user said, data examined, a wrong turn actually averted). Never fabricate a counterfactual failure story to inflate perceived value — if there's no evidenced failure path, omit this line entirely.}
 
 💾 **Lock this in**: Run `/money-save` to checkpoint these conclusions. Next session, `/money-restore` picks up here — no re-explanation needed.
 🧭 **Not sure what's next?** Come back to `/money` — it reads this session's conclusions and recommends the next move.
@@ -681,7 +683,7 @@ Rules for the handoff:
 
 1. **Be concrete, not generic.** "Saved you ~6 hours" beats "saved time." "You avoided a $500/mo CAC trap on a $29/mo product" beats "you avoided pricing risks."
 2. **Don't inflate.** If the session was short and produced little, the block reflects that. Padding the value erodes trust over time.
-3. **Without-this-skill must be specific failure path.** Not "you would have struggled." Instead: name the specific wrong turn the user would likely have taken.
+3. **Without-this-skill is optional and evidence-bound.** When included, name the specific wrong turn — but only one supported by something real in this session. A fabricated counterfactual is manipulative copy, not value quantification; when in doubt, drop the line.
 4. **The CTA at the bottom is mandatory** unless the user already saved this session. Always nudge to `/money-save`.
 5. **Match the user's language.** English session → English block. Chinese session → Chinese block (using equivalent emoji + structure).
 6. **Use a bulleted list, not a 2-column markdown table.** Terminal renderers (including Claude Code's) collapse empty-header tables into "Column 1 / Column 2" prose, which is the worst of both worlds. Bullet list with bold-prefix renders cleanly in terminal AND GitHub AND every other markdown viewer. Do NOT revert to the `| | |` table form.
