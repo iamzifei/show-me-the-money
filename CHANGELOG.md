@@ -6,6 +6,22 @@ All notable changes to **Show Me The Money** are documented here. The current re
 
 ---
 
+## v2.8.0 — 2026-07-17
+
+**The "content craft" release.** `/money-content` and `/money-social` absorb a battle-tested short-video content methodology, generalized for every format the suite produces. No new skill files — count stays at 25.
+
+### Added
+- **Stage 1.5 Topic Gate (supply-demand test).** Every candidate topic passes four tests before entering the calendar: demand (whose pain — "it's about our product" is a kill signal), supply, an edge check ("the top 5 results already cover this — better how?" with only three valid answers: first-hand data, contrarian-but-correct, or plain-words translation), and the two-audience rule. ~80% of a piece's performance is locked at topic selection.
+- **Universal Writing Rules** applied to every format: the close-up rule (concrete beats abstract), the plain-words rule (any word needing explanation is bad copy; jargon shrinks algorithmic reach), the 18-second standard (every point gives a directly copyable action), the **sell-real red line** (never fabricate cases, numbers, or personal details — ask for a true story instead), one-piece-one-point (7±2), and density-is-what-short-means.
+- **Hook Axioms + Hook Typing.** Statement-not-self-Q&A, strongest signal in the first 2 seconds, 3-6 genuinely-different candidates annotated by technique (never 10+), one-variable-at-a-time iteration. Hooks are typed before judging — data hooks score on information gaps and receipts, emotional hooks on unresolved tension and resonance precision — with format-fit ranked above hook score and hybrids flagged as frequent winners.
+- **Stage 4.2 One-Core Resonance Check.** Structure-level diagnosis: list every claim, find the single core (comprehensive ≠ professional), match against four failure modes (core diluted / mechanism unstated / stance drift / correct-but-flat), output the repaired skeleton in one sentence.
+- **Stage 4.3 Information Density Scoring.** Per-sentence scoring with calibrated anchors (80+ = can't-hear-elsewhere first-hand conclusion; 60-79 = specific and actionable; 40-59 = true but commonplace; <40 = filler), pass thresholds by format (short-form: ≥8 at 60+ with ≥4 at 80+), fix priority (cut filler, then expand the under-developed high scorer), friendly-fire protections for hooks/transitions, and diagnose-only review discipline with every low score citing the actual sentence.
+- **Content MVP Testing ladder.** Unproven topics get a text post before a produced asset: distill the one-sentence core claim → ship cheap → read bookmarks/saves against the account's own median at 48-72h → promote up the ladder (post → thread → blog → video → paid) or kill and log via `/money-learn`, with an explicit audience-match signal discount in every verdict.
+- **Three new title rules** in the headline checklist: leave the question open, broaden-don't-narrow (universal words over insider jargon), title the real pain beneath the surface topic.
+- **`/money-social`**: shared hook axioms, sell-real rule for results-based hooks, bookmark/save rate added to the metrics table as the quality signal, and a test-before-invest pointer into the MVP ladder.
+
+---
+
 ## v2.7.1 — 2026-07-17
 
 **The "来财" release.** A Chinese name and a transparency pass driven by a self-audit against the OECD skill-review principles (the standard behind @dontbesilent's `/dbs-skill-cleaner`).

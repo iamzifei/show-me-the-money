@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.7.1`** · [What's new →](#-whats-new-in-v271) · [Full changelog →](CHANGELOG.md)
+**Current version: `v2.8.0`** · [What's new →](#-whats-new-in-v280) · [Full changelog →](CHANGELOG.md)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -51,19 +51,19 @@ Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that
 
 ---
 
-## ✨ What's New in v2.7.1
+## ✨ What's New in v2.8.0
 
-**The "来财" release** — a Chinese name and a transparency pass:
+**The "content craft" release** — `/money-content` and `/money-social` absorb a battle-tested short-video content methodology, generalized for every format:
 
-- **The suite now has a Chinese name: 来财 (lái cái).** Two characters, meme-friendly, easy to say and share — and saying "来财" now invokes `/money` directly.
-- **Self-audit against the OECD skill-review principles** (the standard behind @dontbesilent's `/dbs-skill-cleaner`), with every finding fixed:
-  - Every ccapi.ai mention now carries an explicit interest disclosure — it's run by this suite's author, and the skills must say so whenever they offer it.
-  - Removed the author's private Vercel team scope that had leaked into `/money-product` (it would have broken deploys for everyone else).
-  - The "Without this skill" value line is now optional and evidence-bound — skills may never fabricate a counterfactual failure story to inflate perceived value.
-  - New [Privacy & Disclosure](#-privacy--disclosure) section: all data is local-only, and the suite's only network call is an npm version check.
+- **Topic Gate.** Every topic passes a supply-demand test before a word is written: whose pain, who else covers it, and "the top 5 results already explain this — better how?" (only three valid edges: first-hand data, contrarian-but-correct, or plain-words translation). ~80% of performance is locked at topic selection.
+- **Information Density Scoring.** Every sentence scored against calibrated anchors (80+ = a conclusion you can't hear anywhere else; <40 = filler), with pass thresholds per format and a fix priority: cut filler, then expand the buried high-scorer.
+- **One-Core Resonance Check.** A piece that says six things says nothing — find the single core, catch the four failure modes (diluted core, unstated mechanism, stance drift, correct-but-flat), and say the thing readers privately believe but won't say publicly.
+- **Sell-real red line + hook craft.** Never fabricate cases or numbers; hooks are typed (data vs emotional) and judged with the right ruler; 3-6 genuinely different candidates, never 10+.
+- **Content MVP testing ladder.** Unproven topics get a free text post before an expensive video: bookmarks-vs-your-own-median decides promotion (post → thread → blog → video → paid) or a logged kill.
 
 ### Looking for older release notes?
 
+- [v2.7.1](CHANGELOG.md#v271--2026-07-17) — Chinese name 来财 + OECD transparency pass (disclosure, privacy section, evidence-bound value claims)
 - [v2.7.0](CHANGELOG.md#v270--2026-07-17) — Tutorial Mode: zero-input beginner onboarding (`/money onboarding` / `/money 新手`)
 - [v2.6.0](CHANGELOG.md#v260--2026-07-07) — dual-mode router: post-task navigation, silent language detection, fast-path routing, proactive handoff
 - [v2.5.1](CHANGELOG.md#v251--2026-05-11) — Value Quantification terminal rendering fix + changelog split
