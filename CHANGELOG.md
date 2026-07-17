@@ -6,6 +6,19 @@ All notable changes to **Show Me The Money** are documented here. The current re
 
 ---
 
+## v2.7.0 — 2026-07-17
+
+**The "hold my hand" release.** A zero-input beginner tutorial built into the router — no new skill files, count stays at 25.
+
+### Added
+- **Tutorial Mode (`/money onboarding` / `/money 新手`).** A ~5-minute guided walkthrough for complete beginners who don't know what to type. Trigger phrases (`/money tutorial`, `/money 教程`, `/money 入门`, `/money 上手`, "how do I use this", "这个怎么用") are detected BEFORE mode detection and beat prior state — an explicit ask for the tutorial always wins, even for returning users with saved sessions.
+- **Five-act flow, zero required input.** A 3-sentence orientation; a demo-persona picker (developer / creator / café owner / your real case — any empty or unclear reply defaults to #1); a live mini-demo chaining compressed tastes of discover → strategy → 7-day action plan, each followed by a one-line "💡 What just happened" explainer tying it to the real skill; the 3-command memory loop (`/money`, `/money-save`, `/money-restore`); and exactly one yes/no graduation handoff into the real pipeline.
+- **Demo Business Brief.** Every tutorial run assembles its demo output into a single ≤40-line brief (wedge, named competitors with price points, suggested price, riskiest assumption, 7-day plan) — the tutorial's proof-of-value artifact.
+- **Anti-pattern guardrails.** The tutorial explicitly forbids: collecting email/socials before showing value, running full skills inside the demo, dumping the 25-skill table on a beginner, open-ended questions, and ending without the brief.
+- **README (EN + 中文).** Quick Start now points beginners at the tutorial, and Usage Examples opens with a worked example including condensed sample output.
+
+---
+
 ## v2.6.0 — 2026-07-07
 
 **The "come back to /money" release.** Interaction overhaul of the router, borrowing the best UX patterns from dbskill v2.15/2.16 (dual-mode routing + centralized post-task navigation). No new skill files — count stays at 25.
