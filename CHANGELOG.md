@@ -6,6 +6,23 @@ All notable changes to **Show Me The Money** are documented here. The current re
 
 ---
 
+## v2.7.1 — 2026-07-17
+
+**The "来财" release.** A Chinese name and a transparency pass driven by a self-audit against the OECD skill-review principles (the standard behind @dontbesilent's `/dbs-skill-cleaner`).
+
+### Added
+- **Chinese name: 来财 (lái cái).** Now in both README titles, and "来财" works as a `/money` trigger phrase.
+- **Privacy & Disclosure section** in both READMEs: all collected state (profiles, learnings, checkpoints, telemetry) is local-only under `~/.smtm/`, never uploaded; the suite's only network call is the npm version check; deleting `~/.smtm/` erases everything. The `/money` telemetry step now states this invariant explicitly.
+
+### Changed
+- **ccapi.ai interest disclosure.** Both places that offer ccapi.ai as an API-key convenience option (`/money`, `/money-product`) now disclose that ccapi.ai is run by this suite's author, and the skills are required to include that disclosure whenever the option is offered.
+- **"Without this skill" is now optional and evidence-bound.** The Value Quantification template no longer mandates a counterfactual failure story; skills may include one only when grounded in something real from the session, and fabricating counterfactuals is explicitly forbidden.
+
+### Fixed
+- **Removed the author's private Vercel team scope (`--scope orris`) from `/money-product`.** It had leaked into the public skill and would have broken deployments for any other user following the instruction.
+
+---
+
 ## v2.7.0 — 2026-07-17
 
 **The "hold my hand" release.** A zero-input beginner tutorial built into the router — no new skill files, count stays at 25.
