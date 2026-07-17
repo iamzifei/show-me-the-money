@@ -133,6 +133,7 @@ Track weekly:
 |--------|--------|
 | Follower growth | +5% week-over-week |
 | Engagement rate | >3% |
+| Bookmark/save rate | vs your own recent median (the quality signal — saves mean "I'll need this", likes only mean "I agree") |
 | Profile visits | Growing trend |
 | Link clicks | >50/week |
 | Conversions from social | >5/week |
@@ -157,6 +158,15 @@ Priority-ranked hook techniques for social:
 5. **Authority + viewpoint** — "After building 3 profitable SaaS products, here's what I'd do differently"
 
 **Key principle**: Create mystery rather than deliver answers. Your opening should make people NEED to read the rest.
+
+**Hook axioms** (shared with `/money-content` — full detail there):
+- **Statement, not self-Q&A**: ❌ "Do you ever save posts and never read them?" ✅ "I saved 3,000 posts. Opened zero." A rhetorical question hands the reader an exit; a statement pins them. The unanswered question belongs in their head, not in your copy.
+- **Strongest signal in the first line** — the first-hand number or reversal sits at the very front; the fold is the 5-second retention line of text platforms.
+- **Type the hook before judging it**: data hooks live on information gaps and receipts; emotional hooks live on unresolved tension and "that's literally me" precision. Score with the right ruler, and prefer hybrids (emotion up front + a real number + suspense held back).
+- **3-6 genuinely different candidates**, each annotated with its technique; iterate one variable at a time. Never dump 10+.
+- **Sell-real red line**: hooks built on results (#1, #2) require YOUR real numbers. No real data → use techniques #4/#5 instead. Never invent a metric for star-power.
+
+**Test-before-invest**: an unproven topic gets a text post first, never a produced asset. Run the ladder in `/money-content` § Content MVP Testing — bookmarks/saves (vs your own recent median) decide whether the topic earns a thread, a blog post, or a video.
 
 ## Principles
 

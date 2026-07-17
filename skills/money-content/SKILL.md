@@ -1,6 +1,6 @@
 ---
 name: money-content
-description: "Automated content creation pipeline for business growth. Creates blog posts, landing pages, email sequences, social media content, and video scripts with 5-dimensional quality diagnosis, 12-signal authenticity audit, headline impact matrix, and content substance scoring. Use when the user needs content marketing, blog posts, email sequences, copywriting, video scripts, or says 'write content', 'blog post', 'email sequence', 'content calendar', 'marketing copy', 'video script', or 'hook'."
+description: "Automated content creation pipeline for business growth. Creates blog posts, landing pages, email sequences, social media content, and video scripts with a supply-demand topic gate, 5-dimensional quality diagnosis, one-core resonance check, per-sentence information density scoring, 12-signal authenticity audit, headline impact matrix, content substance scoring, and a cheap-format MVP testing ladder. Use when the user needs content marketing, blog posts, email sequences, copywriting, video scripts, or says 'write content', 'blog post', 'email sequence', 'content calendar', 'marketing copy', 'video script', or 'hook'."
 ---
 
 # Money Content — Content Creation Pipeline
@@ -56,6 +56,21 @@ Ranked by revenue impact:
 - Identify keyword opportunities (use SEO tools if available)
 - Map content to the buyer's journey (awareness → consideration → decision)
 
+### Stage 1.5: Topic Gate (supply-demand test — run per topic BEFORE it enters the calendar)
+
+Traffic is decided by supply and demand, not by how much you care about the topic. ~80% of a piece's performance is locked in at topic selection — before a single sentence is written. Run every candidate topic through four tests:
+
+| Test | Question | Kill signal |
+|---|---|---|
+| **Demand** | Whose specific pain does this serve? Are people already searching for (or paying for) a worse answer to it? | "It's about our product" — product introductions have no organic demand. Wrap the product inside the audience's pain instead |
+| **Supply** | Who else already covers this, and how well? | Saturated by better-resourced players AND you have no edge (below) |
+| **Edge check** | The top 5 existing results already explain this. What makes yours *better* — not just "also exists"? | Can't answer "better how" → the supply side isn't actually low for you. Change the angle or kill the topic |
+| **Two-audience rule** | Would the target customer love it AND a stranger not be annoyed by it? | Insider-only content that reads as noise to everyone else |
+
+A real edge is one of exactly three things: (1) **first-hand data or results** nobody else has, (2) a **contrarian-but-correct** take, or (3) the ability to **translate complexity into plain words** better than the incumbents. "Mine is more complete" is not an edge.
+
+Topics that fail the gate don't get written. No amount of editing below rescues a topic nobody demanded.
+
 ### Stage 2: Content Strategy
 Create a content calendar:
 
@@ -66,6 +81,15 @@ Create a content calendar:
 | ... | ... | ... | ... | ... | ... |
 
 ### Stage 3: Writing
+
+#### Universal Writing Rules (apply to EVERY format below)
+
+1. **Concrete beats abstract — the close-up rule.** Give the picture, not the concept. ❌ "I worked hard and built a successful business" ✅ "Spent $3K opening a 200-sq-ft noodle shop; it clears $20K a month." Two reliable tools for turning abstract into concrete: analogy, and borrowing a consensus the reader already holds.
+2. **The plain-words rule.** Any word that needs explaining is bad copy. Prefer quantifiers, verbs, and nouns; cut adjectives. Jargon doesn't just confuse — it shrinks the distribution pool to people who already know the term, which caps reach on every algorithmic platform.
+3. **The 18-second standard.** Every point must give a directly copyable action, never vibes. ❌ "be more authentic" ✅ "reply to your first 10 comments with a specific follow-up question within the hour." If a reader can't do it tomorrow morning, it isn't a point yet.
+4. **Sell-real red line (non-negotiable).** Never fabricate cases, numbers, or "when I..." details. If the material doesn't exist, ask the user for a true story or write around the gap. A fabricated specific is worse than an honest generality — it's the single fastest way to destroy a founder brand, and one caught fake retroactively poisons everything true you published before it.
+5. **One piece, one point (7±2).** Lists cap at 7 items. A piece that argues six things argues nothing — pick the one with explosive power and make everything else serve it (enforced structurally at Stage 4.2).
+6. **Density is what "short" means.** Scarce, unfamiliar, can't-hear-this-elsewhere information is why anyone keeps reading. Short content isn't fewer words — it's the same value in fewer words (measured at Stage 4.3).
 
 #### Blog Posts / Articles
 1. **Outline** — H2/H3 structure, key points per section
@@ -144,6 +168,25 @@ Priority-ranked hook techniques:
 5. Authority + viewpoint (⭐⭐⭐) — credible source paired with insight
 6. Pain point + intrigue (⭐⭐⭐) — audience anxiety linked to unresolved question
 
+##### Hook Axioms (apply before the quality check)
+
+- **Statement, not self-Q&A.** ❌ "Do you ever save posts and never read them?" ✅ "I saved 3,000 posts. Opened zero." A rhetorical yes/no question aimed at the viewer hands them an exit; a statement pins them. This bans *rhetorical self-Q&A* — it does NOT ban the genuine mystery question of Method 2 (Gap Creation), though even there the statement form of the same gap is usually stronger. "Suspense" below means the unanswered question lives *in the viewer's head*, whichever surface form you use.
+- **Strongest signal in the first 2 seconds.** Whatever earns the hook its stars — the first-hand number, the reversal — must sit at the very front, not arrive in sentence two. Two hooks with identical DNA separate entirely on this axis.
+- **Candidate discipline.** Generate 3-6 candidates that are *genuinely different* (different mechanism, not the same line reworded), annotate each with the technique it uses so the choice is traceable, and stop — 10+ candidates is choice paralysis, not help. When iterating on feedback, change ONE variable at a time (emotional intensity, audience targeting, or number specificity — never all three).
+
+##### Hook Typing (score with the right ruler)
+
+Classify the hook first; judging an emotional hook with data-hook criteria systematically under-scores it:
+
+| | Data/insight hook | Emotional hook |
+|---|---|---|
+| Suspense judged by | Information gap — "what happened next?" | Unresolved emotional tension — "I bet this is you too" holds the viewer inside a discomfort |
+| Credibility judged by | First-hand numbers, receipts | Felt authenticity — vulnerable admission, specificity of the feeling |
+| Extra axis | — | **Resonance precision**: does the target viewer think "that's literally me"? |
+| Fits | How-to / tool / analysis content (payoff = a method to copy) | Opinion / identity / story content (payoff = a feeling named or a belief reframed) |
+
+**Format fit beats hook score**: a 9/10 emotional hook on a how-to piece is still the wrong hook. **Hybrids often win**: emotion up front (first 2 seconds) + a first-hand number + suspense held back — covers the emotional punch data hooks lack and the suspense emotional hooks lack.
+
 ##### Hook Quality Check
 
 Every hook must pass ALL 5 checks:
@@ -172,6 +215,47 @@ Before publishing ANY content, run this diagnostic:
 | **5. Engagement Potential** | Does the opening create urgency? Is there a mystery or payoff? | First 2 sentences must hook or lose the reader |
 
 If any dimension fails, fix it before publishing. Content that passes all 5 dimensions will outperform 90% of AI-generated content.
+
+### Stage 4.2: One-Core Resonance Check (structure level)
+
+Comprehensive ≠ professional; **precise = professional**. A draft can pass every sentence-level check and still land flat, because resonance is a structural property: one piece gets ONE core mechanism, and everything else serves it. A piece that says six things says nothing.
+
+1. **List every claim** the draft makes, explicit or implied. Just list — no judging yet.
+2. **Find the single core** (never skip this step): if only one claim could survive, which is it? Everything else must be demoted to material serving that claim. Can't find a clear core → that IS the finding, and it's the biggest problem in the draft.
+3. **Match against the four failure modes** and apply the fix:
+
+| Failure mode | Symptom | Fix |
+|---|---|---|
+| **Core diluted** | 3-6 parallel points of equal weight | Only one has explosive power. Demote the rest to supporting detail or delete |
+| **Mechanism unstated** | Conclusion present, but the one "because X, therefore Y" sentence is missing | Reader can only *feel* it's right, never *suddenly get it*. Add that one sentence (one sentence — not a paragraph) |
+| **Stance drift** | Opens as the reader's advocate, drifts into adviser, ends as lecturer | Reader slides from "represented" to "lectured at". Pick one stance and hold it to the last line |
+| **Correct but flat** | Everything is true; reader shrugs "fair enough" | It never says the thing the audience privately believes but won't say publicly. Find that sentence and say it for them |
+
+4. **Output "the skeleton after the fix"** in one sentence — what the piece's core structure is once repaired — so the direction is confirmable before line edits begin.
+
+Stance rule for the whole check: a stance must be specific to be worth holding. Not "on the user's side" but "on the side of the technical founder who's embarrassed to charge money and afraid of being called a scammer — NOT on the side of the pricing coach."
+
+### Stage 4.3: Information Density Scoring (sentence level)
+
+The reader decides at every sentence whether to keep going. Score each sentence / information point individually — and cite the actual sentence in every low-score verdict, so the author sees exactly which line drags:
+
+| Score | Anchor |
+|---|---|
+| **80+** | A specific conclusion unavailable anywhere else — first-hand data, an original finding, a judgment tied to a concrete scenario or number ("the clicks that never convert are all comparison-shoppers" — a sentence you can only say after running the data) |
+| **60-79** | Valuable and specific — a pain compressed into one sharp sentence, a directly executable action, a named tool with a concrete use |
+| **40-59** | True but commonplace (everyone covering this topic says it), a correct concept with no example, an applause-line |
+| **<40** | Filler — rhythmic padding, repetition, self-congratulation, off-topic detours |
+
+**Pass thresholds** (scale to format):
+- Short-form script / social post (~12-20 info points): **≥8 sentences at 60+, of which ≥4 at 80+**
+- Blog post / newsletter: ≥60% of sentences at 60+, and at least one 80+ sentence per major section
+- Below threshold = don't publish. A concept mentioned without your own specific finding or example caps at 65 — "right but hollow" is its own disease.
+
+**Fix priority**: cut filler first, then **expand the highest-scoring concept that was only name-dropped** — making a real 80+ point land fully beats deleting three 50s.
+
+**Scoring protections** (avoid friendly fire): hook and transition sentences are NOT scored on density — their job is retention and flow; score them via the hook checks above. Opinion/identity pieces score their points on "concrete, resonant, lands in one sentence", not on how-to density.
+
+**Review discipline**: when auditing existing content, diagnose only — report scores, cite sentences, propose the fix direction. Rewrite only when the user says to, one flagged spot at a time.
 
 ### Stage 4.5: Authenticity Audit (AI Fingerprint Detection)
 
@@ -224,6 +308,9 @@ Before finalizing any title/headline, evaluate it against these psychological me
 - [ ] Works WITHOUT seeing the thumbnail/cover — standalone clarity
 - [ ] Uses concrete nouns and verbs, not abstract concepts
 - [ ] Creates a question in the reader's mind that can only be answered by reading
+- [ ] **Leaves the question open** — use "why" not "proof that", the problem not the conclusion. If the title already answers itself, nobody needs to click
+- [ ] **Broadens, never narrows** — universal words over insider jargon ("get customers without ads" not "PLG motion"; "quit your job" not "solopreneurship"). Jargon shrinks the algorithmic distribution pool
+- [ ] **Hits the real pain, not the surface topic** — "one-person company" is a topic; "never having a boss again without going broke" is the pain. Title the pain
 
 ### Stage 4.8: Hook & Title Pattern Library
 
@@ -348,6 +435,18 @@ Major versions deserve names (gives the marketing surface area). Minor patches d
 | Pure infra / refactor / dependency bump | Don't name. Single line in CHANGELOG. Don't email. |
 
 Names should be one or two words, lowercase if technical (`fastpath`), titlecase if product-facing (`Quiet Mode`). Avoid trendy adjectives — they age fast.
+
+## Content MVP Testing (validate cheap before producing expensive)
+
+A video costs hours of production; a long article costs an afternoon; a text post costs nothing. When a topic's demand is unproven, test the *claim* in the cheapest format before investing in the expensive one. One text post is a strategy signal, not a throwaway.
+
+1. **Distill the topic into its one-sentence core claim** — what cognition or emotion is this content betting on? Confirm it with the user before writing.
+2. **Ship it as a text post** (X or equivalent): ≤240 chars for a single point/contrarian take; a line-broken listicle mid-length post if the material has steps worth saving. The first line must stand alone — the fold is the 5-second retention line of text platforms.
+3. **Read the signal after 48-72h**: bookmarks/saves outrank likes as the quality signal (saves = "I'll need this", likes = "I agree"). Compare against the account's OWN recent median, never against absolute numbers.
+4. **Verdict and route**:
+   - **Validated** → promote up the ladder: text post → thread → blog post → video → paid distribution. Carry the proven claim and hook wording upward with the data attached.
+   - **Flat** → kill the topic and log the kill (with reason) via `/money-learn` — this stops the same topic re-entering the calendar wearing new words.
+5. **Signal discount (state it in every verdict)**: the test only transfers when the test audience matches the target audience. A dev-heavy X following is a reliable signal for dev-tool topics but only a weak directional signal for consumer topics — a flat result there is *not* a veto for a different-audience channel.
 
 ## Content-to-Format Matching
 
