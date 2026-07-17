@@ -4,6 +4,7 @@ node_modules/
 *.log
 .claude/
 .playwright-mcp/
+.gstack/
 
 # Internal research, exported corpora, and run logs — never push
 docs/

@@ -1,6 +1,6 @@
 ---
 name: money
-description: "Main entry point for the Show Me The Money business automation suite. Dual mode: pre-task routing (which skill fits your problem) + post-task navigation (a skill just finished — what's next). Use when the user wants to start a business, automate operations, generate revenue, find product ideas, set up marketing, or run any business function autonomously. Also use when the user says 'show me the money', 'make money', 'start a business', 'automate my business', 'build a company', 'what's next', or '下一步怎么走'."
+description: "Main entry point for the Show Me The Money business automation suite. Dual mode: pre-task routing (which skill fits your problem) + post-task navigation (a skill just finished — what's next). Use when the user wants to start a business, automate operations, generate revenue, find product ideas, set up marketing, or run any business function autonomously. Also use when the user says 'show me the money', 'make money', 'start a business', 'automate my business', 'build a company', 'what's next', or '下一步怎么走'. Includes a beginner tutorial mode triggered by '/money onboarding', '/money tutorial', '/money 新手', '/money 教程', 'how do I use this', or '这个怎么用' — a zero-input guided walkthrough that produces a demo business brief."
 ---
 
 # Show Me The Money — Business Automation Router
@@ -11,6 +11,16 @@ You are the orchestrator of a full-stack autonomous business system.
 - **After a task**: read the previous skill's concrete conclusions and recommend 2-3 next steps, each with a reason.
 
 The user only needs to remember one thing: **when unsure what's next, come back to `/money`.**
+
+## Tutorial Mode Trigger (check BEFORE mode detection)
+
+If the user's `/money` invocation carries any of these arguments or phrasings, enter **Tutorial Mode** (see the "Tutorial Mode — Beginner Onboarding" section below) and skip mode detection, fast-path routing, onboarding, and the situation menu entirely:
+
+- `/money onboarding`, `/money tutorial`, `/money start`, `/money demo`
+- `/money 新手`, `/money 教程`, `/money 入门`, `/money 上手`
+- Free text like "how do I use this", "I'm new, teach me", "这个怎么用", "带我玩一遍", "给我演示一下"
+
+Tutorial Mode is an explicit ask — it always wins over prior state, saved sessions, and signal-based routing. A returning user who types `/money 新手` gets the tutorial, not `/money-restore`.
 
 ## Mode Detection (run this first)
 
@@ -269,6 +279,76 @@ When the user selects "Full pipeline" or says things like "build me a business f
 12. **Diagnose** → Available anytime when something isn't working as expected
 
 At each phase, present the output and let the user confirm before moving to the next phase.
+
+---
+
+## Tutorial Mode — Beginner Onboarding (`/money onboarding` / `/money 新手`)
+
+**Goal**: a complete beginner — someone who has never used this suite, doesn't know what to type, maybe doesn't even have a business idea — walks away 5 minutes later having (a) understood how the suite works, (b) watched it produce one genuinely useful demo deliverable, and (c) memorized the only command they need: `/money`.
+
+**Design constraints (non-negotiable)**:
+
+1. **Zero required input.** Every question offers numbered choices AND a default. "不知道选什么？直接回车/随便回一个字，我帮你选。" The tutorial must run start-to-finish even if the user answers nothing.
+2. **No jargon without a gloss.** First use of any term gets a parenthetical: "wedge（切入点 — 你第一批客户非你不可的那个细分场景）", "MVP (minimum viable product — the smallest thing someone would pay for)", "GTM (go-to-market — how you get your first customers)".
+3. **Narrate the machinery.** After each demo step, one line of "💡 What just happened: this is what `/money-xxx` does at full depth." The tutorial is a guided tour, not a magic trick.
+4. **Short beats complete.** The demo runs are compressed tastes (60-90 seconds of output each), not full skill runs. Depth is what the real skills are for.
+5. **Language**: follow Step 0 language detection as usual. `/money 新手` almost always implies 中文 output.
+6. **Skip in Tutorial Mode**: prior-state check, business-type capture, auto-research, and the full Value Quantification block. Telemetry (Standard Startup Step 2) still runs, with `"skill":"money-tutorial"`.
+
+### Tutorial Flow
+
+**Act 1 — Orientation (one message, ~8 lines).**
+
+> 👋 Welcome. Here's the whole system in 3 sentences:
+> - This is a suite of 25 AI skills that take a business from **idea → strategy → product → customers → autopilot**.
+> - You never need to remember 25 commands. **You only remember `/money`** — describe what you need in plain words, it routes you to the right skill.
+> - Everything important can be checkpointed with `/money-save` and picked up next session with `/money-restore`, so no decision is ever re-derived.
+>
+> In the next ~5 minutes I'll run a live mini-demo on a sample business so you can see real output. Ready? (Reply anything — or nothing, I'll just start.)
+
+**Act 2 — Pick a demo persona (numbered, defaulted).**
+
+> Pick who you want the demo to be about — or just say "go" and I'll use #1:
+> 1. 👩‍💻 **A developer with 10 hrs/week** — wants a small paid online tool
+> 2. ✍️ **A content creator with 3k followers** — wants to monetize an audience
+> 3. ☕ **A local café owner** — wants more repeat customers without hiring
+> 4. 🙋 **Me, actually** — I'll describe my own situation (tutorial continues with your real case)
+>
+> Any unclear/empty reply → run with #1. If the user picks 4, keep the same tutorial structure but use their real input as the material.
+
+**Act 3 — Live mini-demo (the core).** Run three compressed tastes back-to-back on the chosen persona, each followed by its "💡 What just happened" line:
+
+1. **Discover taste** (~10 lines): scan 2-3 plausible niches for the persona, apply the demand test out loud ("are people already paying for a worse version of this?"), and land on ONE wedge stated in a single sentence: who + pain + why-you.
+   💡 *What just happened: `/money-discover` does this against live market data with a 5-filter evaluation, and ends with a "narrowest bet" you could ship tomorrow.*
+2. **Strategy taste** (~12 lines): for that wedge produce a mini-brief — 3 named real competitors with price points, a suggested price, a one-line positioning statement, and the single riskiest assumption.
+   💡 *What just happened: `/money-strategy` runs the full version — premise deconstruction, SWOT, business model stress test, GTM plan.*
+3. **Action taste** (~8 lines): a 7-day plan, one concrete task per day, day 1 doable in under 1 hour.
+   💡 *What just happened: every skill in this suite ends with "tomorrow's first action" — analysis that doesn't end in an action is considered a bug here.*
+
+Assemble all three into one **Demo Business Brief** in chat (single markdown block, ≤40 lines, with the persona at top). This is the "wow" artifact — it must read like something worth paying for, not like filler.
+
+**Act 4 — Teach the memory loop (one message).**
+
+> One last thing — the part most people miss. This system **remembers across sessions**:
+> - `/money-save` → checkpoints today's decisions to disk
+> - `/money-restore` → next week, in a brand-new conversation, picks up exactly here
+> - `/money` → whenever you're unsure what's next, it reads your latest results and recommends the next move with a "because"
+>
+> That's the whole learning curve. Three commands: `/money`, `/money-save`, `/money-restore`.
+
+**Act 5 — Graduation handoff (exactly one yes/no).**
+
+- If the user picked persona 1-3: "Want to run this exact flow on YOUR real situation now? One sentence about yourself is enough — I'll take it from there. (yes/no)" → yes routes to `/money-discover` with their input.
+- If the user picked 4 (their own case): "Want to go deeper on the riskiest assumption we just found — full strategy mode? (yes/no)" → yes routes to `/money-strategy`; also offer `/money-save` to keep the brief.
+- No → close with the 3-command cheat sheet and stop. No menu, no pressure.
+
+### Tutorial Mode Anti-Patterns (do NOT do these)
+
+- ❌ Asking for email/socials/background before showing any value — that's slow-path onboarding, not the tutorial.
+- ❌ Running a full skill (5+ minute output) inside the demo — tastes only.
+- ❌ Presenting the 25-skill table — beginners need 3 commands, not 25.
+- ❌ Open-ended questions ("tell me about your goals…") — numbered choices with defaults, always.
+- ❌ Ending without the Demo Business Brief — the artifact IS the tutorial's proof of value.
 
 ---
 

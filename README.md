@@ -8,7 +8,7 @@
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
 
-**Current version: `v2.6.0`** · [What's new →](#-whats-new-in-v260) · [Full changelog →](CHANGELOG.md)
+**Current version: `v2.7.0`** · [What's new →](#-whats-new-in-v270) · [Full changelog →](CHANGELOG.md)
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -51,17 +51,18 @@ Works with **Claude Code**, **Codex CLI**, **Gemini CLI**, and other agents that
 
 ---
 
-## ✨ What's New in v2.6.0
+## ✨ What's New in v2.7.0
 
-**The "come back to /money" release** — an interaction overhaul of the router:
+**The "hold my hand" release** — a zero-input beginner tutorial built into the router:
 
-- **Post-task navigation.** `/money` is now dual-mode: after any skill finishes, come back to `/money` and it reads that skill's actual conclusions and recommends 2-3 next moves, each with a "because". A per-skill navigation map (conclusion signal → next step → why) covers the whole suite. You only need to remember one thing: **when unsure what's next, `/money`**.
-- **The language menu is gone.** `/money` detects your language from what you write and follows silently — no more "choose your language" gate on every session.
-- **Fast-path routing.** Arrive with a clear ask ("my conversion is stuck", "review this before I ship") and you get routed immediately — no onboarding, no business-type quiz, no situation menu. Those questions are now asked lazily, by the skill that actually needs the answer.
-- **The proactive handoff.** Every skill ends with one yes/no offer of the most likely next action ("Strategy's set. Want me to start building the MVP right now?") — a concrete action, not a skill name.
+- **Tutorial Mode.** Type `/money onboarding` (or `/money 新手`) and get a ~5-minute guided walkthrough that assumes nothing: a 3-sentence orientation, a demo-persona picker where pressing Enter just works, and a live mini-demo of the discover → strategy → action flow with a "💡 What just happened" explainer after each step.
+- **Demo Business Brief.** Every tutorial run ends with a real ≤40-line deliverable — wedge, named competitors with prices, suggested pricing, riskiest assumption, 7-day plan — so beginners see actual value before being asked for anything.
+- **Explicit ask always wins.** Tutorial triggers are detected before mode detection and beat saved state — a returning user who asks for the tutorial gets the tutorial, not a restore prompt.
+- **Anti-pattern guardrails.** No email harvesting before value, no full skill runs inside the demo, no 25-skill table dumps, no open-ended questions.
 
 ### Looking for older release notes?
 
+- [v2.6.0](CHANGELOG.md#v260--2026-07-07) — dual-mode router: post-task navigation, silent language detection, fast-path routing, proactive handoff
 - [v2.5.1](CHANGELOG.md#v251--2026-05-11) — Value Quantification terminal rendering fix + changelog split
 - [v2.5.0](CHANGELOG.md#v250--2026-05-11) — business-type awareness (7 types) + `/money-strategy iterate` for post-PMF iteration
 - [v2.4.0](CHANGELOG.md#v240--2026-05-10) — operating modes, narrowest-bet, ship lifecycle, STRIDE, portfolio learnings, auto-update
@@ -96,6 +97,16 @@ Then open Claude Code (or Codex CLI / Gemini CLI) and type:
 ```
 
 That's it. The AI will check for prior session state, onboard you if you're new, and guide you through every step.
+
+**Completely new to this?** Type:
+
+```
+/money onboarding
+```
+
+(also: `/money tutorial`, or in Chinese `/money 新手` / `/money 教程`)
+
+A 5-minute guided tutorial that requires **zero input** — even if you have no idea what to type, it picks a sample business, runs a live mini-demo of the discover → strategy → action flow, produces a real **Demo Business Brief**, and teaches you the only 3 commands you need to remember. [See what it looks like →](#-complete-beginner--guided-tutorial-money-onboarding)
 
 ---
 
@@ -262,6 +273,50 @@ cd ~/.claude/skills/show-me-the-money && node install.js
 ---
 
 ## 💡 Usage Examples
+
+### 🎓 Complete beginner — guided tutorial (`/money onboarding`)
+
+Don't know what to type? This mode assumes nothing and asks for nothing:
+
+```
+/money onboarding          (or: /money tutorial, /money 新手, /money 教程)
+```
+
+What the tutorial actually does:
+
+1. **Orientation** — the whole system explained in 3 sentences (idea → strategy → product → customers → autopilot; you only ever need to remember `/money`)
+2. **Pick a demo persona** — numbered choices with a default, so pressing Enter works:
+   - 👩‍💻 a developer with 10 hrs/week · ✍️ a creator with 3k followers · ☕ a local café owner · 🙋 or your real situation
+3. **Live mini-demo** — compressed tastes of `/money-discover` → `/money-strategy` → 7-day action plan, each followed by a one-line "💡 What just happened" explainer
+4. **Graduation** — one yes/no: "want to run this exact flow on YOUR real situation?"
+
+Example output (persona #1, condensed):
+
+```
+📋 Demo Business Brief — "Screenshot-to-Invoice" micro-SaaS
+
+🎯 Wedge: freelance designers who invoice 5-15 clients/mo and lose
+   ~2 hrs each month re-typing line items — they already pay for
+   worse workarounds (manual VAs, clunky OCR apps).
+
+💰 Competitors & pricing:
+   - Invoice Ninja (free-$10/mo, generic, no screenshot flow)
+   - Hectic ($15/mo, freelancer suite, invoice is a side feature)
+   - Manual VA on Upwork (~$40/mo equivalent)
+   → Suggested price: $12/mo — under the suite, above "toy"
+
+⚠️ Riskiest assumption: designers trust OCR enough to send the
+   result to a client without checking every line.
+
+📅 7-day plan: Day 1 (< 1 hr) — post the one-sentence pitch in two
+   freelance-designer communities and count reactions. Days 2-7:
+   landing page → waitlist → 5 problem interviews → mock demo → decide.
+
+That's the whole learning curve. Three commands:
+/money · /money-save · /money-restore
+```
+
+💡 The full tutorial takes ~5 minutes and never asks an open-ended question — every prompt has numbered options and a default.
 
 ### Start from scratch
 ```
