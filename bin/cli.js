@@ -92,8 +92,9 @@ function update() {
 
   // Step 1: Fetch the latest version from npm using execFileSync (no shell)
   let latest;
+  const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
   try {
-    latest = execFileSync("npm", ["view", "@orrisai/show-me-the-money", "version"], {
+    latest = execFileSync(npmCmd, ["view", "@orrisai/show-me-the-money", "version"], {
       encoding: "utf8",
       stdio: ["pipe", "pipe", "pipe"],
     }).trim();
@@ -115,8 +116,9 @@ function update() {
   // Step 3: Download the latest package and run its install command.
   //         npx with @latest always fetches the newest published version,
   //         then the "install" sub-command copies skills into ~/.claude/skills/.
+  const npxCmd = process.platform === "win32" ? "npx.cmd" : "npx";
   try {
-    execFileSync("npx", ["--yes", "@orrisai/show-me-the-money@latest", "install"], {
+    execFileSync(npxCmd, ["--yes", "@orrisai/show-me-the-money@latest", "install"], {
       stdio: "inherit",
     });
     console.log(`\n  Update complete! v${VERSION} → v${latest}`);
