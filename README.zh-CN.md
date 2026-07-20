@@ -7,6 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/@orrisai/show-me-the-money?label=npm&color=blue)](https://www.npmjs.com/package/@orrisai/show-me-the-money)
 [![Latest release](https://img.shields.io/github/v/release/iamzifei/show-me-the-money?label=release&color=green)](https://github.com/iamzifei/show-me-the-money/releases)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-orange.svg)](LICENSE)
+[![Commercial / OEM license](https://img.shields.io/badge/commercial%20%2F%20OEM-available-blue.svg)](COMMERCIAL-LICENSE.md)
 
 **当前版本：`v2.8.0`** · [更新内容 →](#-v280-更新内容) · [完整历史 →](CHANGELOG.zh-CN.md)
 
@@ -459,4 +460,4 @@ CC BY-NC 4.0（知识共享 署名-非商业性使用 4.0）
 
 - 个人 / 学习 / 研究：自由使用
 - 公开衍生作品：需注明来源
-- 商业用途：需单独授权
+- 商业用途 / 嵌入 / OEM：需单独授权 —— 见 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)
